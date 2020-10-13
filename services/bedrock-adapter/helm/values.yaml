@@ -1,0 +1,26 @@
+replicaCount: 1
+image:
+  repository: registry.meridian.internal/cswt/bedrock-adapter
+  tag: "3.14.2"
+  pullPolicy: IfNotPresent
+service:
+  port: 4516
+resources:
+  requests:
+    cpu: 250m
+    memory: 768Mi
+  limits:
+    memory: 1536Mi
+probes:
+  path: /actuator/health
+  initialDelaySeconds: 45
+env:
+  LOG_LEVEL: info
+  SPLUNK_HEC_URL: http://splunk-hec-mock:4606/services/collector
+  SPRING_PROFILES_ACTIVE: local,local-artemis
+  # deployed environments always go through the queue manager; http is the laptop bridge only
+  MERIDIAN_BEDROCK_MODE: mq
+  MERIDIAN_BEDROCK_TRANSPORT: mq
+vault:
+  role: bedrock-adapter
+  secretsPath: secret/data/cswt/bedrock-adapter
