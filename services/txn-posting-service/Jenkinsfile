@@ -1,0 +1,12 @@
+#!/usr/bin/env groovy
+// txn-posting-service. Owner payments-platform. Coverage threshold matches sonar-project.properties; if you lower one, lower both, and raise a PLAT ticket saying why.
+@Library('meridian-pipeline@v3') _
+
+meridianJavaPipeline(
+    agentLabel:        'maven-jdk11-rhel8',
+    appName:           'txn-posting-service',
+    modulePath:        'platform-services/services/txn-posting-service',
+    helmChart:         'platform-tooling/helm/txn-posting-service',
+    coverageThreshold: 15,
+    checkmarxThresholds: [high: 0, medium: 0]   // compliance critical, GIS-STD-014
+)
