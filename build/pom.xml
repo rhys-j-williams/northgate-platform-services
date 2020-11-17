@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Reactor for the JaCoCo aggregate report only. Day to day builds run per service (each pom stands
+  alone and resolves common-starter from the local repository, the way it resolves from Artifactory
+  on the agents). This reactor exists so `make coverage` can produce one report across the seven
+  Java services for COVERAGE.md and the Sonar portfolio view.
+
+  Run it with JDK 17: entitlements-service needs it and the Boot 2.7 services compile with
+  release 11 under it without complaint. Do not run `clean` here or you throw away the exec files
+  the per service verify runs produced.
+
+  PLAT-1244 (aggregate coverage), TOOL-1034 (jdk17 agents).
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.meridian.platform</groupId>
+  <artifactId>platform-services-reactor</artifactId>
+  <version>2026.09</version>
+  <packaging>pom</packaging>
+  <name>platform-services reactor (coverage aggregate)</name>
+
+  <modules>
+    <module>../libs/java/common-starter</module>
+    <module>../services/bedrock-adapter</module>
+    <module>../services/beacon-notifications</module>
+    <module>../services/alerts-preferences-service</module>
+    <module>../services/txn-posting-service</module>
+    <module>../services/pii-vault-service</module>
+    <module>../services/audit-trail-service</module>
+    <module>../services/entitlements-service</module>
+    <module>coverage-aggregate</module>
+  </modules>
+</project>
