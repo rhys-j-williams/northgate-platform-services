@@ -1,0 +1,21 @@
+spring:
+  main:
+    banner-mode: off
+  jms:
+    listener:
+      auto-startup: false
+
+logging:
+  config: classpath:log4j2-test.xml
+
+meridian:
+  security:
+    enabled: false
+  mq:
+    host: localhost
+    port: 1
+    receive-timeout-ms: 50
+  beacon:
+    preferences-url: http://127.0.0.1:1/preferences/v1
+    fixture-fallback: true
+    gap-sweep-ms: 60000
