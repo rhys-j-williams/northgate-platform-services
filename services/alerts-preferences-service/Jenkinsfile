@@ -1,0 +1,12 @@
+#!/usr/bin/env groovy
+// alerts-preferences-service. Owner payments-platform. Coverage threshold matches sonar-project.properties; if you lower one, lower both, and raise a PLAT ticket saying why.
+@Library('meridian-pipeline@v3') _
+
+meridianJavaPipeline(
+    agentLabel:        'maven-jdk11-rhel8',
+    appName:           'alerts-preferences-service',
+    modulePath:        'platform-services/services/alerts-preferences-service',
+    helmChart:         'platform-tooling/helm/alerts-preferences-service',
+    coverageThreshold: 40
+
+)
