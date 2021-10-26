@@ -1,0 +1,6 @@
+# kind / docker desktop. Talks to the mock-external stack on the host.
+image:
+  pullPolicy: Never
+env:
+  LOG_LEVEL: debug
+  SPLUNK_HEC_URL: http://host.docker.internal:4606/services/collector
