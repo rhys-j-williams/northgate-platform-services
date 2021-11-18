@@ -1,0 +1,53 @@
+#!/usr/bin/env groovy
+// statements-api. There is no meridianPythonPipeline (TOOL-1290, declined twice). This is a hand written
+// scripted pipeline that does install, build, scan and deploy. There is no test stage because there
+// are no tests. CAB-2021-1188.
+@Library('meridian-pipeline@v3') _
+
+import com.meridian.pipeline.MeridianDefaults
+
+Map cfg = MeridianDefaults.common() + [appName: 'statements-api', helmChart: 'platform-tooling/helm/statements-api']
+
+pipeline {
+    agent { label 'maven-jdk11-rhel8' }   // it has python3.11 on it. Do not ask.
+    options { timestamps(); timeout(time: 30, unit: 'MINUTES'); disableConcurrentBuilds() }
+    environment {
+        APP_NAME = 'statements-api'
+        PIP_INDEX_URL = 'https://artifactory.meridian.internal/artifactory/api/pypi/pypi-virtual/simple'
+    }
+    stages {
+        stage('Checkout') { steps { checkout scm } }
+        stage('Install') {
+            steps {
+                dir('platform-services/services/statements-api') {
+                    sh 'python3.11 -m venv .venv && . .venv/bin/activate && pip install -r requirements.txt'
+                }
+            }
+        }
+        stage('Import check') {
+            steps {
+                dir('platform-services/services/statements-api') {
+                    sh '. .venv/bin/activate && python -c "import app.main"'
+                }
+            }
+        }
+        // No unit test stage. See the header comment.
+        stage('Checkmarx') {
+            steps {
+                dir('platform-services/services/statements-api') {
+                    sh "${cfg.scannerBin}/cx scan --config checkmarx.yml --source . --output .cx-reports"
+                }
+            }
+        }
+        stage('Container build') {
+            steps {
+                dir('platform-services') {
+                    sh "podman build -f services/statements-api/Dockerfile -t ${cfg.imageRegistry}/cswt/statements-api:${env.BUILD_NUMBER} ."
+                }
+            }
+        }
+        stage('Helm package') {
+            steps { sh "helm package ${cfg.helmChart} --version 0.0.${env.BUILD_NUMBER}" }
+        }
+    }
+}
