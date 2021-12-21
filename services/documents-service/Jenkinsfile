@@ -1,0 +1,15 @@
+#!/usr/bin/env groovy
+// documents-service. Owner retail-digital.
+@Library('meridian-pipeline@v3') _
+
+meridianNodePipeline(
+    agentLabel:        'nodejs18-rhel9',
+    nodeVersion:       '18.19.0',
+    appName:           'documents-service',
+    helmChart:         'platform-tooling/helm/documents-service',
+    coverageThreshold: 25,
+    lintCommand:       'npm run lint',
+    testCommand:       'npm run test:coverage',
+    buildCommand:      'npm run build',
+    coverageSummary:   'coverage/coverage-summary.json'
+)
