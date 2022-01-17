@@ -1,0 +1,7 @@
+Overdraft notice for account ending {{accountTail}}
+On {{occurredAt}} a transaction of {{amount}} ({{description}}) was paid on your account ending {{accountTail}}, resulting in a negative available balance of {{balance}}.
+
+IMPORTANT DISCLOSURE. An overdraft fee may have been assessed to your account in accordance with your Deposit Account Agreement and Fee Schedule. You have the right to request a copy of the agreement and fee schedule at any branch or by calling the number on your statement. If you believe this overdraft was assessed in error, you may dispute it within 60 days of the statement date on which it appears. This notice is provided in accordance with the consumer overdraft regulations that apply to your account.
+
+This is a regulatory notice. It cannot be turned off in your alert preferences.
+Ref {{eventId}}
