@@ -1,0 +1,12 @@
+apiVersion: v2
+name: statements-api
+description: Local/legacy chart for statements-api. The deployable chart is platform-tooling/helm/statements-api; this one is kept for the kind cluster and the DeploymentConfig rollback path (TOOL-1102).
+type: application
+version: 0.0.0
+appVersion: "0.9.4"
+maintainers:
+  - name: payments-platform
+    email: payments-platform@example.com
+annotations:
+  meridian.bank/ticket-key: PLAT
+  meridian.bank/compliance-critical: "false"
