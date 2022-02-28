@@ -1,0 +1,12 @@
+apiVersion: v2
+name: documents-service
+description: Local/legacy chart for documents-service. The deployable chart is platform-tooling/helm/documents-service; this one is kept for the kind cluster and the DeploymentConfig rollback path (TOOL-1102).
+type: application
+version: 0.1.0
+appVersion: "1.14.3"
+maintainers:
+  - name: retail-digital
+    email: retail-digital@example.com
+annotations:
+  meridian.bank/ticket-key: PLAT
+  meridian.bank/compliance-critical: "false"
