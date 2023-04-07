@@ -1,0 +1,12 @@
+# Fallback broker for laptops and build agents without the IBM MQ image. Same JMS abstraction,
+# same queue names, different ConnectionFactory. Activated with SPRING_PROFILES_ACTIVE=local,local-artemis.
+meridian:
+  mq:
+    artemis-url: tcp://localhost:61616
+    user: artemis
+    password: CHANGEME-artemis-password
+
+# On laptops the fallback broker is frequently not running at all, and the listener container copes
+# (see MqConfig). Do not let the JMS indicator turn the whole health endpoint red for that; the
+# estate smoke script treats a 503 on /actuator/health as "service not started".
+management.health.jms.enabled: false
