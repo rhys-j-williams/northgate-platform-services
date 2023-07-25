@@ -1,0 +1,12 @@
+apiVersion: v2
+name: entitlements-service
+description: Local/legacy chart for entitlements-service. The deployable chart is platform-tooling/helm/entitlements-service; this one is kept for the kind cluster and the DeploymentConfig rollback path (TOOL-1102).
+type: application
+version: 0.4.0
+appVersion: "4.1.0"
+maintainers:
+  - name: identity-platform
+    email: identity-platform@example.com
+annotations:
+  meridian.bank/ticket-key: PLAT
+  meridian.bank/compliance-critical: "false"
