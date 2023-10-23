@@ -1,0 +1,14 @@
+{
+  "time": { "$resolver": "timestamp", "epoch": { "unit": "secs" } },
+  "sourcetype": "meridian:json",
+  "event": {
+    "event": { "$resolver": "message", "stringified": true },
+    "severity": { "$resolver": "level", "field": "name" },
+    "logger": { "$resolver": "logger", "field": "name" },
+    "thread": { "$resolver": "thread", "field": "name" },
+    "correlationId": { "$resolver": "mdc", "key": "correlationId" },
+    "exception": { "$resolver": "exception", "field": "stackTrace", "stackTrace": { "stringified": true } }
+  },
+  "service": "entitlements-service",
+  "environment": { "$resolver": "pattern", "pattern": "${env:MERIDIAN_ENV:-local}" }
+}
