@@ -1,0 +1,27 @@
+# Oracle 19c on Exadata, CSWTPRD service, ENTL schema. Credentials via the Vault agent sidecar.
+# Commented out for the same reason as every other service: the ojdbc artefact is only in the
+# internal Artifactory virtual repo. See README, Datasources. GIS-1180 applies.
+#spring:
+#  datasource:
+#    url: jdbc:oracle:thin:@//exa-cswt-prod-scan.meridian.internal:1521/CSWTPRD_SVC
+#    driver-class-name: oracle.jdbc.OracleDriver
+#    username: ${VAULT_DB_USER}
+#    password: ${VAULT_DB_PASSWORD}
+#    hikari:
+#      maximum-pool-size: 16
+#  jpa:
+#    properties:
+#      hibernate.dialect: org.hibernate.dialect.OracleDialect
+#  flyway:
+#    schemas: ENTL
+#  kafka:
+#    bootstrap-servers: redpanda-a.meridian.internal:9092,redpanda-b.meridian.internal:9092
+#    security:
+#      protocol: SASL_SSL
+
+meridian:
+  security:
+    jwks-uri: https://keystone.meridian.internal/.well-known/jwks.json
+    issuer: https://keystone.meridian.internal
+  approvals:
+    ttl-hours: 48
