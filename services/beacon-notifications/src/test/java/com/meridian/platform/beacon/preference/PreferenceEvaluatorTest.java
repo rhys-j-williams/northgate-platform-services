@@ -28,10 +28,10 @@ class PreferenceEvaluatorTest {
     @Test
     void regulatoryEventNotifiesEvenWhenCustomerDisabledIt() {
         CustomerPreferences.AlertPreference p = new CustomerPreferences.AlertPreference();
-        p.setAlertCode("REG_OVERDRAFT");
+        p.setAlertCode("OVERDRAFT_NOTICE");
         p.setEnabled(false);
         p.setChannels(Collections.singletonList("PUSH"));
-        prefs.getAlerts().put("REG_OVERDRAFT", p);
+        prefs.getAlerts().put("OVERDRAFT_NOTICE", p);
 
         PreferenceDecision d = evaluator.evaluate(event(EventType.OVERDRAFT, -100));
 
@@ -43,11 +43,11 @@ class PreferenceEvaluatorTest {
     @Test
     void thresholdSuppressesSmallDebits() {
         CustomerPreferences.AlertPreference p = new CustomerPreferences.AlertPreference();
-        p.setAlertCode("LARGE_TXN");
+        p.setAlertCode("LARGE_TRANSACTION");
         p.setEnabled(true);
         p.setThresholdMinor(50_000L);
         p.setChannels(Arrays.asList("PUSH", "SMS"));
-        prefs.getAlerts().put("LARGE_TXN", p);
+        prefs.getAlerts().put("LARGE_TRANSACTION", p);
 
         assertThat(evaluator.evaluate(event(EventType.LARGE_DEBIT, -49_999)).shouldNotify()).isFalse();
         PreferenceDecision big = evaluator.evaluate(event(EventType.LARGE_DEBIT, -50_000));

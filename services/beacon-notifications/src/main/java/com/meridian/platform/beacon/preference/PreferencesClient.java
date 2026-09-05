@@ -81,7 +81,7 @@ public class PreferencesClient {
         prefs.setCustomerId(customerId);
         for (JsonNode node : fixtures.alertPreferencesFor(customerId)) {
             CustomerPreferences.AlertPreference p = new CustomerPreferences.AlertPreference();
-            p.setAlertCode(node.path("alertCode").asText());
+            p.setAlertCode(node.hasNonNull("code") ? node.get("code").asText() : node.path("alertCode").asText());
             p.setEnabled(node.path("enabled").asBoolean(true));
             p.setRegulatory(node.path("regulatory").asBoolean(false));
             List<String> channels = new ArrayList<>();

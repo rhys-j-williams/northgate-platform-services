@@ -1,6 +1,7 @@
 package com.meridian.platform.beacon.preference;
 
 import com.meridian.platform.beacon.event.AccountEvent;
+import com.meridian.platform.beacon.event.EventType;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -42,8 +43,15 @@ public class PreferenceEvaluator {
         if (!pref.isEnabled()) {
             return PreferenceDecision.suppress("alert disabled by customer");
         }
-        if (pref.getThresholdMinor() != null && Math.abs(event.getAmountMinor()) < pref.getThresholdMinor()) {
-            return PreferenceDecision.suppress("below threshold " + pref.getThresholdMinor());
+        if (pref.getThresholdMinor() != null) {
+            // Balance alerts threshold on the balance after the event, everything else on the amount.
+            if (event.getEventType() == EventType.LOW_BALANCE) {
+                if (event.getBalanceAfterMinor() > pref.getThresholdMinor()) {
+                    return PreferenceDecision.suppress("balance above threshold " + pref.getThresholdMinor());
+                }
+            } else if (Math.abs(event.getAmountMinor()) < pref.getThresholdMinor()) {
+                return PreferenceDecision.suppress("below threshold " + pref.getThresholdMinor());
+            }
         }
         if (pref.getChannels() == null || pref.getChannels().isEmpty()) {
             return PreferenceDecision.suppress("no channels selected");
