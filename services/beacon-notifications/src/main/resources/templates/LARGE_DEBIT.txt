@@ -1,0 +1,5 @@
+Debit of {{amount}} on account ending {{accountTail}}
+A debit of {{amount}} ({{description}}) posted to your account ending {{accountTail}} on {{occurredAt}}. Available balance is now {{balance}}.
+
+If you do not recognise this transaction call the number on the back of your card.
+Ref {{eventId}}

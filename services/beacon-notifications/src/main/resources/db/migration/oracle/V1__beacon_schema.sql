@@ -1,0 +1,38 @@
+-- Beacon schema, Oracle dialect. Runs against H2 in MODE=Oracle locally and against the
+-- BEACON schema on the ORCL-CSWT-P03 Exadata in production (PLAT-0412). Keep types Oracle-native;
+-- H2's Oracle mode accepts them. Do not use IDENTITY here, sequences only, or the prod run breaks.
+
+CREATE SEQUENCE BEACON_NOTIFICATION_SEQ START WITH 1 INCREMENT BY 50;
+
+CREATE TABLE BEACON_NOTIFICATION (
+    NOTIFICATION_ID      NUMBER(19)      NOT NULL,
+    EVENT_ID             VARCHAR2(64)    NOT NULL,
+    CUSTOMER_ID          VARCHAR2(16)    NOT NULL,
+    ACCOUNT_ID           VARCHAR2(16),
+    CUSTOMER_SEQUENCE    NUMBER(19)      NOT NULL,
+    EVENT_TYPE           VARCHAR2(40)    NOT NULL,
+    TEMPLATE_CODE        VARCHAR2(40)    NOT NULL,
+    CHANNEL              VARCHAR2(10)    NOT NULL,
+    REGULATORY           NUMBER(1)       DEFAULT 0 NOT NULL,
+    RENDERED_SUBJECT     VARCHAR2(200),
+    RENDERED_BODY        CLOB,
+    STATUS               VARCHAR2(12)    NOT NULL,
+    FAILURE_REASON       VARCHAR2(400),
+    OCCURRED_AT          TIMESTAMP       NOT NULL,
+    DISPATCHED_AT        TIMESTAMP,
+    CREATED_AT           TIMESTAMP       DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    CONSTRAINT PK_BEACON_NOTIFICATION PRIMARY KEY (NOTIFICATION_ID),
+    CONSTRAINT UQ_BEACON_EVENT_CHANNEL UNIQUE (EVENT_ID, CHANNEL)
+);
+
+CREATE INDEX IX_BEACON_NOTIF_CUST ON BEACON_NOTIFICATION (CUSTOMER_ID, CUSTOMER_SEQUENCE);
+CREATE INDEX IX_BEACON_NOTIF_STATUS ON BEACON_NOTIFICATION (STATUS, CREATED_AT);
+
+-- One row per customer: the last sequence number we dispatched. The ordering guarantee hangs off
+-- this table and the SequenceCoordinator; see docs/adr/0002-per-customer-ordering.md.
+CREATE TABLE BEACON_CUSTOMER_SEQ (
+    CUSTOMER_ID          VARCHAR2(16)    NOT NULL,
+    LAST_DISPATCHED      NUMBER(19)      DEFAULT 0 NOT NULL,
+    UPDATED_AT           TIMESTAMP       DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    CONSTRAINT PK_BEACON_CUSTOMER_SEQ PRIMARY KEY (CUSTOMER_ID)
+);

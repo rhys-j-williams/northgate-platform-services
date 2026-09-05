@@ -1,0 +1,7 @@
+Notice of change to the rate on your account ending {{accountTail}}
+The variable interest rate that applies to your account ending {{accountTail}} will change effective the next statement cycle. Details of the new rate, the index it follows and the margin applied are enclosed with your statement and available under Documents in online banking.
+
+IMPORTANT DISCLOSURE. This change is made under the variable rate terms of your account agreement. You are entitled to at least 45 days notice of a rate increase on a credit account and this notice is provided to satisfy that requirement. If you do not accept the change you may close the account and repay the outstanding balance under the existing terms.
+
+This is a regulatory notice. It cannot be turned off in your alert preferences.
+Ref {{eventId}}

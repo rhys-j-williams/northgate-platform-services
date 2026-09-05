@@ -18,6 +18,11 @@ management:
   endpoint:
     health:
       show-details: when_authorized
+      group:
+        # k8s readiness ignores the broker: MQ being down must not take the pod out of rotation
+        # or every queue-manager failover cascades into a full restart (INC-2023-0142).
+        readiness:
+          include: ping,diskSpace
 
 logging:
   config: classpath:log4j2-meridian.xml

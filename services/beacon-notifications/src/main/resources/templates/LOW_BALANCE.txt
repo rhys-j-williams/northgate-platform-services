@@ -1,0 +1,3 @@
+Low balance on account ending {{accountTail}}
+Your available balance on account ending {{accountTail}} has fallen to {{balance}} as of {{occurredAt}}.
+You can change this alert in Alerts and Notifications.
