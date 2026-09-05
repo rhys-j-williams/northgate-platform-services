@@ -1,0 +1,21 @@
+{
+  "time": {
+    "$resolver": "timestamp",
+    "epoch": { "unit": "secs", "rounded": false }
+  },
+  "sourcetype": "meridian:json",
+  "event": {
+    "event": { "$resolver": "message", "stringified": true },
+    "severity": { "$resolver": "level", "field": "name" },
+    "logger": { "$resolver": "logger", "field": "name" },
+    "thread": { "$resolver": "thread", "field": "name" },
+    "correlationId": { "$resolver": "mdc", "key": "correlationId" },
+    "customerId": { "$resolver": "mdc", "key": "customerId" },
+    "sequence": { "$resolver": "mdc", "key": "sequence" },
+    "exception": {
+      "$resolver": "exception",
+      "field": "stackTrace",
+      "stackTrace": { "stringified": true }
+    }
+  }
+}
