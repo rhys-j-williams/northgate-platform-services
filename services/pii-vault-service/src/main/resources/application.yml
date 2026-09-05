@@ -44,3 +44,10 @@ meridian:
   security:
     jwks-uri: http://localhost:4400/.well-known/jwks.json
     issuer: http://localhost:4400
+  vault:
+    url: http://localhost:4605
+    # Vault token comes from the pod's Kubernetes auth in the bank. Locally the mock accepts anything.
+    token: CHANGEME-vault-token
+    key-name: pii-fpe
+    # Dev-derived key when Vault is unreachable. application-prod.yml sets this false. GIS-0522.
+    allow-dev-key: true
