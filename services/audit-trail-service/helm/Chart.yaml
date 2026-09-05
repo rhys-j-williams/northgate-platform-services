@@ -1,0 +1,12 @@
+apiVersion: v2
+name: audit-trail-service
+description: Local/legacy chart for audit-trail-service. The deployable chart is platform-tooling/helm/audit-trail-service; this one is kept for the kind cluster and the DeploymentConfig rollback path (TOOL-1102).
+type: application
+version: 0.2.0
+appVersion: "2.3.4"
+maintainers:
+  - name: platform-engineering
+    email: platform-engineering@example.com
+annotations:
+  meridian.bank/ticket-key: PLAT
+  meridian.bank/compliance-critical: "true"

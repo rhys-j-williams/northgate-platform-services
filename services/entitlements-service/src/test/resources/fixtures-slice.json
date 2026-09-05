@@ -1,0 +1,10 @@
+{
+  "seed": "test-slice",
+  "entitlements": [
+    {"entitlementId": "ENT-900000001", "customerId": "CUS-100000", "organisationId": "ORG-900000001", "userHandle": "test.admin", "role": "administrator", "permissions": [], "dualApprovalRequired": false},
+    {"entitlementId": "ENT-900000002", "customerId": "CUS-100000", "organisationId": "ORG-900000001", "userHandle": "test.admin2", "role": "administrator", "permissions": [], "dualApprovalRequired": false},
+    {"entitlementId": "ENT-900000005", "customerId": "CUS-100000", "organisationId": "ORG-900000001", "userHandle": "test.admin3", "role": "administrator", "permissions": [], "dualApprovalRequired": false},
+    {"entitlementId": "ENT-900000003", "customerId": "CUS-100000", "organisationId": "ORG-900000001", "userHandle": "test.viewer", "role": "viewer", "permissions": [], "dualApprovalRequired": false},
+    {"entitlementId": "ENT-900000004", "customerId": "CUS-100000", "organisationId": "ORG-900000001", "userHandle": "test.initiator", "role": "initiator", "permissions": [], "dualApprovalRequired": true, "limitPerTransactionMinor": 5000000, "limitPerDayMinor": 20000000}
+  ]
+}

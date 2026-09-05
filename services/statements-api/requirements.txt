@@ -1,0 +1,8 @@
+# statements-api. Pinned because the 2023-03 reportlab 3.6 -> 4.0 jump changed the default page
+# size handling and shifted every statement footer by 6pt (INC0047702). Bump deliberately.
+fastapi==0.104.1
+uvicorn==0.24.0.post1
+pydantic==2.5.2
+httpx==0.25.2
+reportlab==4.0.7
+python-dateutil==2.8.2

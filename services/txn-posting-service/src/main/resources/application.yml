@@ -1,0 +1,53 @@
+spring:
+  application:
+    name: txn-posting-service
+  profiles:
+    active: local
+  main:
+    banner-mode: off
+  datasource:
+    # H2 in Oracle compatibility mode. The real datasource block is in application-prod.yml, commented out.
+    url: jdbc:h2:mem:txnposting;MODE=Oracle;DB_CLOSE_DELAY=-1;DEFAULT_NULL_ORDERING=HIGH
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+  jpa:
+    open-in-view: false
+    hibernate:
+      # none, not validate: Hibernate's H2 dialect reads NUMBER(19) back as numeric and refuses the
+      # Flyway schema. Validation runs in the prod pipeline against a real Oracle (PLAT-0967).
+      ddl-auto: none
+    properties:
+      hibernate.dialect: com.meridian.platform.common.jpa.LocalOracleDialect
+      hibernate.jdbc.time_zone: UTC
+  flyway:
+    enabled: true
+    locations: classpath:db/migration/oracle
+
+server:
+  port: 4512
+  shutdown: graceful
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: when_authorized
+
+logging:
+  config: classpath:log4j2-meridian.xml
+
+meridian:
+  security:
+    jwks-uri: http://localhost:4400/.well-known/jwks.json
+    issuer: http://localhost:4400
+  posting:
+    bedrock-adapter-url: http://localhost:4516/bedrock/v1
+    # PLAT-1188: hold postings as PENDING_BEDROCK during EOD rather than 503. Reversals never hold.
+    hold-when-bedrock-unavailable: true
+    daily-debit-limit-minor: 2500000
+    reversal-window-days: 60
+    pending-sweep-ms: 60000

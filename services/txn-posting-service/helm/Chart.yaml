@@ -1,0 +1,12 @@
+apiVersion: v2
+name: txn-posting-service
+description: Local/legacy chart for txn-posting-service. The deployable chart is platform-tooling/helm/txn-posting-service; this one is kept for the kind cluster and the DeploymentConfig rollback path (TOOL-1102).
+type: application
+version: 0.4.0
+appVersion: "4.1.7"
+maintainers:
+  - name: payments-platform
+    email: payments-platform@example.com
+annotations:
+  meridian.bank/ticket-key: PLAT
+  meridian.bank/compliance-critical: "true"

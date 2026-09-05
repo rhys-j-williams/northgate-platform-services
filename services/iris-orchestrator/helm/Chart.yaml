@@ -1,0 +1,12 @@
+apiVersion: v2
+name: iris-orchestrator
+description: Local/legacy chart for iris-orchestrator. The deployable chart is platform-tooling/helm/iris-orchestrator; this one is kept for the kind cluster and the DeploymentConfig rollback path (TOOL-1102).
+type: application
+version: 0.2.0
+appVersion: "2.8.1"
+maintainers:
+  - name: retail-digital
+    email: retail-digital@example.com
+annotations:
+  meridian.bank/ticket-key: PLAT
+  meridian.bank/compliance-critical: "false"

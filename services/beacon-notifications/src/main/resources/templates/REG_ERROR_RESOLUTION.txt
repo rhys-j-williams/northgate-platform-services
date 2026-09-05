@@ -1,0 +1,7 @@
+Resolution of your reported error, account ending {{accountTail}}
+We have completed our investigation into the transaction you reported on account ending {{accountTail}}. The outcome and any resulting credit of {{amount}} are shown in your account activity as of {{occurredAt}}.
+
+IMPORTANT DISCLOSURE. You have the right to request copies of the documents we relied on in our investigation. If a provisional credit was made to your account during the investigation and the error was not confirmed, the provisional credit will be reversed five business days after the date of this notice. Questions about this determination can be raised by calling the number on your statement.
+
+This is a regulatory notice. It cannot be turned off in your alert preferences.
+Ref {{eventId}}

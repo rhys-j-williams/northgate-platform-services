@@ -1,0 +1,12 @@
+apiVersion: v2
+name: bff-business
+description: Local/legacy chart for bff-business. The deployable chart is platform-tooling/helm/bff-business; this one is kept for the kind cluster and the DeploymentConfig rollback path (TOOL-1102).
+type: application
+version: 0.4.0
+appVersion: "4.12.0"
+maintainers:
+  - name: business-digital
+    email: business-digital@example.com
+annotations:
+  meridian.bank/ticket-key: PLAT
+  meridian.bank/compliance-critical: "false"

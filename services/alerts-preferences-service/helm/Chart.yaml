@@ -1,0 +1,12 @@
+apiVersion: v2
+name: alerts-preferences-service
+description: Local/legacy chart for alerts-preferences-service. The deployable chart is platform-tooling/helm/alerts-preferences-service; this one is kept for the kind cluster and the DeploymentConfig rollback path (TOOL-1102).
+type: application
+version: 0.2.0
+appVersion: "2.9.1"
+maintainers:
+  - name: payments-platform
+    email: payments-platform@example.com
+annotations:
+  meridian.bank/ticket-key: PLAT
+  meridian.bank/compliance-critical: "false"

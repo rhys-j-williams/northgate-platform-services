@@ -1,0 +1,20 @@
+# DB2 11.5 on the audit LPAR. Credentials are rendered by the Vault agent.
+# The whole block is commented out because this repository cannot reach the production driver
+# artefacts outside the Artifactory virtual repository. Uncomment on a build agent with the
+# internal settings.xml. Do not commit it uncommented (GIS-1180).
+#spring:
+#  datasource:
+#    url: jdbc:db2://db2-audit-prod.meridian.internal:50000/AUDITDB:sslConnection=true;
+#    driver-class-name: com.ibm.db2.jcc.DB2Driver
+#    username: ${VAULT_DB_USER}
+#    password: ${VAULT_DB_PASSWORD}
+#  jpa:
+#    properties:
+#      hibernate.dialect: org.hibernate.dialect.DB2Dialect
+#  flyway:
+#    locations: classpath:db/migration/db2
+
+meridian:
+  security:
+    jwks-uri: https://keystone.meridian.internal/.well-known/jwks.json
+    issuer: https://keystone.meridian.internal

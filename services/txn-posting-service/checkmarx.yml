@@ -1,0 +1,19 @@
+# Consumed by the mock cx CLI in platform-tooling/mock-scanners/bin. Inherits the platform-services
+# root checkmarx.yml; only the per-service overrides live here.
+project:
+  name: meridian-platform-services-txn-posting-service
+  team: /CxServer/Meridian/CSWT/payments-platform
+scan:
+  preset: Meridian-PCI
+  incremental: true
+  language: java
+  source: .
+  exclude:
+    - "target"
+thresholds:
+  high: 0
+  medium: 0
+  low: 20
+report:
+  formats: [json, html]
+  output: .cx-reports

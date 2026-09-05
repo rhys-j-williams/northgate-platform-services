@@ -1,0 +1,14 @@
+spring:
+  main:
+    banner-mode: off
+  kafka:
+    bootstrap-servers: localhost:1
+
+logging:
+  config: classpath:log4j2-test.xml
+
+meridian:
+  security:
+    enabled: false
+  audit:
+    consume: false

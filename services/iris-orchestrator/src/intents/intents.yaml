@@ -1,0 +1,93 @@
+# Iris scripted intents. Owned by the Digital Assistant squad (Iris), reviewed by Compliance for
+# anything that mentions fees, rates or disputes (CMP-0412). Keep the copy plain; the widget does
+# not render markdown.
+#
+# Matching is keyword scoring, not NLU. See intent-matcher.ts. Each keyword is a lowercase token
+# or a /regex/. `weight` defaults to 1. `requires_auth` intents need a Keystone token because they
+# call bff-retail. `handoff: true` pushes the transcript onto the agent queue.
+#
+# History: this file replaced the Dialogflow export in 2021-09 (PLAT-0611) when the licence was
+# not renewed. Nobody has missed it.
+
+version: 7
+fallback: fallback
+
+intents:
+  - id: greeting
+    keywords: [hello, hi, hey, "good morning", "good afternoon", "/^yo$/"]
+    responses:
+      - "Hi, I'm Iris. I can check balances, find recent transactions, explain fees or get you to a person. What do you need?"
+    quick_replies: ["Check my balance", "Recent transactions", "Talk to someone"]
+
+  - id: balance
+    keywords: [balance, balances, "how much", money, funds, available]
+    weight: 1.2
+    requires_auth: true
+    action: balances
+    responses:
+      - "Here's where you stand:"
+    quick_replies: ["Recent transactions", "Something else"]
+
+  - id: transactions
+    keywords: [transactions, transaction, spent, spend, charge, charges, purchases, recent, activity, "/what did i/"]
+    requires_auth: true
+    action: recent_transactions
+    entities:
+      last4: "/\\b(\\d{4})\\b/"
+    responses:
+      - "Your most recent activity:"
+    quick_replies: ["Dispute a charge", "Check my balance"]
+
+  - id: dispute
+    keywords: [dispute, fraud, "didn't make", "did not make", unauthorised, unauthorized, "not mine", stolen]
+    weight: 1.5
+    handoff: true
+    handoff_queue: disputes
+    responses:
+      - "I'm sorry to hear that. Disputes have to go through a specialist so I'm connecting you now. If your card is lost or stolen you can lock it straight away from Cards in the app."
+    # Reg E language. Do not edit without CMP sign off (CMP-0412).
+    disclosure: reg_e_dispute
+
+  - id: fees
+    keywords: [fee, fees, charged, "overdraft fee", "monthly fee", "maintenance fee", "why was i charged"]
+    responses:
+      - "Common fees on the everyday checking account: overdraft 34.00, returned item 34.00, out of network ATM 3.00, paper statement 2.00. The full schedule is under Disclosures in the app. Want me to get someone to look at a specific charge?"
+    quick_replies: ["Yes, talk to someone", "No thanks"]
+
+  - id: rates
+    keywords: [rate, rates, apy, interest, "savings rate", cd, "certificate"]
+    responses:
+      - "Rates change often so I can't quote them here. The current sheet is on the Rates page in the app, and the Markets tab shows today's reference rates."
+
+  - id: hours
+    keywords: [hours, open, closed, branch, holiday, "when do you"]
+    responses:
+      - "Branches are open 9 to 5 Monday to Friday and 9 to 1 Saturday, except federal holidays. Phone support is 24/7 for card issues."
+
+  - id: card_lost
+    keywords: [lost, "lost card", "missing card", "can't find my card", "new card", replace, replacement]
+    responses:
+      - "Lock the card first: Cards, pick the card, Lock. Then Replace card on the same screen. A replacement takes 5 to 7 business days."
+    quick_replies: ["Talk to someone"]
+
+  - id: human
+    keywords: [human, person, agent, someone, representative, "talk to", "speak to", operator, help]
+    weight: 0.8
+    handoff: true
+    handoff_queue: general
+    responses:
+      - "Sure. Connecting you to the next available banker. Typical wait right now is a few minutes; this chat stays open."
+
+  - id: thanks
+    keywords: [thanks, "thank you", cheers, great, perfect]
+    weight: 0.6
+    responses:
+      - "Any time."
+    end: true
+
+  - id: fallback
+    keywords: []
+    responses:
+      - "I didn't catch that. I can help with balances, transactions, fees, cards, or connect you to a banker."
+      - "Sorry, that's not something I can do yet. Try 'balance', 'transactions', or 'talk to someone'."
+    quick_replies: ["Check my balance", "Recent transactions", "Talk to someone"]

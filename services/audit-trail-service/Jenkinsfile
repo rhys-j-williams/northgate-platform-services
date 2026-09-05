@@ -1,0 +1,12 @@
+#!/usr/bin/env groovy
+// audit-trail-service. Owner platform-engineering. Coverage threshold matches sonar-project.properties; if you lower one, lower both, and raise a PLAT ticket saying why.
+@Library('meridian-pipeline@v3') _
+
+meridianJavaPipeline(
+    agentLabel:        'maven-jdk11-rhel8',
+    appName:           'audit-trail-service',
+    modulePath:        'platform-services/services/audit-trail-service',
+    helmChart:         'platform-tooling/helm/audit-trail-service',
+    coverageThreshold: 12,
+    checkmarxThresholds: [high: 0, medium: 0]   // compliance critical, GIS-STD-014
+)

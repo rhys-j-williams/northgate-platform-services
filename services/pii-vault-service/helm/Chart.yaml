@@ -1,0 +1,12 @@
+apiVersion: v2
+name: pii-vault-service
+description: Local/legacy chart for pii-vault-service. The deployable chart is platform-tooling/helm/pii-vault-service; this one is kept for the kind cluster and the DeploymentConfig rollback path (TOOL-1102).
+type: application
+version: 0.1.0
+appVersion: "1.12.0"
+maintainers:
+  - name: payments-platform
+    email: payments-platform@example.com
+annotations:
+  meridian.bank/ticket-key: PLAT
+  meridian.bank/compliance-critical: "true"

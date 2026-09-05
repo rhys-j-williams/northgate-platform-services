@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Shared Log4j2 configuration for the Boot 2.7 services. Services point at it with
+  logging.config=classpath:log4j2-meridian.xml and override the service name through
+  the MERIDIAN_SERVICE_NAME environment variable (set in the Helm values).
+
+  The HEC appender points at splunk-hec-mock locally. In the bank the URL is the
+  Splunk heavy forwarder and the token comes from Vault. When the collector is down
+  Log4j prints one error every five minutes and carries on; this is by design, a
+  logging outage must not take the service down (INC0048817).
+-->
+<Configuration status="WARN" name="meridian">
+  <Properties>
+    <Property name="service">${env:MERIDIAN_SERVICE_NAME:-unknown-service}</Property>
+    <Property name="environment">${env:MERIDIAN_ENV:-local}</Property>
+    <Property name="hecUrl">${env:SPLUNK_HEC_URL:-http://localhost:4606/services/collector/event}</Property>
+    <Property name="hecToken">${env:SPLUNK_HEC_TOKEN:-CHANGEME-splunk-hec-token}</Property>
+  </Properties>
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <JsonTemplateLayout eventTemplateUri="classpath:SplunkHecLayout.json">
+        <EventTemplateAdditionalField key="service" value="${service}"/>
+        <EventTemplateAdditionalField key="environment" value="${environment}"/>
+      </JsonTemplateLayout>
+    </Console>
+    <Http name="SplunkHec" url="${hecUrl}" ignoreExceptions="true" connectTimeoutMillis="500" readTimeoutMillis="1000">
+      <Property name="Authorization" value="Splunk ${hecToken}"/>
+      <JsonTemplateLayout eventTemplateUri="classpath:SplunkHecLayout.json">
+        <EventTemplateAdditionalField key="service" value="${service}"/>
+        <EventTemplateAdditionalField key="environment" value="${environment}"/>
+      </JsonTemplateLayout>
+    </Http>
+    <Async name="AsyncHec" blocking="false" bufferSize="1024" ignoreExceptions="true">
+      <AppenderRef ref="SplunkHec"/>
+    </Async>
+  </Appenders>
+  <Loggers>
+    <Logger name="org.springframework" level="WARN"/>
+    <Logger name="org.hibernate" level="WARN"/>
+    <Logger name="org.apache.kafka" level="WARN"/>
+    <Logger name="org.flywaydb" level="INFO"/>
+    <Logger name="com.meridian" level="INFO"/>
+    <Root level="INFO">
+      <AppenderRef ref="Console"/>
+      <AppenderRef ref="AsyncHec"/>
+    </Root>
+  </Loggers>
+</Configuration>

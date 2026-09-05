@@ -1,0 +1,15 @@
+#!/usr/bin/env groovy
+// bff-retail. Owner retail-digital.
+@Library('meridian-pipeline@v3') _
+
+meridianNodePipeline(
+    agentLabel:        'nodejs18-rhel9',
+    nodeVersion:       '18.19.0',
+    appName:           'bff-retail',
+    helmChart:         'platform-tooling/helm/bff-retail',
+    coverageThreshold: 35,
+    lintCommand:       'npm run lint',
+    testCommand:       'npm run test:coverage',
+    buildCommand:      'npm run build',
+    coverageSummary:   'coverage/coverage-summary.json'
+)

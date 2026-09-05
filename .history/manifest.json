@@ -1,0 +1,3576 @@
+{
+ "component": "platform-services",
+ "commits": [
+  {
+   "date": "2020-06-08T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1001 scaffold platform-services monorepo with the common starter",
+   "paths": [
+    "platform-services/libs/java/common-starter/pom.xml"
+   ],
+   "body": "Maven module com.meridian.platform:common-starter. Services resolve it from Artifactory; the\nMakefile installs it locally first so a laptop build behaves the same way."
+  },
+  {
+   "date": "2020-06-08T00:00:00",
+   "author": "j.hollins",
+   "message": "PLAT-1004 scaffold bedrock-adapter",
+   "paths": [
+    "platform-services/services/bedrock-adapter/pom.xml",
+    "platform-services/services/bedrock-adapter/src/main/java/com/meridian/platform/bedrockadapter/BedrockAdapterApplication.java",
+    "platform-services/services/bedrock-adapter/src/main/resources/application.yml",
+    "platform-services/services/bedrock-adapter/src/test/resources/application.yml",
+    "platform-services/services/bedrock-adapter/src/test/resources/log4j2-test.xml"
+   ]
+  },
+  {
+   "date": "2020-06-09T00:00:00",
+   "author": "j.hollins",
+   "message": "PLAT-1008 online copybooks ACCT-INQ TXN-POST CUST-PROF alongside the batch extracts",
+   "paths": [
+    "platform-services/copybooks/ACCT-INQ.cpy",
+    "platform-services/copybooks/CUST-PROF.cpy",
+    "platform-services/copybooks/README.md",
+    "platform-services/copybooks/TXN-POST.cpy"
+   ],
+   "body": "Layouts confirmed against the MTAI/MTTP/MTCP CICS transactions with the Bedrock team. The 64 position\nheader is common. README carries the return code table."
+  },
+  {
+   "date": "2020-06-10T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1012 common-starter correlation id filter and RestTemplate interceptor",
+   "paths": [
+    "platform-services/libs/java/common-starter/src/main/java/com/meridian/platform/common/MeridianCommonAutoConfiguration.java",
+    "platform-services/libs/java/common-starter/src/main/java/com/meridian/platform/common/correlation/CorrelationId.java"
+   ]
+  },
+  {
+   "date": "2020-06-15T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1015 common-starter standard ApiError body and handler",
+   "paths": [
+    "platform-services/libs/java/common-starter/src/main/java/com/meridian/platform/common/correlation/CorrelationIdFilter.java",
+    "platform-services/libs/java/common-starter/src/main/java/com/meridian/platform/common/correlation/CorrelationIdRestTemplateInterceptor.java"
+   ]
+  },
+  {
+   "date": "2020-06-15T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1017 export domain fixtures to JSON for the Java services",
+   "paths": [
+    "platform-services/fixtures/meridian-fixtures.json",
+    "platform-services/scripts/export-fixtures.js"
+   ]
+  },
+  {
+   "date": "2020-06-17T00:00:00",
+   "author": "j.hollins",
+   "message": "PLAT-1023 bedrock-adapter fixed width record framing for MTBACCT",
+   "paths": [
+    "platform-services/services/bedrock-adapter/src/main/java/com/meridian/platform/bedrockadapter/api/AccountsController.java",
+    "platform-services/services/bedrock-adapter/src/main/java/com/meridian/platform/bedrockadapter/api/BedrockService.java"
+   ]
+  },
+  {
+   "date": "2020-06-17T00:00:00",
+   "author": "p.venkatesan",
+   "message": "PLAT-1028 bedrock-adapter zoned decimal overpunch decode",
+   "paths": [
+    "platform-services/services/bedrock-adapter/src/main/java/com/meridian/platform/bedrockadapter/api/PostingRequest.java",
+    "platform-services/services/bedrock-adapter/src/main/java/com/meridian/platform/bedrockadapter/config/MqConfig.java"
+   ]
+  },
+  {
+   "date": "2020-06-22T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1031 common-starter Log4j2 JSON layout with Splunk fields",
+   "paths": [
+    "platform-services/libs/java/common-starter/src/main/java/com/meridian/platform/common/error/ApiError.java",
+    "platform-services/libs/java/common-starter/src/main/java/com/meridian/platform/common/error/ApiException.java",
+    "platform-services/libs/java/common-starter/src/main/java/com/meridian/platform/common/error/GlobalExceptionHandler.java"
+   ]
+  },
+  {
+   "date": "2020-06-22T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1036 bedrock-adapter tests for bedrockadapterapplication",
+   "paths": [
+    "platform-services/services/bedrock-adapter/src/test/java/com/meridian/platform/bedrockadapter/BedrockAdapterApplicationTest.java"
+   ]
+  },
+  {
+   "date": "2020-07-10T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1040 common-starter HEC appender for splunk-hec-mock",
+   "paths": [
+    "platform-services/libs/java/common-starter/src/main/java/com/meridian/platform/common/fixtures/FixtureAutoConfiguration.java",
+    "platform-services/libs/java/common-starter/src/main/java/com/meridian/platform/common/fixtures/FixtureStore.java",
+    "platform-services/libs/java/common-starter/src/main/java/com/meridian/platform/common/jpa/LocalDb2Dialect.java"
+   ]
+  },
+  {
+   "date": "2020-07-14T00:00:00",
+   "author": "j.hollins",
+   "message": "PLAT-1045 bedrock-adapter ACCT-INQ request builder",
+   "paths": [
+    "platform-services/services/bedrock-adapter/src/main/java/com/meridian/platform/bedrockadapter/copybook/AccountRecord.java",
+    "platform-services/services/bedrock-adapter/src/main/java/com/meridian/platform/bedrockadapter/copybook/Copybook.java",
+    "platform-services/services/bedrock-adapter/src/main/java/com/meridian/platform/bedrockadapter/copybook/CustomerRecord.java"
+   ]
+  },
+  {
+   "date": "2020-07-15T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1051 common-starter resource server config for the Keystone JWKS",
+   "paths": [
+    "platform-services/libs/java/common-starter/src/main/java/com/meridian/platform/common/jpa/LocalOracleDialect.java",
+    "platform-services/libs/java/common-starter/src/main/java/com/meridian/platform/common/logging/SplunkFields.java"
+   ]
+  },
+  {
+   "date": "2020-07-20T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1053 common-starter fixture store auto configuration",
+   "paths": [
+    "platform-services/libs/java/common-starter/src/main/java/com/meridian/platform/common/security/MeridianSecurityProperties.java",
+    "platform-services/libs/java/common-starter/src/main/java/com/meridian/platform/common/security/ResourceServerAutoConfiguration.java",
+    "platform-services/libs/java/common-starter/src/main/resources/META-INF/additional-spring-configuration-metadata.json"
+   ]
+  },
+  {
+   "date": "2020-07-22T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1060 common-starter tests for the correlation filter and error handler",
+   "paths": [
+    "platform-services/libs/java/common-starter/src/test/java/com/meridian/platform/common/correlation/CorrelationIdFilterTest.java",
+    "platform-services/libs/java/common-starter/src/test/java/com/meridian/platform/common/error/GlobalExceptionHandlerTest.java"
+   ]
+  },
+  {
+   "date": "2020-08-03T00:00:00",
+   "author": "j.hollins",
+   "message": "Merge release/2020.08 into main for train 2020.08.1",
+   "empty": true
+  },
+  {
+   "date": "2020-08-04T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1063 root Makefile install build test targets",
+   "paths": [
+    "platform-services/Makefile"
+   ]
+  },
+  {
+   "date": "2020-08-07T00:00:00",
+   "author": "a.balaraman",
+   "message": "Merge release/2020.08 into main for train 2020.08.2",
+   "empty": true
+  },
+  {
+   "date": "2020-08-10T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1066 common-starter local H2 dialects standing in for Oracle and DB2",
+   "paths": [
+    "platform-services/libs/java/common-starter/src/main/resources/META-INF/spring.factories",
+    "platform-services/libs/java/common-starter/src/main/resources/SplunkHecLayout.json"
+   ]
+  },
+  {
+   "date": "2020-08-10T00:00:00",
+   "author": "a.balaraman",
+   "message": "TOOL-731 bedrock-adapter Jenkinsfile on the shared library pipeline",
+   "paths": [
+    "platform-services/services/bedrock-adapter/Jenkinsfile"
+   ]
+  },
+  {
+   "date": "2020-08-17T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1069 common-starter correlation id filter and RestTemplate interceptor",
+   "paths": [
+    "platform-services/libs/java/common-starter/src/main/resources/log4j2-meridian.xml"
+   ]
+  },
+  {
+   "date": "2020-08-17T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1073 bedrock-adapter MQ request reply with correlation id selector",
+   "paths": [
+    "platform-services/services/bedrock-adapter/src/main/java/com/meridian/platform/bedrockadapter/copybook/Fixed.java"
+   ]
+  },
+  {
+   "date": "2020-08-17T00:00:00",
+   "author": "p.venkatesan",
+   "message": "PLAT-1078 bedrock-adapter tests for recordlayout",
+   "paths": [
+    "platform-services/services/bedrock-adapter/src/test/java/com/meridian/platform/bedrockadapter/copybook/RecordLayoutTest.java"
+   ]
+  },
+  {
+   "date": "2020-08-21T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1084 bedrock-adapter Dockerfile on the UBI runtime image",
+   "paths": [
+    "platform-services/services/bedrock-adapter/Dockerfile"
+   ]
+  },
+  {
+   "date": "2020-09-02T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1089 bedrock-adapter tests for zoneddecimal",
+   "paths": [
+    "platform-services/services/bedrock-adapter/src/test/java/com/meridian/platform/bedrockadapter/copybook/ZonedDecimalTest.java"
+   ]
+  },
+  {
+   "date": "2020-09-02T00:00:00",
+   "author": "j.hollins",
+   "message": "Merge release/2020.09 into main for train 2020.09.1",
+   "empty": true
+  },
+  {
+   "date": "2020-09-07T00:00:00",
+   "author": "j.hollins",
+   "message": "PLAT-1092 bedrock-adapter README in the wiki shape",
+   "paths": [
+    "platform-services/services/bedrock-adapter/README.md",
+    "platform-services/services/bedrock-adapter/docs/adr/0001-mq-request-reply-with-fixed-width.md"
+   ]
+  },
+  {
+   "date": "2020-09-07T00:00:00",
+   "author": "j.hollins",
+   "message": "PLAT-1097 txn-posting-service posting request validation",
+   "paths": [
+    "platform-services/services/txn-posting-service/src/main/java/com/meridian/platform/txnposting/api/PostingView.java",
+    "platform-services/services/txn-posting-service/src/main/java/com/meridian/platform/txnposting/api/PostingsController.java"
+   ]
+  },
+  {
+   "date": "2020-09-08T00:00:00",
+   "author": "j.hollins",
+   "message": "PLAT-1099 bedrock-adapter CUST-PROF lookup for the BFFs",
+   "paths": [
+    "platform-services/services/bedrock-adapter/src/main/java/com/meridian/platform/bedrockadapter/copybook/TransactionRecord.java"
+   ]
+  },
+  {
+   "date": "2020-09-11T00:00:00",
+   "author": "j.hollins",
+   "message": "PLAT-1104 scaffold txn-posting-service",
+   "paths": [
+    "platform-services/services/txn-posting-service/pom.xml",
+    "platform-services/services/txn-posting-service/src/main/java/com/meridian/platform/txnposting/TxnPostingServiceApplication.java",
+    "platform-services/services/txn-posting-service/src/main/resources/application.yml",
+    "platform-services/services/txn-posting-service/src/test/resources/application.yml",
+    "platform-services/services/txn-posting-service/src/test/resources/log4j2-test.xml"
+   ],
+   "body": "Port from PORTS.md. Local profile only until the txn-posting-service CAB entry is approved."
+  },
+  {
+   "date": "2020-09-11T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1107 txn-posting-service tests for applicationcontext",
+   "paths": [
+    "platform-services/services/txn-posting-service/src/test/java/com/meridian/platform/txnposting/ApplicationContextTest.java"
+   ]
+  },
+  {
+   "date": "2020-09-14T00:00:00",
+   "author": "p.venkatesan",
+   "message": "PLAT-1114 bedrock-adapter tests for fixturebedrock",
+   "paths": [
+    "platform-services/services/bedrock-adapter/src/test/java/com/meridian/platform/bedrockadapter/fixture/FixtureBedrockTest.java"
+   ]
+  },
+  {
+   "date": "2020-09-14T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2020.09 into main for train 2020.09.2",
+   "empty": true
+  },
+  {
+   "date": "2020-09-21T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1119 bedrock-adapter map Bedrock return codes to HTTP",
+   "paths": [
+    "platform-services/services/bedrock-adapter/src/main/java/com/meridian/platform/bedrockadapter/copybook/OnlineMessages.java"
+   ]
+  },
+  {
+   "date": "2020-09-21T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1126 txn-posting-service idempotency key table and lookup",
+   "paths": [
+    "platform-services/services/txn-posting-service/src/main/java/com/meridian/platform/txnposting/bedrock/BedrockAdapterClient.java",
+    "platform-services/services/txn-posting-service/src/main/java/com/meridian/platform/txnposting/bedrock/BedrockPostingResult.java"
+   ]
+  },
+  {
+   "date": "2020-09-24T00:00:00",
+   "author": "j.hollins",
+   "message": "PLAT-1131 txn-posting-service migration V1 posting schema",
+   "paths": [
+    "platform-services/services/txn-posting-service/src/main/resources/db/migration/oracle/V1__posting_schema.sql"
+   ]
+  },
+  {
+   "date": "2020-10-06T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1135 txn-posting-service post through bedrock-adapter",
+   "paths": [
+    "platform-services/services/txn-posting-service/src/main/java/com/meridian/platform/txnposting/posting/IdempotencyKeys.java",
+    "platform-services/services/txn-posting-service/src/main/java/com/meridian/platform/txnposting/posting/PendingSweep.java"
+   ]
+  },
+  {
+   "date": "2020-10-07T00:00:00",
+   "author": "j.hollins",
+   "message": "PLAT-1142 txn-posting-service migration V2 pending bedrock status",
+   "paths": [
+    "platform-services/services/txn-posting-service/src/main/resources/db/migration/oracle/V2__pending_bedrock_status.sql"
+   ]
+  },
+  {
+   "date": "2020-10-13T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1144 bedrock-adapter Helm chart for the platform namespace",
+   "paths": [
+    "platform-services/services/bedrock-adapter/helm/Chart.yaml",
+    "platform-services/services/bedrock-adapter/helm/templates/_helpers.tpl",
+    "platform-services/services/bedrock-adapter/helm/templates/configmap.yaml",
+    "platform-services/services/bedrock-adapter/helm/templates/deployment.yaml",
+    "platform-services/services/bedrock-adapter/helm/templates/service.yaml",
+    "platform-services/services/bedrock-adapter/helm/values-local.yaml",
+    "platform-services/services/bedrock-adapter/helm/values.yaml"
+   ]
+  },
+  {
+   "date": "2020-10-14T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2020.10 into main for train 2020.10.1",
+   "empty": true
+  },
+  {
+   "date": "2020-10-22T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1149 bedrock-adapter TXN-POST envelope and reply parsing",
+   "paths": [
+    "platform-services/services/bedrock-adapter/src/main/java/com/meridian/platform/bedrockadapter/copybook/ZonedDecimal.java",
+    "platform-services/services/bedrock-adapter/src/main/java/com/meridian/platform/bedrockadapter/fixture/FixtureBedrock.java"
+   ]
+  },
+  {
+   "date": "2020-10-22T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2020.10 into main for train 2020.10.2",
+   "empty": true
+  },
+  {
+   "date": "2020-11-02T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-1154 bff-retail accounts and balances aggregation",
+   "paths": [
+    "platform-services/services/bff-retail/src/accounts/account.dto.ts",
+    "platform-services/services/bff-retail/src/accounts/accounts.controller.ts",
+    "platform-services/services/bff-retail/src/accounts/accounts.module.ts"
+   ]
+  },
+  {
+   "date": "2020-11-09T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1157 bedrock-adapter fixture Bedrock for local runs",
+   "paths": [
+    "platform-services/services/bedrock-adapter/src/main/java/com/meridian/platform/bedrockadapter/gateway/BedrockGateway.java"
+   ]
+  },
+  {
+   "date": "2020-11-09T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1162 bff-retail Keystone JWT validation against the mock JWKS",
+   "paths": [
+    "platform-services/services/bff-retail/src/accounts/accounts.service.ts",
+    "platform-services/services/bff-retail/src/accounts/money.ts"
+   ]
+  },
+  {
+   "date": "2020-11-09T00:00:00",
+   "author": "d.okafor",
+   "message": "Merge release/2020.11 into main for train 2020.11.1",
+   "empty": true
+  },
+  {
+   "date": "2020-11-10T00:00:00",
+   "author": "v.orlova",
+   "message": "GIS-417 bedrock-adapter Sonar and Checkmarx onboarding",
+   "paths": [
+    "platform-services/services/bedrock-adapter/checkmarx.yml",
+    "platform-services/services/bedrock-adapter/sonar-project.properties"
+   ]
+  },
+  {
+   "date": "2020-11-10T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1164 txn-posting-service hold postings PENDING_BEDROCK during EOD",
+   "paths": [
+    "platform-services/services/txn-posting-service/src/main/java/com/meridian/platform/txnposting/posting/PostingRequest.java",
+    "platform-services/services/txn-posting-service/src/main/java/com/meridian/platform/txnposting/posting/PostingService.java"
+   ]
+  },
+  {
+   "date": "2020-11-10T00:00:00",
+   "author": "e.castellanos",
+   "message": "TOOL-845 txn-posting-service Jenkinsfile on the shared library pipeline",
+   "paths": [
+    "platform-services/services/txn-posting-service/Jenkinsfile"
+   ]
+  },
+  {
+   "date": "2020-11-10T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-1166 bff-retail tests for accounts.service",
+   "paths": [
+    "platform-services/services/bff-retail/src/accounts/accounts.service.spec.ts"
+   ]
+  },
+  {
+   "date": "2020-11-12T00:00:00",
+   "author": "p.venkatesan",
+   "message": "PLAT-1173 txn-posting-service migration V3 reversal window",
+   "paths": [
+    "platform-services/services/txn-posting-service/src/main/resources/db/migration/oracle/V3__reversal_window.sql"
+   ]
+  },
+  {
+   "date": "2020-11-12T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1178 scaffold bff-retail",
+   "paths": [
+    "platform-services/services/bff-retail/.eslintrc.js",
+    "platform-services/services/bff-retail/.gitignore",
+    "platform-services/services/bff-retail/.npmrc",
+    "platform-services/services/bff-retail/.nvmrc",
+    "platform-services/services/bff-retail/jest.config.js",
+    "platform-services/services/bff-retail/package-lock.json",
+    "platform-services/services/bff-retail/package.json",
+    "platform-services/services/bff-retail/src/app.module.ts",
+    "platform-services/services/bff-retail/src/config.ts",
+    "platform-services/services/bff-retail/src/main.ts",
+    "platform-services/services/bff-retail/tsconfig.build.json",
+    "platform-services/services/bff-retail/tsconfig.json"
+   ],
+   "body": "Port from PORTS.md. Local profile only until the bff-retail CAB entry is approved."
+  },
+  {
+   "date": "2020-11-16T00:00:00",
+   "author": "a.balaraman",
+   "message": "Merge release/2020.11 into main for train 2020.11.2",
+   "empty": true
+  },
+  {
+   "date": "2020-11-17T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1183 Maven reactor and checkstyle under build/",
+   "paths": [
+    "platform-services/build/checkstyle.xml",
+    "platform-services/build/pom.xml"
+   ]
+  },
+  {
+   "date": "2020-11-19T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1186 txn-posting-service Dockerfile on the UBI runtime image",
+   "paths": [
+    "platform-services/services/txn-posting-service/Dockerfile"
+   ]
+  },
+  {
+   "date": "2020-11-23T00:00:00",
+   "author": "j.hollins",
+   "message": "PLAT-1192 bedrock-adapter receive timeout configurable per queue",
+   "paths": [
+    "platform-services/services/bedrock-adapter/src/main/java/com/meridian/platform/bedrockadapter/gateway/BedrockUnavailableException.java",
+    "platform-services/services/bedrock-adapter/src/main/java/com/meridian/platform/bedrockadapter/gateway/GatewayConfig.java",
+    "platform-services/services/bedrock-adapter/src/main/java/com/meridian/platform/bedrockadapter/gateway/MqBedrockGateway.java"
+   ]
+  },
+  {
+   "date": "2020-11-23T00:00:00",
+   "author": "p.venkatesan",
+   "message": "PLAT-1196 txn-posting-service reversal of a posted transaction",
+   "paths": [
+    "platform-services/services/txn-posting-service/src/main/java/com/meridian/platform/txnposting/posting/Posting.java",
+    "platform-services/services/txn-posting-service/src/main/java/com/meridian/platform/txnposting/posting/PostingRepository.java"
+   ]
+  },
+  {
+   "date": "2020-12-02T00:00:00",
+   "author": "p.venkatesan",
+   "message": "PLAT-1200 bedrock-adapter ADR",
+   "paths": [
+    "platform-services/services/bedrock-adapter/docs/runbooks/bedrock-adapter.md"
+   ]
+  },
+  {
+   "date": "2020-12-07T00:00:00",
+   "author": "j.hollins",
+   "message": "PLAT-1207 txn-posting-service tests for postingvalidator",
+   "paths": [
+    "platform-services/services/txn-posting-service/src/test/java/com/meridian/platform/txnposting/posting/PostingValidatorTest.java"
+   ]
+  },
+  {
+   "date": "2020-12-21T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1209 bff-retail Redis cache with in process fallback",
+   "paths": [
+    "platform-services/services/bff-retail/src/auth/auth.module.ts",
+    "platform-services/services/bff-retail/src/auth/current-principal.decorator.ts",
+    "platform-services/services/bff-retail/src/auth/jwt-auth.guard.ts"
+   ]
+  },
+  {
+   "date": "2020-12-23T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1214 txn-posting-service README in the wiki shape",
+   "paths": [
+    "platform-services/services/txn-posting-service/README.md",
+    "platform-services/services/txn-posting-service/docs/adr/0002-idempotency-keys-are-stored-server.md"
+   ]
+  },
+  {
+   "date": "2021-01-01T00:00:00",
+   "author": "a.balaraman",
+   "message": "TOOL-401 bff-retail Jenkinsfile on the shared library pipeline",
+   "paths": [
+    "platform-services/services/bff-retail/Jenkinsfile"
+   ]
+  },
+  {
+   "date": "2021-01-01T00:00:00",
+   "author": "meridian-dependency-bot",
+   "message": "PLAT-1215 bump h2 2.1.214 test scope",
+   "empty": true,
+   "body": "Automated. Ranges pinned by the dependency policy; this moves the exact version only."
+  },
+  {
+   "date": "2021-01-04T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2021.01 into main for train 2021.01.1",
+   "empty": true
+  },
+  {
+   "date": "2021-01-11T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1221 bff-retail Dockerfile on the UBI runtime image",
+   "paths": [
+    "platform-services/services/bff-retail/Dockerfile"
+   ]
+  },
+  {
+   "date": "2021-01-12T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1225 bff-retail payees from PayLink",
+   "paths": [
+    "platform-services/services/bff-retail/src/cache/cache.module.ts",
+    "platform-services/services/bff-retail/src/cache/cache.service.ts"
+   ]
+  },
+  {
+   "date": "2021-01-13T00:00:00",
+   "author": "d.okafor",
+   "message": "Merge release/2021.01 into main for train 2021.01.2",
+   "empty": true
+  },
+  {
+   "date": "2021-01-14T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1229 txn-posting-service Helm chart for the platform namespace",
+   "paths": [
+    "platform-services/services/txn-posting-service/helm/Chart.yaml",
+    "platform-services/services/txn-posting-service/helm/templates/_helpers.tpl",
+    "platform-services/services/txn-posting-service/helm/templates/configmap.yaml",
+    "platform-services/services/txn-posting-service/helm/templates/deployment.yaml",
+    "platform-services/services/txn-posting-service/helm/templates/service.yaml",
+    "platform-services/services/txn-posting-service/helm/values-local.yaml",
+    "platform-services/services/txn-posting-service/helm/values.yaml"
+   ]
+  },
+  {
+   "date": "2021-01-14T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1231 bff-retail tests for keystone-jwt.service",
+   "paths": [
+    "platform-services/services/bff-retail/src/auth/keystone-jwt.service.spec.ts"
+   ]
+  },
+  {
+   "date": "2021-01-22T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1237 txn-posting-service posting status endpoint",
+   "paths": [
+    "platform-services/services/txn-posting-service/src/main/java/com/meridian/platform/txnposting/posting/PostingValidator.java"
+   ]
+  },
+  {
+   "date": "2021-01-26T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-1241 bff-retail cards endpoint via Bedrock",
+   "paths": [
+    "platform-services/services/bff-retail/src/auth/keystone-jwt.service.ts",
+    "platform-services/services/bff-retail/src/auth/principal.ts"
+   ]
+  },
+  {
+   "date": "2021-02-04T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-1246 bff-retail README in the wiki shape",
+   "paths": [
+    "platform-services/services/bff-retail/README.md",
+    "platform-services/services/bff-retail/docs/adr/0003-one-bff-per-channel-rather.md"
+   ]
+  },
+  {
+   "date": "2021-02-04T00:00:00",
+   "author": "a.balaraman",
+   "message": "Merge release/2021.02 into main for train 2021.02.1",
+   "empty": true
+  },
+  {
+   "date": "2021-02-05T00:00:00",
+   "author": "j.hollins",
+   "message": "PLAT-1253 txn-posting-service MCC and channel passthrough",
+   "paths": [
+    "platform-services/services/txn-posting-service/src/main/resources/application-prod.yml"
+   ]
+  },
+  {
+   "date": "2021-02-08T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1256 scaffold beacon-notifications",
+   "paths": [
+    "platform-services/services/beacon-notifications/pom.xml",
+    "platform-services/services/beacon-notifications/src/main/java/com/meridian/platform/beacon/BeaconNotificationsApplication.java",
+    "platform-services/services/beacon-notifications/src/main/resources/application.yml",
+    "platform-services/services/beacon-notifications/src/test/resources/application.yml",
+    "platform-services/services/beacon-notifications/src/test/resources/log4j2-test.xml"
+   ]
+  },
+  {
+   "date": "2021-02-08T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1258 beacon-notifications preference evaluation",
+   "paths": [
+    "platform-services/services/beacon-notifications/src/main/java/com/meridian/platform/beacon/api/NotificationsController.java",
+    "platform-services/services/beacon-notifications/src/main/java/com/meridian/platform/beacon/channel/ChannelAdapter.java"
+   ]
+  },
+  {
+   "date": "2021-02-15T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2021.02 into main for train 2021.02.2",
+   "empty": true
+  },
+  {
+   "date": "2021-02-18T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1262 bff-retail transfers through txn-posting",
+   "paths": [
+    "platform-services/services/bff-retail/src/cards/cards.controller.ts",
+    "platform-services/services/bff-retail/src/cards/cards.module.ts"
+   ]
+  },
+  {
+   "date": "2021-02-22T00:00:00",
+   "author": "c.mbeki",
+   "message": "GIS-1329 txn-posting-service Sonar and Checkmarx onboarding",
+   "paths": [
+    "platform-services/services/txn-posting-service/checkmarx.yml",
+    "platform-services/services/txn-posting-service/sonar-project.properties"
+   ]
+  },
+  {
+   "date": "2021-02-22T00:00:00",
+   "author": "p.venkatesan",
+   "message": "PLAT-1269 txn-posting-service ADR",
+   "paths": [
+    "platform-services/services/txn-posting-service/docs/runbooks/txn-posting-service.md"
+   ]
+  },
+  {
+   "date": "2021-02-25T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-1274 beacon-notifications ACCT.EVENTS consumer",
+   "paths": [
+    "platform-services/services/beacon-notifications/src/main/java/com/meridian/platform/beacon/admin/AdminController.java",
+    "platform-services/services/beacon-notifications/src/main/java/com/meridian/platform/beacon/admin/AdminSecurityConfig.java",
+    "platform-services/services/beacon-notifications/src/main/java/com/meridian/platform/beacon/api/EventsController.java"
+   ]
+  },
+  {
+   "date": "2021-03-03T00:00:00",
+   "author": "a.balaraman",
+   "message": "Merge release/2021.03 into main for train 2021.03.1",
+   "empty": true
+  },
+  {
+   "date": "2021-03-04T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-1278 beacon-notifications template rendering with disclosure footers",
+   "paths": [
+    "platform-services/services/beacon-notifications/src/main/java/com/meridian/platform/beacon/channel/ChannelDispatcher.java",
+    "platform-services/services/beacon-notifications/src/main/java/com/meridian/platform/beacon/channel/EmailChannelAdapter.java"
+   ]
+  },
+  {
+   "date": "2021-03-04T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1282 beacon-notifications channel adapters for email sms push",
+   "paths": [
+    "platform-services/services/beacon-notifications/src/main/java/com/meridian/platform/beacon/channel/InAppChannelAdapter.java",
+    "platform-services/services/beacon-notifications/src/main/java/com/meridian/platform/beacon/channel/LetterChannelAdapter.java",
+    "platform-services/services/beacon-notifications/src/main/java/com/meridian/platform/beacon/channel/LoggingChannelAdapter.java"
+   ]
+  },
+  {
+   "date": "2021-03-08T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-1286 bff-retail tests for cache.service",
+   "paths": [
+    "platform-services/services/bff-retail/src/cache/cache.service.spec.ts"
+   ]
+  },
+  {
+   "date": "2021-03-08T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1291 scaffold alerts-preferences-service",
+   "paths": [
+    "platform-services/services/alerts-preferences-service/pom.xml",
+    "platform-services/services/alerts-preferences-service/src/main/java/com/meridian/platform/alertprefs/AlertsPreferencesServiceApplication.java",
+    "platform-services/services/alerts-preferences-service/src/main/resources/application.yml",
+    "platform-services/services/alerts-preferences-service/src/test/resources/application.yml",
+    "platform-services/services/alerts-preferences-service/src/test/resources/log4j2-test.xml"
+   ]
+  },
+  {
+   "date": "2021-03-08T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-1293 alerts-preferences-service preference model and repository",
+   "paths": [
+    "platform-services/services/alerts-preferences-service/src/main/java/com/meridian/platform/alertprefs/api/PreferencesController.java",
+    "platform-services/services/alerts-preferences-service/src/main/java/com/meridian/platform/alertprefs/preference/AlertCatalogue.java",
+    "platform-services/services/alerts-preferences-service/src/main/java/com/meridian/platform/alertprefs/preference/AlertPreference.java"
+   ]
+  },
+  {
+   "date": "2021-03-08T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-1296 alerts-preferences-service migration V1 alert preference schema",
+   "paths": [
+    "platform-services/services/alerts-preferences-service/src/main/resources/db/migration/oracle/V1__alert_preference_schema.sql"
+   ]
+  },
+  {
+   "date": "2021-03-10T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1300 bff-retail linked accounts via Aggregio",
+   "paths": [
+    "platform-services/services/bff-retail/src/clients/clients.module.ts",
+    "platform-services/services/bff-retail/src/clients/fixtures.service.ts",
+    "platform-services/services/bff-retail/src/clients/partner.clients.ts"
+   ]
+  },
+  {
+   "date": "2021-03-11T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-1303 beacon-notifications migration V1 beacon schema",
+   "paths": [
+    "platform-services/services/beacon-notifications/src/main/resources/db/migration/oracle/V1__beacon_schema.sql"
+   ]
+  },
+  {
+   "date": "2021-03-11T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-1305 beacon-notifications tests for preferenceevaluator",
+   "paths": [
+    "platform-services/services/beacon-notifications/src/test/java/com/meridian/platform/beacon/preference/PreferenceEvaluatorTest.java"
+   ]
+  },
+  {
+   "date": "2021-03-15T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-1311 bff-retail market data from TickerHaus",
+   "paths": [
+    "platform-services/services/bff-retail/src/cards/cards.service.ts",
+    "platform-services/services/bff-retail/src/clients/bedrock.client.ts"
+   ]
+  },
+  {
+   "date": "2021-03-17T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1314 bff-retail Helm chart for the platform namespace",
+   "paths": [
+    "platform-services/services/bff-retail/helm/Chart.yaml",
+    "platform-services/services/bff-retail/helm/templates/_helpers.tpl",
+    "platform-services/services/bff-retail/helm/templates/configmap.yaml",
+    "platform-services/services/bff-retail/helm/templates/deployment.yaml",
+    "platform-services/services/bff-retail/helm/templates/service.yaml",
+    "platform-services/services/bff-retail/helm/values-local.yaml",
+    "platform-services/services/bff-retail/helm/values.yaml"
+   ]
+  },
+  {
+   "date": "2021-03-17T00:00:00",
+   "author": "j.hollins",
+   "message": "Merge release/2021.03 into main for train 2021.03.2",
+   "empty": true
+  },
+  {
+   "date": "2021-04-02T00:00:00",
+   "author": "j.hollins",
+   "message": "Merge release/2021.04 into main for train 2021.04.1",
+   "empty": true
+  },
+  {
+   "date": "2021-04-05T00:00:00",
+   "author": "e.castellanos",
+   "message": "TOOL-578 beacon-notifications Jenkinsfile on the shared library pipeline",
+   "paths": [
+    "platform-services/services/beacon-notifications/Jenkinsfile"
+   ]
+  },
+  {
+   "date": "2021-04-05T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2021.04 into main for train 2021.04.2",
+   "empty": true
+  },
+  {
+   "date": "2021-04-05T00:00:00",
+   "author": "a.balaraman",
+   "message": "Revert \"PLAT-1088 txn-posting-service reject reversal of a reversal\"",
+   "empty": true,
+   "body": "Reverted after the canary. See the incident ticket linked from the runbook."
+  },
+  {
+   "date": "2021-04-09T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-1320 alerts-preferences-service regulatory alerts locked on",
+   "paths": [
+    "platform-services/services/alerts-preferences-service/src/main/java/com/meridian/platform/alertprefs/preference/AlertPreferenceHistory.java"
+   ]
+  },
+  {
+   "date": "2021-04-12T00:00:00",
+   "author": "meridian-dependency-bot",
+   "message": "PLAT-1322 bump jest 29.x",
+   "empty": true,
+   "body": "Automated. Ranges pinned by the dependency policy; this moves the exact version only."
+  },
+  {
+   "date": "2021-04-14T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-1326 bff-retail tests for api-exception.filter",
+   "paths": [
+    "platform-services/services/bff-retail/src/common/api-exception.filter.spec.ts"
+   ]
+  },
+  {
+   "date": "2021-04-14T00:00:00",
+   "author": "c.mbeki",
+   "message": "GIS-787 bff-retail Sonar and Checkmarx onboarding",
+   "paths": [
+    "platform-services/services/bff-retail/checkmarx.yml",
+    "platform-services/services/bff-retail/sonar-project.properties"
+   ]
+  },
+  {
+   "date": "2021-04-19T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1331 bff-retail credit score from TriScore",
+   "paths": [
+    "platform-services/services/bff-retail/src/clients/txn-posting.client.ts",
+    "platform-services/services/bff-retail/src/clients/upstream-client.ts"
+   ]
+  },
+  {
+   "date": "2021-04-19T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-1336 beacon-notifications per customer sequence numbers",
+   "paths": [
+    "platform-services/services/beacon-notifications/src/main/java/com/meridian/platform/beacon/channel/PushChannelAdapter.java"
+   ]
+  },
+  {
+   "date": "2021-04-19T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1342 beacon-notifications Dockerfile on the UBI runtime image",
+   "paths": [
+    "platform-services/services/beacon-notifications/Dockerfile"
+   ]
+  },
+  {
+   "date": "2021-04-22T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-1344 alerts-preferences-service migration V2 quiet hours default",
+   "paths": [
+    "platform-services/services/alerts-preferences-service/src/main/resources/db/migration/oracle/V2__quiet_hours_default.sql"
+   ]
+  },
+  {
+   "date": "2021-04-23T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-1350 beacon-notifications tests for templateregistry",
+   "paths": [
+    "platform-services/services/beacon-notifications/src/test/java/com/meridian/platform/beacon/template/TemplateRegistryTest.java"
+   ]
+  },
+  {
+   "date": "2021-05-03T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-1356 bff-retail ADR",
+   "paths": [
+    "platform-services/services/bff-retail/docs/runbooks/bff-retail.md"
+   ]
+  },
+  {
+   "date": "2021-05-03T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-1362 beacon-notifications regulatory templates cannot be suppressed",
+   "paths": [
+    "platform-services/services/beacon-notifications/src/main/java/com/meridian/platform/beacon/event/AccountEventListener.java",
+    "platform-services/services/beacon-notifications/src/main/java/com/meridian/platform/beacon/event/EventIngestService.java",
+    "platform-services/services/beacon-notifications/src/main/java/com/meridian/platform/beacon/event/EventType.java"
+   ]
+  },
+  {
+   "date": "2021-05-03T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-1365 alerts-preferences-service tests for applicationcontext",
+   "paths": [
+    "platform-services/services/alerts-preferences-service/src/test/java/com/meridian/platform/alertprefs/ApplicationContextTest.java"
+   ]
+  },
+  {
+   "date": "2021-05-03T00:00:00",
+   "author": "v.orlova",
+   "message": "PLAT-1369 pii-vault-service tests for piitype",
+   "paths": [
+    "platform-services/services/pii-vault-service/src/test/java/com/meridian/platform/piivault/token/PiiTypeTest.java"
+   ]
+  },
+  {
+   "date": "2021-05-03T00:00:00",
+   "author": "j.hollins",
+   "message": "Merge release/2021.05 into main for train 2021.05.1",
+   "empty": true
+  },
+  {
+   "date": "2021-05-04T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-1374 alerts-preferences-service channel preferences",
+   "paths": [
+    "platform-services/services/alerts-preferences-service/src/main/java/com/meridian/platform/alertprefs/preference/AlertPreferenceHistoryRepository.java",
+    "platform-services/services/alerts-preferences-service/src/main/java/com/meridian/platform/alertprefs/preference/AlertPreferenceRepository.java",
+    "platform-services/services/alerts-preferences-service/src/main/java/com/meridian/platform/alertprefs/preference/PreferenceService.java"
+   ]
+  },
+  {
+   "date": "2021-05-04T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-1381 alerts-preferences-service migration V3 regulatory enabled guard",
+   "paths": [
+    "platform-services/services/alerts-preferences-service/src/main/resources/db/migration/oracle/V3__regulatory_enabled_guard.sql"
+   ]
+  },
+  {
+   "date": "2021-05-04T00:00:00",
+   "author": "meridian-dependency-bot",
+   "message": "PLAT-1382 bump jackson-databind",
+   "empty": true,
+   "body": "Automated. Ranges pinned by the dependency policy; this moves the exact version only."
+  },
+  {
+   "date": "2021-05-05T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-1386 bff-retail fixture fallback when an upstream is down",
+   "paths": [
+    "platform-services/services/bff-retail/src/common/api-exception.filter.ts",
+    "platform-services/services/bff-retail/src/common/correlation.middleware.ts",
+    "platform-services/services/bff-retail/src/common/correlation.ts"
+   ]
+  },
+  {
+   "date": "2021-05-05T00:00:00",
+   "author": "e.castellanos",
+   "message": "TOOL-728 alerts-preferences-service Jenkinsfile on the shared library pipeline",
+   "paths": [
+    "platform-services/services/alerts-preferences-service/Jenkinsfile"
+   ]
+  },
+  {
+   "date": "2021-05-06T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-1388 beacon-notifications README in the wiki shape",
+   "paths": [
+    "platform-services/services/beacon-notifications/README.md"
+   ]
+  },
+  {
+   "date": "2021-05-07T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1393 bff-retail correlation id on every upstream call",
+   "paths": [
+    "platform-services/services/bff-retail/src/common/api-error.ts"
+   ]
+  },
+  {
+   "date": "2021-05-10T00:00:00",
+   "author": "c.mbeki",
+   "message": "PLAT-1397 pii-vault-service migration V1 vault schema",
+   "paths": [
+    "platform-services/services/pii-vault-service/src/main/resources/db/migration/oracle/V1__vault_schema.sql"
+   ]
+  },
+  {
+   "date": "2021-05-11T00:00:00",
+   "author": "c.mbeki",
+   "message": "PLAT-1400 scaffold pii-vault-service",
+   "paths": [
+    "platform-services/services/pii-vault-service/pom.xml",
+    "platform-services/services/pii-vault-service/src/main/java/com/meridian/platform/piivault/PiiVaultServiceApplication.java",
+    "platform-services/services/pii-vault-service/src/main/resources/application.yml",
+    "platform-services/services/pii-vault-service/src/test/resources/application.yml",
+    "platform-services/services/pii-vault-service/src/test/resources/log4j2-test.xml"
+   ]
+  },
+  {
+   "date": "2021-05-12T00:00:00",
+   "author": "c.mbeki",
+   "message": "PLAT-1403 pii-vault-service Vault transit key fetch",
+   "paths": [
+    "platform-services/services/pii-vault-service/src/main/java/com/meridian/platform/piivault/access/PiiAccessRepository.java",
+    "platform-services/services/pii-vault-service/src/main/java/com/meridian/platform/piivault/access/PurposeCode.java"
+   ]
+  },
+  {
+   "date": "2021-05-18T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2021.05 into main for train 2021.05.2",
+   "empty": true
+  },
+  {
+   "date": "2021-05-19T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1405 alerts-preferences-service Dockerfile on the UBI runtime image",
+   "paths": [
+    "platform-services/services/alerts-preferences-service/Dockerfile"
+   ]
+  },
+  {
+   "date": "2021-05-19T00:00:00",
+   "author": "v.orlova",
+   "message": "PLAT-1407 pii-vault-service format preserving tokenisation for account numbers",
+   "paths": [
+    "platform-services/services/pii-vault-service/src/main/java/com/meridian/platform/piivault/access/AccessLogger.java",
+    "platform-services/services/pii-vault-service/src/main/java/com/meridian/platform/piivault/access/PiiAccess.java"
+   ]
+  },
+  {
+   "date": "2021-05-21T00:00:00",
+   "author": "v.orlova",
+   "message": "PLAT-1411 pii-vault-service migration V2 purpose codes",
+   "paths": [
+    "platform-services/services/pii-vault-service/src/main/resources/db/migration/oracle/V2__purpose_codes.sql"
+   ]
+  },
+  {
+   "date": "2021-05-24T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-1413 beacon-notifications gap timeout for out of order events",
+   "paths": [
+    "platform-services/services/beacon-notifications/src/main/java/com/meridian/platform/beacon/channel/SmsChannelAdapter.java",
+    "platform-services/services/beacon-notifications/src/main/java/com/meridian/platform/beacon/config/MqConfig.java",
+    "platform-services/services/beacon-notifications/src/main/java/com/meridian/platform/beacon/event/AccountEvent.java"
+   ]
+  },
+  {
+   "date": "2021-05-25T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1419 beacon-notifications migration V2 regulatory flag backfill",
+   "paths": [
+    "platform-services/services/beacon-notifications/src/main/resources/db/migration/oracle/V2__regulatory_flag_backfill.sql"
+   ]
+  },
+  {
+   "date": "2021-05-26T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-1422 bff-retail tests for correlation.middleware",
+   "paths": [
+    "platform-services/services/bff-retail/src/common/correlation.middleware.spec.ts"
+   ]
+  },
+  {
+   "date": "2021-06-04T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-1424 alerts-preferences-service publish preference changes to Kafka",
+   "paths": [
+    "platform-services/services/alerts-preferences-service/src/main/java/com/meridian/platform/alertprefs/preference/PreferenceUpdate.java"
+   ]
+  },
+  {
+   "date": "2021-06-07T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-1430 beacon-notifications admin endpoints behind LDAP",
+   "paths": [
+    "platform-services/services/beacon-notifications/src/main/java/com/meridian/platform/beacon/notification/NotificationRepository.java",
+    "platform-services/services/beacon-notifications/src/main/java/com/meridian/platform/beacon/preference/CustomerPreferences.java"
+   ]
+  },
+  {
+   "date": "2021-06-07T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1436 beacon-notifications Helm chart for the platform namespace",
+   "paths": [
+    "platform-services/services/beacon-notifications/helm/Chart.yaml",
+    "platform-services/services/beacon-notifications/helm/templates/_helpers.tpl",
+    "platform-services/services/beacon-notifications/helm/templates/configmap.yaml",
+    "platform-services/services/beacon-notifications/helm/templates/deployment.yaml",
+    "platform-services/services/beacon-notifications/helm/templates/service.yaml",
+    "platform-services/services/beacon-notifications/helm/values-local.yaml",
+    "platform-services/services/beacon-notifications/helm/values.yaml"
+   ]
+  },
+  {
+   "date": "2021-06-07T00:00:00",
+   "author": "c.mbeki",
+   "message": "PLAT-1439 pii-vault-service access log on every detokenise",
+   "paths": [
+    "platform-services/services/pii-vault-service/src/main/java/com/meridian/platform/piivault/access/PurposeCodeRepository.java",
+    "platform-services/services/pii-vault-service/src/main/java/com/meridian/platform/piivault/api/VaultController.java"
+   ]
+  },
+  {
+   "date": "2021-06-10T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1444 scaffold audit-trail-service",
+   "paths": [
+    "platform-services/services/audit-trail-service/pom.xml",
+    "platform-services/services/audit-trail-service/src/main/java/com/meridian/platform/audittrail/AuditTrailServiceApplication.java",
+    "platform-services/services/audit-trail-service/src/main/resources/application.yml",
+    "platform-services/services/audit-trail-service/src/test/resources/application.yml",
+    "platform-services/services/audit-trail-service/src/test/resources/log4j2-test.xml"
+   ],
+   "body": "Port from PORTS.md. Local profile only until the audit-trail-service CAB entry is approved."
+  },
+  {
+   "date": "2021-06-11T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1446 bff-retail transactions paging",
+   "paths": [
+    "platform-services/services/bff-retail/src/common/http.ts",
+    "platform-services/services/bff-retail/src/common/logger.ts"
+   ]
+  },
+  {
+   "date": "2021-06-14T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-1450 bff-retail tests for setup-env",
+   "paths": [
+    "platform-services/services/bff-retail/test/setup-env.ts"
+   ]
+  },
+  {
+   "date": "2021-06-14T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1457 audit-trail-service append only event table in DB2 dialect",
+   "paths": [
+    "platform-services/services/audit-trail-service/src/main/java/com/meridian/platform/audittrail/api/AuditController.java",
+    "platform-services/services/audit-trail-service/src/main/java/com/meridian/platform/audittrail/audit/AuditEvent.java"
+   ]
+  },
+  {
+   "date": "2021-06-16T00:00:00",
+   "author": "a.balaraman",
+   "message": "Merge release/2021.06 into main for train 2021.06.1",
+   "empty": true
+  },
+  {
+   "date": "2021-06-21T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-1459 alerts-preferences-service README in the wiki shape",
+   "paths": [
+    "platform-services/services/alerts-preferences-service/README.md",
+    "platform-services/services/alerts-preferences-service/docs/adr/0001-transactional-outbox-for-preference-change.md"
+   ]
+  },
+  {
+   "date": "2021-06-22T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1465 formatting sweep with spotless and prettier, no functional change",
+   "empty": true
+  },
+  {
+   "date": "2021-06-23T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1471 beacon-notifications notifications query by customer",
+   "paths": [
+    "platform-services/services/beacon-notifications/src/main/java/com/meridian/platform/beacon/notification/Notification.java"
+   ]
+  },
+  {
+   "date": "2021-06-25T00:00:00",
+   "author": "j.hollins",
+   "message": "Merge release/2021.06 into main for train 2021.06.2",
+   "empty": true
+  },
+  {
+   "date": "2021-07-02T00:00:00",
+   "author": "meridian-dependency-bot",
+   "message": "PLAT-1473 bump eslint",
+   "empty": true,
+   "body": "Automated. Ranges pinned by the dependency policy; this moves the exact version only."
+  },
+  {
+   "date": "2021-07-05T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1476 bff-retail rate limit headers passthrough",
+   "paths": [
+    "platform-services/services/bff-retail/src/markets/markets.controller.ts"
+   ]
+  },
+  {
+   "date": "2021-07-05T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1483 alerts-preferences-service Helm chart for the platform namespace",
+   "paths": [
+    "platform-services/services/alerts-preferences-service/helm/Chart.yaml",
+    "platform-services/services/alerts-preferences-service/helm/templates/_helpers.tpl",
+    "platform-services/services/alerts-preferences-service/helm/templates/configmap.yaml",
+    "platform-services/services/alerts-preferences-service/helm/templates/deployment.yaml",
+    "platform-services/services/alerts-preferences-service/helm/templates/service.yaml",
+    "platform-services/services/alerts-preferences-service/helm/values-local.yaml",
+    "platform-services/services/alerts-preferences-service/helm/values.yaml"
+   ]
+  },
+  {
+   "date": "2021-07-05T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1487 audit-trail-service hash chain over events",
+   "paths": [
+    "platform-services/services/audit-trail-service/src/main/java/com/meridian/platform/audittrail/audit/AuditEventRepository.java",
+    "platform-services/services/audit-trail-service/src/main/java/com/meridian/platform/audittrail/audit/AuditTrailService.java"
+   ]
+  },
+  {
+   "date": "2021-07-05T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1490 audit-trail-service migration V1 audit event",
+   "paths": [
+    "platform-services/services/audit-trail-service/src/main/resources/db/migration/db2/V1__audit_event.sql"
+   ]
+  },
+  {
+   "date": "2021-07-05T00:00:00",
+   "author": "j.hollins",
+   "message": "Merge release/2021.07 into main for train 2021.07.1",
+   "empty": true
+  },
+  {
+   "date": "2021-07-07T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1495 pii-vault-service Dockerfile on the UBI runtime image",
+   "paths": [
+    "platform-services/services/pii-vault-service/Dockerfile"
+   ]
+  },
+  {
+   "date": "2021-07-13T00:00:00",
+   "author": "d.okafor",
+   "message": "Merge release/2021.07 into main for train 2021.07.2",
+   "empty": true
+  },
+  {
+   "date": "2021-07-14T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-1500 beacon-notifications embedded UnboundID directory for local",
+   "paths": [
+    "platform-services/services/beacon-notifications/src/main/java/com/meridian/platform/beacon/preference/PreferenceDecision.java",
+    "platform-services/services/beacon-notifications/src/main/java/com/meridian/platform/beacon/preference/PreferenceEvaluator.java"
+   ]
+  },
+  {
+   "date": "2021-07-16T00:00:00",
+   "author": "w.tanaka",
+   "message": "PLAT-1240 ADR: keep the BFFs thin, aggregation not orchestration",
+   "empty": true
+  },
+  {
+   "date": "2021-07-19T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-1507 bff-retail tests for token",
+   "paths": [
+    "platform-services/services/bff-retail/test/token.ts"
+   ]
+  },
+  {
+   "date": "2021-07-19T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1509 alerts-preferences-service tests for regulatoryguard",
+   "paths": [
+    "platform-services/services/alerts-preferences-service/src/test/java/com/meridian/platform/alertprefs/preference/RegulatoryGuardTest.java"
+   ]
+  },
+  {
+   "date": "2021-07-19T00:00:00",
+   "author": "a.balaraman",
+   "message": "TOOL-623 pii-vault-service Jenkinsfile on the shared library pipeline",
+   "paths": [
+    "platform-services/services/pii-vault-service/Jenkinsfile"
+   ]
+  },
+  {
+   "date": "2021-07-21T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-1512 alerts-preferences-service in memory Kafka for local profile",
+   "paths": [
+    "platform-services/services/alerts-preferences-service/src/main/java/com/meridian/platform/alertprefs/preference/RegulatoryGuard.java"
+   ]
+  },
+  {
+   "date": "2021-07-22T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-1514 bff-retail health and readiness split",
+   "paths": [
+    "platform-services/services/bff-retail/src/health/health.controller.ts",
+    "platform-services/services/bff-retail/src/health/health.module.ts"
+   ]
+  },
+  {
+   "date": "2021-07-22T00:00:00",
+   "author": "c.mbeki",
+   "message": "GIS-548 beacon-notifications Sonar and Checkmarx onboarding",
+   "paths": [
+    "platform-services/services/beacon-notifications/checkmarx.yml",
+    "platform-services/services/beacon-notifications/sonar-project.properties"
+   ]
+  },
+  {
+   "date": "2021-07-22T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-1517 alerts-preferences-service tests for alertcatalogue",
+   "paths": [
+    "platform-services/services/alerts-preferences-service/src/test/java/com/meridian/platform/alertprefs/preference/AlertCatalogueTest.java"
+   ]
+  },
+  {
+   "date": "2021-07-22T00:00:00",
+   "author": "v.orlova",
+   "message": "PLAT-1524 pii-vault-service token vault table",
+   "paths": [
+    "platform-services/services/pii-vault-service/src/main/java/com/meridian/platform/piivault/keys/KeyMaterial.java"
+   ]
+  },
+  {
+   "date": "2021-08-02T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-1531 beacon-notifications ADR",
+   "paths": [
+    "platform-services/services/beacon-notifications/docs/adr/0004-per-customer-sequence-numbers-enforced-in.md",
+    "platform-services/services/beacon-notifications/docs/runbooks/beacon-notifications.md"
+   ]
+  },
+  {
+   "date": "2021-08-02T00:00:00",
+   "author": "meridian-dependency-bot",
+   "message": "PLAT-1534 bump reportlab 4.0.x",
+   "empty": true,
+   "body": "Automated. Ranges pinned by the dependency policy; this moves the exact version only."
+  },
+  {
+   "date": "2021-08-04T00:00:00",
+   "author": "a.balaraman",
+   "message": "Merge release/2021.08 into main for train 2021.08.1",
+   "empty": true
+  },
+  {
+   "date": "2021-08-06T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-1534 beacon-notifications dispatch trace ring for debug",
+   "paths": [
+    "platform-services/services/beacon-notifications/src/main/java/com/meridian/platform/beacon/sequence/CustomerSequenceRepository.java"
+   ]
+  },
+  {
+   "date": "2021-08-06T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1539 pii-vault-service SSN tokenisation",
+   "paths": [
+    "platform-services/services/pii-vault-service/src/main/java/com/meridian/platform/piivault/token/PiiType.java"
+   ]
+  },
+  {
+   "date": "2021-08-10T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1543 audit-trail-service Kafka consumer for audit topics",
+   "paths": [
+    "platform-services/services/audit-trail-service/src/main/java/com/meridian/platform/audittrail/audit/HashChain.java"
+   ]
+  },
+  {
+   "date": "2021-08-16T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1545 bff-retail alerts preferences proxy",
+   "paths": [
+    "platform-services/services/bff-retail/src/markets/markets.module.ts",
+    "platform-services/services/bff-retail/src/payees/payees.controller.ts"
+   ]
+  },
+  {
+   "date": "2021-08-16T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-1548 beacon-notifications migration V3 dispatch attempts",
+   "paths": [
+    "platform-services/services/beacon-notifications/src/main/resources/db/migration/oracle/V3__dispatch_attempts.sql"
+   ]
+  },
+  {
+   "date": "2021-08-16T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-1555 alerts-preferences-service ADR",
+   "paths": [
+    "platform-services/services/alerts-preferences-service/docs/runbooks/alerts-preferences-service.md"
+   ]
+  },
+  {
+   "date": "2021-08-16T00:00:00",
+   "author": "c.mbeki",
+   "message": "PLAT-1562 pii-vault-service README in the wiki shape",
+   "paths": [
+    "platform-services/services/pii-vault-service/README.md"
+   ]
+  },
+  {
+   "date": "2021-08-18T00:00:00",
+   "author": "v.orlova",
+   "message": "PLAT-1565 pii-vault-service dev derived key when Vault is unreachable",
+   "paths": [
+    "platform-services/services/pii-vault-service/src/main/java/com/meridian/platform/piivault/keys/VaultKeyClient.java",
+    "platform-services/services/pii-vault-service/src/main/java/com/meridian/platform/piivault/token/FormatPreservingCipher.java"
+   ]
+  },
+  {
+   "date": "2021-08-18T00:00:00",
+   "author": "e.castellanos",
+   "message": "TOOL-676 audit-trail-service Jenkinsfile on the shared library pipeline",
+   "paths": [
+    "platform-services/services/audit-trail-service/Jenkinsfile"
+   ]
+  },
+  {
+   "date": "2021-08-20T00:00:00",
+   "author": "c.mbeki",
+   "message": "GIS-1252 alerts-preferences-service Sonar and Checkmarx onboarding",
+   "paths": [
+    "platform-services/services/alerts-preferences-service/checkmarx.yml",
+    "platform-services/services/alerts-preferences-service/sonar-project.properties"
+   ]
+  },
+  {
+   "date": "2021-08-23T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-1569 beacon-notifications Oracle Flyway baseline",
+   "paths": [
+    "platform-services/services/beacon-notifications/src/main/java/com/meridian/platform/beacon/preference/PreferencesClient.java",
+    "platform-services/services/beacon-notifications/src/main/java/com/meridian/platform/beacon/sequence/CustomerSequence.java"
+   ]
+  },
+  {
+   "date": "2021-08-23T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-1572 alerts-preferences-service quiet hours",
+   "paths": [
+    "platform-services/services/alerts-preferences-service/src/main/java/com/meridian/platform/alertprefs/publish/PreferenceChangedEvent.java",
+    "platform-services/services/alerts-preferences-service/src/main/java/com/meridian/platform/alertprefs/publish/PreferencePublisher.java",
+    "platform-services/services/alerts-preferences-service/src/main/resources/application-prod.yml"
+   ]
+  },
+  {
+   "date": "2021-08-23T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1579 audit-trail-service Dockerfile on the UBI runtime image",
+   "paths": [
+    "platform-services/services/audit-trail-service/Dockerfile"
+   ]
+  },
+  {
+   "date": "2021-08-24T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1581 JaCoCo aggregate report across the Java services",
+   "paths": [
+    "platform-services/build/coverage-aggregate/pom.xml"
+   ]
+  },
+  {
+   "date": "2021-08-25T00:00:00",
+   "author": "j.hollins",
+   "message": "Merge release/2021.08 into main for train 2021.08.2",
+   "empty": true
+  },
+  {
+   "date": "2021-09-06T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1583 scaffold statements-api",
+   "paths": [
+    "platform-services/services/statements-api/.gitignore",
+    "platform-services/services/statements-api/.python-version",
+    "platform-services/services/statements-api/app/__init__.py",
+    "platform-services/services/statements-api/app/config.py",
+    "platform-services/services/statements-api/app/main.py",
+    "platform-services/services/statements-api/requirements.txt",
+    "platform-services/services/statements-api/run.sh"
+   ]
+  },
+  {
+   "date": "2021-09-06T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-1588 statements-api period discovery from Bedrock transactions",
+   "paths": [
+    "platform-services/services/statements-api/app/bedrock.py",
+    "platform-services/services/statements-api/app/logging_setup.py"
+   ]
+  },
+  {
+   "date": "2021-09-09T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1593 audit-trail-service tests for hashchain",
+   "paths": [
+    "platform-services/services/audit-trail-service/src/test/java/com/meridian/platform/audittrail/audit/HashChainTest.java"
+   ]
+  },
+  {
+   "date": "2021-09-09T00:00:00",
+   "author": "meridian-dependency-bot",
+   "message": "PLAT-1595 bump eslint",
+   "empty": true,
+   "body": "Automated. Ranges pinned by the dependency policy; this moves the exact version only."
+  },
+  {
+   "date": "2021-09-13T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1595 pii-vault-service Helm chart for the platform namespace",
+   "paths": [
+    "platform-services/services/pii-vault-service/helm/Chart.yaml",
+    "platform-services/services/pii-vault-service/helm/templates/_helpers.tpl",
+    "platform-services/services/pii-vault-service/helm/templates/configmap.yaml",
+    "platform-services/services/pii-vault-service/helm/templates/deployment.yaml",
+    "platform-services/services/pii-vault-service/helm/templates/service.yaml",
+    "platform-services/services/pii-vault-service/helm/values-local.yaml",
+    "platform-services/services/pii-vault-service/helm/values.yaml"
+   ]
+  },
+  {
+   "date": "2021-09-13T00:00:00",
+   "author": "j.hollins",
+   "message": "Merge release/2021.09 into main for train 2021.09.1",
+   "empty": true
+  },
+  {
+   "date": "2021-09-13T00:00:00",
+   "author": "d.okafor",
+   "message": "Merge release/2021.09 into main for train 2021.09.2",
+   "empty": true
+  },
+  {
+   "date": "2021-09-16T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1600 bff-retail accounts and balances aggregation",
+   "paths": [
+    "platform-services/services/bff-retail/src/payees/payees.module.ts",
+    "platform-services/services/bff-retail/src/paylink/paylink.controller.ts",
+    "platform-services/services/bff-retail/src/paylink/paylink.module.ts"
+   ]
+  },
+  {
+   "date": "2021-09-16T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1604 beacon-notifications console channel adapter",
+   "paths": [
+    "platform-services/services/beacon-notifications/src/main/java/com/meridian/platform/beacon/sequence/SequenceCoordinator.java",
+    "platform-services/services/beacon-notifications/src/main/java/com/meridian/platform/beacon/template/RenderedTemplate.java"
+   ]
+  },
+  {
+   "date": "2021-09-21T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1606 audit-trail-service README in the wiki shape",
+   "paths": [
+    "platform-services/services/audit-trail-service/README.md",
+    "platform-services/services/audit-trail-service/docs/adr/0001-hash-chained-rows-in-a-relational.md"
+   ]
+  },
+  {
+   "date": "2021-09-22T00:00:00",
+   "author": "c.mbeki",
+   "message": "PLAT-1611 pii-vault-service purpose codes on access",
+   "paths": [
+    "platform-services/services/pii-vault-service/src/main/java/com/meridian/platform/piivault/token/TokenMap.java"
+   ]
+  },
+  {
+   "date": "2021-09-24T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1616 bff-retail Keystone JWT validation against the mock JWKS",
+   "paths": [
+    "platform-services/services/bff-retail/src/transfers/transfer.dto.ts"
+   ]
+  },
+  {
+   "date": "2021-09-27T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1618 audit-trail-service query by subject",
+   "paths": [
+    "platform-services/services/audit-trail-service/src/main/java/com/meridian/platform/audittrail/ingest/AuditEventMessage.java",
+    "platform-services/services/audit-trail-service/src/main/java/com/meridian/platform/audittrail/ingest/AuditKafkaListener.java"
+   ]
+  },
+  {
+   "date": "2021-10-04T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1620 scaffold documents-service",
+   "paths": [
+    "platform-services/services/documents-service/.eslintrc.js",
+    "platform-services/services/documents-service/.gitignore",
+    "platform-services/services/documents-service/.npmrc",
+    "platform-services/services/documents-service/.nvmrc",
+    "platform-services/services/documents-service/jest.config.js",
+    "platform-services/services/documents-service/package-lock.json",
+    "platform-services/services/documents-service/package.json",
+    "platform-services/services/documents-service/src/app.ts",
+    "platform-services/services/documents-service/src/config.ts",
+    "platform-services/services/documents-service/src/server.ts",
+    "platform-services/services/documents-service/tsconfig.build.json",
+    "platform-services/services/documents-service/tsconfig.json"
+   ]
+  },
+  {
+   "date": "2021-10-04T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1625 documents-service statements route streaming from statements-api",
+   "paths": [
+    "platform-services/services/documents-service/disclosures/esign.html",
+    "platform-services/services/documents-service/disclosures/fee_schedule.html"
+   ]
+  },
+  {
+   "date": "2021-10-04T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2021.10 into main for train 2021.10.1",
+   "empty": true
+  },
+  {
+   "date": "2021-10-06T00:00:00",
+   "author": "v.orlova",
+   "message": "PLAT-1628 pii-vault-service detokenise requires elevated scope",
+   "paths": [
+    "platform-services/services/pii-vault-service/src/main/java/com/meridian/platform/piivault/token/TokenMapRepository.java",
+    "platform-services/services/pii-vault-service/src/main/java/com/meridian/platform/piivault/token/TokenService.java"
+   ]
+  },
+  {
+   "date": "2021-10-11T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-1634 bff-retail Redis cache with in process fallback",
+   "paths": [
+    "platform-services/services/bff-retail/src/transfers/transfers.controller.ts",
+    "platform-services/services/bff-retail/src/transfers/transfers.module.ts",
+    "platform-services/services/bff-retail/src/transfers/transfers.service.ts"
+   ]
+  },
+  {
+   "date": "2021-10-11T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1638 bff-retail tests for readme",
+   "paths": [
+    "platform-services/services/bff-retail/test/README.md"
+   ]
+  },
+  {
+   "date": "2021-10-11T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-1641 documents-service tests for disclosures",
+   "paths": [
+    "platform-services/services/documents-service/src/routes/disclosures.spec.ts"
+   ]
+  },
+  {
+   "date": "2021-10-15T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2021.10 into main for train 2021.10.2",
+   "empty": true
+  },
+  {
+   "date": "2021-10-18T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1645 beacon-notifications suppression reasons in the trace",
+   "paths": [
+    "platform-services/services/beacon-notifications/src/main/java/com/meridian/platform/beacon/template/TemplateRegistry.java"
+   ]
+  },
+  {
+   "date": "2021-10-21T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-1650 beacon-notifications ACCT.EVENTS consumer",
+   "paths": [
+    "platform-services/services/beacon-notifications/src/main/resources/application-prod.yml",
+    "platform-services/services/beacon-notifications/src/main/resources/beacon-ldap.ldif"
+   ]
+  },
+  {
+   "date": "2021-10-21T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1654 audit-trail-service query by actor and correlation",
+   "paths": [
+    "platform-services/services/audit-trail-service/src/main/java/com/meridian/platform/audittrail/ingest/EventMapper.java",
+    "platform-services/services/audit-trail-service/src/main/resources/application-prod.yml"
+   ]
+  },
+  {
+   "date": "2021-10-22T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1661 documents-service object store stub on local disk",
+   "paths": [
+    "platform-services/services/documents-service/disclosures/privacy_notice.html"
+   ]
+  },
+  {
+   "date": "2021-10-25T00:00:00",
+   "author": "c.mbeki",
+   "message": "GIS-697 pii-vault-service Sonar and Checkmarx onboarding",
+   "paths": [
+    "platform-services/services/pii-vault-service/checkmarx.yml",
+    "platform-services/services/pii-vault-service/sonar-project.properties"
+   ]
+  },
+  {
+   "date": "2021-10-26T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1667 audit-trail-service Helm chart for the platform namespace",
+   "paths": [
+    "platform-services/services/audit-trail-service/helm/Chart.yaml",
+    "platform-services/services/audit-trail-service/helm/templates/_helpers.tpl",
+    "platform-services/services/audit-trail-service/helm/templates/configmap.yaml",
+    "platform-services/services/audit-trail-service/helm/templates/deployment.yaml",
+    "platform-services/services/audit-trail-service/helm/templates/service.yaml",
+    "platform-services/services/audit-trail-service/helm/values-local.yaml",
+    "platform-services/services/audit-trail-service/helm/values.yaml"
+   ]
+  },
+  {
+   "date": "2021-11-02T00:00:00",
+   "author": "j.hollins",
+   "message": "Merge release/2021.11 into main for train 2021.11.1",
+   "empty": true
+  },
+  {
+   "date": "2021-11-03T00:00:00",
+   "author": "c.mbeki",
+   "message": "PLAT-1669 pii-vault-service format preserving tokenisation for account numbers",
+   "paths": [
+    "platform-services/services/pii-vault-service/src/main/resources/application-prod.yml"
+   ]
+  },
+  {
+   "date": "2021-11-04T00:00:00",
+   "author": "v.orlova",
+   "message": "PLAT-1675 pii-vault-service runbook after the first on call week",
+   "paths": [
+    "platform-services/services/pii-vault-service/docs/runbooks/pii-vault-service.md"
+   ]
+  },
+  {
+   "date": "2021-11-08T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-1677 beacon-notifications preference evaluation",
+   "paths": [
+    "platform-services/services/beacon-notifications/src/main/resources/templates/CARD_DECLINED.txt",
+    "platform-services/services/beacon-notifications/src/main/resources/templates/LARGE_CREDIT.txt",
+    "platform-services/services/beacon-notifications/src/main/resources/templates/LARGE_DEBIT.txt"
+   ]
+  },
+  {
+   "date": "2021-11-08T00:00:00",
+   "author": "meridian-dependency-bot",
+   "message": "PLAT-1678 bump typescript 4.9.x",
+   "empty": true,
+   "body": "Automated. Ranges pinned by the dependency policy; this moves the exact version only."
+  },
+  {
+   "date": "2021-11-12T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-1683 beacon-notifications template rendering with disclosure footers",
+   "paths": [
+    "platform-services/services/beacon-notifications/src/main/resources/templates/LOGIN_NEW_DEVICE.txt"
+   ]
+  },
+  {
+   "date": "2021-11-16T00:00:00",
+   "author": "c.mbeki",
+   "message": "GIS-1251 audit-trail-service Sonar and Checkmarx onboarding",
+   "paths": [
+    "platform-services/services/audit-trail-service/checkmarx.yml",
+    "platform-services/services/audit-trail-service/sonar-project.properties"
+   ]
+  },
+  {
+   "date": "2021-11-16T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1689 statements-api Dockerfile on the UBI runtime image",
+   "paths": [
+    "platform-services/services/statements-api/Dockerfile"
+   ]
+  },
+  {
+   "date": "2021-11-18T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1691 audit-trail-service migration V2",
+   "paths": [
+    "platform-services/services/audit-trail-service/src/main/resources/db/migration/db2/V2__consumer_offsets.sql"
+   ]
+  },
+  {
+   "date": "2021-11-18T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1693 statements-api reportlab statement layout",
+   "paths": [
+    "platform-services/services/statements-api/app/models.py",
+    "platform-services/services/statements-api/app/pdf.py"
+   ]
+  },
+  {
+   "date": "2021-11-18T00:00:00",
+   "author": "a.balaraman",
+   "message": "TOOL-734 statements-api Jenkinsfile on the shared library pipeline",
+   "paths": [
+    "platform-services/services/statements-api/Jenkinsfile"
+   ]
+  },
+  {
+   "date": "2021-11-18T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-1700 documents-service tests for setup-env",
+   "paths": [
+    "platform-services/services/documents-service/test/setup-env.ts"
+   ]
+  },
+  {
+   "date": "2021-11-19T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1702 audit-trail-service ADR",
+   "paths": [
+    "platform-services/services/audit-trail-service/docs/runbooks/audit-trail-service.md"
+   ]
+  },
+  {
+   "date": "2021-11-19T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1708 documents-service disclosure HTML",
+   "paths": [
+    "platform-services/services/documents-service/src/common/api-error.ts",
+    "platform-services/services/documents-service/src/common/correlation.ts"
+   ]
+  },
+  {
+   "date": "2021-11-22T00:00:00",
+   "author": "c.mbeki",
+   "message": "PLAT-1714 pii-vault-service ADR",
+   "paths": [
+    "platform-services/services/pii-vault-service/docs/adr/0001-format-preserving-encryption-with-vault-held-keys.md"
+   ]
+  },
+  {
+   "date": "2021-11-24T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-1720 documents-service tests for object-store",
+   "paths": [
+    "platform-services/services/documents-service/src/store/object-store.spec.ts"
+   ]
+  },
+  {
+   "date": "2021-11-26T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1722 documents-service tax documents 1099-INT",
+   "paths": [
+    "platform-services/services/documents-service/disclosures/reg_e_dispute.html",
+    "platform-services/services/documents-service/src/auth/jwt.ts",
+    "platform-services/services/documents-service/src/clients/statements-api.client.ts"
+   ]
+  },
+  {
+   "date": "2021-11-26T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2021.11 into main for train 2021.11.2",
+   "empty": true
+  },
+  {
+   "date": "2021-12-03T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-1728 statements-api README in the wiki shape",
+   "paths": [
+    "platform-services/services/statements-api/README.md",
+    "platform-services/services/statements-api/docs/adr/0001-render-statements-on-demand-in.md"
+   ]
+  },
+  {
+   "date": "2021-12-06T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1733 beacon-notifications channel adapters for email sms push",
+   "paths": [
+    "platform-services/services/beacon-notifications/src/main/resources/templates/LOW_BALANCE.txt"
+   ]
+  },
+  {
+   "date": "2021-12-09T00:00:00",
+   "author": "c.mbeki",
+   "message": "GIS-0611 pin log4j2 to 2.17.1 across the Java services",
+   "empty": true
+  },
+  {
+   "date": "2021-12-16T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1738 documents-service Dockerfile on the UBI runtime image",
+   "paths": [
+    "platform-services/services/documents-service/Dockerfile"
+   ]
+  },
+  {
+   "date": "2021-12-21T00:00:00",
+   "author": "a.balaraman",
+   "message": "TOOL-603 documents-service Jenkinsfile on the shared library pipeline",
+   "paths": [
+    "platform-services/services/documents-service/Jenkinsfile"
+   ]
+  },
+  {
+   "date": "2022-01-03T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-1743 statements-api running balance column",
+   "paths": [
+    "platform-services/services/statements-api/app/periods.py"
+   ]
+  },
+  {
+   "date": "2022-01-05T00:00:00",
+   "author": "k.subramani",
+   "message": "PLAT-1748 scaffold bff-business",
+   "paths": [
+    "platform-services/services/bff-business/.eslintrc.js",
+    "platform-services/services/bff-business/.gitignore",
+    "platform-services/services/bff-business/.npmrc",
+    "platform-services/services/bff-business/.nvmrc",
+    "platform-services/services/bff-business/jest.config.js",
+    "platform-services/services/bff-business/package-lock.json",
+    "platform-services/services/bff-business/package.json",
+    "platform-services/services/bff-business/src/app.module.ts",
+    "platform-services/services/bff-business/src/config.ts",
+    "platform-services/services/bff-business/src/main.ts",
+    "platform-services/services/bff-business/tsconfig.build.json",
+    "platform-services/services/bff-business/tsconfig.json"
+   ],
+   "body": "Port from PORTS.md. Local profile only until the bff-business CAB entry is approved."
+  },
+  {
+   "date": "2022-01-05T00:00:00",
+   "author": "k.subramani",
+   "message": "PLAT-1751 bff-business entitlement check on every route",
+   "paths": [
+    "platform-services/services/bff-business/src/accounts/accounts.controller.ts",
+    "platform-services/services/bff-business/src/accounts/accounts.module.ts"
+   ]
+  },
+  {
+   "date": "2022-01-11T00:00:00",
+   "author": "meridian-dependency-bot",
+   "message": "PLAT-1754 bump reportlab 4.0.x",
+   "empty": true,
+   "body": "Automated. Ranges pinned by the dependency policy; this moves the exact version only."
+  },
+  {
+   "date": "2022-01-14T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1758 bff-business approvals queue",
+   "paths": [
+    "platform-services/services/bff-business/src/approvals/approval.ts",
+    "platform-services/services/bff-business/src/approvals/approvals.controller.ts",
+    "platform-services/services/bff-business/src/approvals/approvals.module.ts"
+   ]
+  },
+  {
+   "date": "2022-01-17T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-1762 beacon-notifications gap timeout for out of order events",
+   "paths": [
+    "platform-services/services/beacon-notifications/src/main/resources/templates/REG_OVERDRAFT_NOTICE.txt"
+   ]
+  },
+  {
+   "date": "2022-01-17T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-1764 documents-service README in the wiki shape",
+   "paths": [
+    "platform-services/services/documents-service/README.md"
+   ]
+  },
+  {
+   "date": "2022-01-17T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2022.01 into main for train 2022.01.1",
+   "empty": true
+  },
+  {
+   "date": "2022-01-18T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-1771 beacon-notifications per customer sequence numbers",
+   "paths": [
+    "platform-services/services/beacon-notifications/src/main/resources/templates/PAYMENT_DUE.txt",
+    "platform-services/services/beacon-notifications/src/main/resources/templates/REG_ERROR_RESOLUTION.txt"
+   ]
+  },
+  {
+   "date": "2022-01-19T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-1774 documents-service tests for token",
+   "paths": [
+    "platform-services/services/documents-service/test/token.ts"
+   ]
+  },
+  {
+   "date": "2022-01-21T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-1780 documents-service archive read through",
+   "paths": [
+    "platform-services/services/documents-service/src/common/logger.ts"
+   ]
+  },
+  {
+   "date": "2022-01-24T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1787 statements-api Helm chart for the platform namespace",
+   "paths": [
+    "platform-services/services/statements-api/helm/Chart.yaml",
+    "platform-services/services/statements-api/helm/templates/_helpers.tpl",
+    "platform-services/services/statements-api/helm/templates/configmap.yaml",
+    "platform-services/services/statements-api/helm/templates/deployment.yaml",
+    "platform-services/services/statements-api/helm/templates/service.yaml",
+    "platform-services/services/statements-api/helm/values-local.yaml",
+    "platform-services/services/statements-api/helm/values.yaml"
+   ]
+  },
+  {
+   "date": "2022-01-25T00:00:00",
+   "author": "d.okafor",
+   "message": "Merge release/2022.01 into main for train 2022.01.2",
+   "empty": true
+  },
+  {
+   "date": "2022-02-01T00:00:00",
+   "author": "d.okafor",
+   "message": "Merge release/2022.02 into main for train 2022.02.1",
+   "empty": true
+  },
+  {
+   "date": "2022-02-02T00:00:00",
+   "author": "n.rajaram",
+   "message": "PLAT-1789 bff-business tests for approvals.service",
+   "paths": [
+    "platform-services/services/bff-business/src/approvals/approvals.service.spec.ts"
+   ]
+  },
+  {
+   "date": "2022-02-07T00:00:00",
+   "author": "a.balaraman",
+   "message": "Merge release/2022.02 into main for train 2022.02.2",
+   "empty": true
+  },
+  {
+   "date": "2022-02-09T00:00:00",
+   "author": "v.orlova",
+   "message": "GIS-1260 statements-api Sonar and Checkmarx onboarding",
+   "paths": [
+    "platform-services/services/statements-api/checkmarx.yml",
+    "platform-services/services/statements-api/sonar-project.properties"
+   ]
+  },
+  {
+   "date": "2022-02-09T00:00:00",
+   "author": "n.rajaram",
+   "message": "PLAT-1792 bff-business business accounts aggregation",
+   "paths": [
+    "platform-services/services/bff-business/src/approvals/approvals.service.ts",
+    "platform-services/services/bff-business/src/auth/auth.module.ts"
+   ]
+  },
+  {
+   "date": "2022-02-14T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1796 documents-service latest statement resolution",
+   "paths": [
+    "platform-services/services/documents-service/src/fixtures.ts",
+    "platform-services/services/documents-service/src/routes/disclosures.ts"
+   ]
+  },
+  {
+   "date": "2022-02-17T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1801 beacon-notifications regulatory templates cannot be suppressed",
+   "paths": [
+    "platform-services/services/beacon-notifications/src/main/resources/templates/REG_PRIVACY_ANNUAL.txt",
+    "platform-services/services/beacon-notifications/src/main/resources/templates/REG_RATE_CHANGE.txt"
+   ]
+  },
+  {
+   "date": "2022-02-21T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-1808 statements-api ADR",
+   "paths": [
+    "platform-services/services/statements-api/docs/runbooks/statements-api.md"
+   ]
+  },
+  {
+   "date": "2022-02-22T00:00:00",
+   "author": "n.rajaram",
+   "message": "PLAT-1815 formatting sweep with spotless and prettier, no functional change",
+   "empty": true
+  },
+  {
+   "date": "2022-02-28T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1822 documents-service Helm chart for the platform namespace",
+   "paths": [
+    "platform-services/services/documents-service/helm/Chart.yaml",
+    "platform-services/services/documents-service/helm/templates/_helpers.tpl",
+    "platform-services/services/documents-service/helm/templates/configmap.yaml",
+    "platform-services/services/documents-service/helm/templates/deployment.yaml",
+    "platform-services/services/documents-service/helm/templates/service.yaml",
+    "platform-services/services/documents-service/helm/values-local.yaml",
+    "platform-services/services/documents-service/helm/values.yaml"
+   ]
+  },
+  {
+   "date": "2022-03-02T00:00:00",
+   "author": "a.balaraman",
+   "message": "Merge release/2022.03 into main for train 2022.03.1",
+   "empty": true
+  },
+  {
+   "date": "2022-03-03T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1826 documents-service JWT check on every route",
+   "paths": [
+    "platform-services/services/documents-service/src/routes/statements.ts",
+    "platform-services/services/documents-service/src/routes/tax.ts"
+   ]
+  },
+  {
+   "date": "2022-03-07T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1829 bff-business dual approval submit and approve",
+   "paths": [
+    "platform-services/services/bff-business/src/auth/current-principal.decorator.ts",
+    "platform-services/services/bff-business/src/auth/jwt-auth.guard.ts",
+    "platform-services/services/bff-business/src/auth/keystone-jwt.service.ts"
+   ]
+  },
+  {
+   "date": "2022-03-07T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1836 bff-business Dockerfile on the UBI runtime image",
+   "paths": [
+    "platform-services/services/bff-business/Dockerfile"
+   ]
+  },
+  {
+   "date": "2022-03-09T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1840 COVERAGE.md generated from the JaCoCo and Jest reports",
+   "paths": [
+    "platform-services/COVERAGE.md",
+    "platform-services/scripts/coverage-md.py"
+   ],
+   "body": "The table is what gets quoted to the coverage working group; regenerate with make coverage, do not hand edit."
+  },
+  {
+   "date": "2022-03-11T00:00:00",
+   "author": "k.subramani",
+   "message": "PLAT-1844 bff-business treasury exposure proxy",
+   "paths": [
+    "platform-services/services/bff-business/src/auth/principal.ts",
+    "platform-services/services/bff-business/src/cache/cache.module.ts"
+   ]
+  },
+  {
+   "date": "2022-03-16T00:00:00",
+   "author": "a.balaraman",
+   "message": "Merge release/2022.03 into main for train 2022.03.2",
+   "empty": true
+  },
+  {
+   "date": "2022-03-18T00:00:00",
+   "author": "v.orlova",
+   "message": "GIS-492 documents-service Sonar and Checkmarx onboarding",
+   "paths": [
+    "platform-services/services/documents-service/checkmarx.yml",
+    "platform-services/services/documents-service/sonar-project.properties"
+   ]
+  },
+  {
+   "date": "2022-03-21T00:00:00",
+   "author": "e.castellanos",
+   "message": "TOOL-388 bff-business Jenkinsfile on the shared library pipeline",
+   "paths": [
+    "platform-services/services/bff-business/Jenkinsfile"
+   ]
+  },
+  {
+   "date": "2022-04-04T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1847 documents-service X-Meridian-Source header",
+   "paths": [
+    "platform-services/services/documents-service/src/store/object-store.ts"
+   ]
+  },
+  {
+   "date": "2022-04-06T00:00:00",
+   "author": "k.subramani",
+   "message": "PLAT-1853 bff-business Redis backed approvals",
+   "paths": [
+    "platform-services/services/bff-business/src/cache/cache.service.ts",
+    "platform-services/services/bff-business/src/clients/bedrock.client.ts"
+   ]
+  },
+  {
+   "date": "2022-04-06T00:00:00",
+   "author": "k.subramani",
+   "message": "PLAT-1857 bff-business tests for entitlements.service",
+   "paths": [
+    "platform-services/services/bff-business/src/entitlements/entitlements.service.spec.ts"
+   ]
+  },
+  {
+   "date": "2022-04-06T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2022.04 into main for train 2022.04.1",
+   "empty": true
+  },
+  {
+   "date": "2022-04-07T00:00:00",
+   "author": "k.subramani",
+   "message": "PLAT-1862 bff-business README in the wiki shape",
+   "paths": [
+    "platform-services/services/bff-business/README.md",
+    "platform-services/services/bff-business/docs/adr/0002-approval-decisions-are-made-here.md"
+   ]
+  },
+  {
+   "date": "2022-04-13T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1869 documents-service ADR",
+   "paths": [
+    "platform-services/services/documents-service/docs/adr/0001-read-through-archive-render-on-first.md"
+   ]
+  },
+  {
+   "date": "2022-04-13T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1871 documents-service runbook after the first on call week",
+   "paths": [
+    "platform-services/services/documents-service/docs/adr/0001-read-through-archive.md",
+    "platform-services/services/documents-service/docs/runbooks/documents-service.md"
+   ]
+  },
+  {
+   "date": "2022-04-19T00:00:00",
+   "author": "a.balaraman",
+   "message": "Merge release/2022.04 into main for train 2022.04.2",
+   "empty": true
+  },
+  {
+   "date": "2022-05-04T00:00:00",
+   "author": "n.rajaram",
+   "message": "PLAT-1878 bff-business organisation scoped accounts",
+   "paths": [
+    "platform-services/services/bff-business/src/clients/exposure.client.ts",
+    "platform-services/services/bff-business/src/clients/fixtures.service.ts"
+   ]
+  },
+  {
+   "date": "2022-05-06T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2022.05 into main for train 2022.05.1",
+   "empty": true
+  },
+  {
+   "date": "2022-05-11T00:00:00",
+   "author": "j.hollins",
+   "message": "Merge release/2022.05 into main for train 2022.05.2",
+   "empty": true
+  },
+  {
+   "date": "2022-05-16T00:00:00",
+   "author": "k.subramani",
+   "message": "PLAT-1881 bff-business user context from Keystone",
+   "paths": [
+    "platform-services/services/bff-business/src/clients/clients.module.ts",
+    "platform-services/services/bff-business/src/clients/entitlements.client.ts"
+   ]
+  },
+  {
+   "date": "2022-05-17T00:00:00",
+   "author": "k.subramani",
+   "message": "PLAT-1884 bff-business tests for setup-env",
+   "paths": [
+    "platform-services/services/bff-business/test/setup-env.ts"
+   ]
+  },
+  {
+   "date": "2022-05-19T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1888 bff-business Helm chart for the platform namespace",
+   "paths": [
+    "platform-services/services/bff-business/helm/Chart.yaml",
+    "platform-services/services/bff-business/helm/templates/_helpers.tpl",
+    "platform-services/services/bff-business/helm/templates/configmap.yaml",
+    "platform-services/services/bff-business/helm/templates/deployment.yaml",
+    "platform-services/services/bff-business/helm/templates/service.yaml",
+    "platform-services/services/bff-business/helm/values-local.yaml",
+    "platform-services/services/bff-business/helm/values.yaml"
+   ]
+  },
+  {
+   "date": "2022-06-01T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1894 scaffold iris-orchestrator",
+   "paths": [
+    "platform-services/services/iris-orchestrator/.eslintrc.js",
+    "platform-services/services/iris-orchestrator/.gitignore",
+    "platform-services/services/iris-orchestrator/.npmrc",
+    "platform-services/services/iris-orchestrator/.nvmrc",
+    "platform-services/services/iris-orchestrator/jest.config.js",
+    "platform-services/services/iris-orchestrator/package-lock.json",
+    "platform-services/services/iris-orchestrator/package.json",
+    "platform-services/services/iris-orchestrator/src/app.module.ts",
+    "platform-services/services/iris-orchestrator/src/config.ts",
+    "platform-services/services/iris-orchestrator/src/main.ts",
+    "platform-services/services/iris-orchestrator/tsconfig.build.json",
+    "platform-services/services/iris-orchestrator/tsconfig.json"
+   ]
+  },
+  {
+   "date": "2022-06-01T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1896 iris-orchestrator balance intent via bff-retail",
+   "paths": [
+    "platform-services/services/iris-orchestrator/src/auth/jwt-auth.guard.ts",
+    "platform-services/services/iris-orchestrator/src/auth/keystone-jwt.service.ts"
+   ]
+  },
+  {
+   "date": "2022-06-06T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-1900 iris-orchestrator intent catalogue from YAML",
+   "paths": [
+    "platform-services/services/iris-orchestrator/src/auth/auth.module.ts",
+    "platform-services/services/iris-orchestrator/src/auth/current-principal.decorator.ts"
+   ]
+  },
+  {
+   "date": "2022-06-06T00:00:00",
+   "author": "j.hollins",
+   "message": "Merge release/2022.06 into main for train 2022.06.1",
+   "empty": true
+  },
+  {
+   "date": "2022-06-06T00:00:00",
+   "author": "meridian-dependency-bot",
+   "message": "PLAT-1902 bump jest 29.x",
+   "empty": true,
+   "body": "Automated. Ranges pinned by the dependency policy; this moves the exact version only."
+  },
+  {
+   "date": "2022-06-07T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-1905 iris-orchestrator tests for conversation.service",
+   "paths": [
+    "platform-services/services/iris-orchestrator/src/conversation/conversation.service.spec.ts"
+   ]
+  },
+  {
+   "date": "2022-06-08T00:00:00",
+   "author": "n.rajaram",
+   "message": "PLAT-1910 bff-business tests for token",
+   "paths": [
+    "platform-services/services/bff-business/test/token.ts"
+   ]
+  },
+  {
+   "date": "2022-06-15T00:00:00",
+   "author": "j.hollins",
+   "message": "Merge release/2022.06 into main for train 2022.06.2",
+   "empty": true
+  },
+  {
+   "date": "2022-06-16T00:00:00",
+   "author": "k.subramani",
+   "message": "PLAT-1915 bff-business approval rejection with reason",
+   "paths": [
+    "platform-services/services/bff-business/src/clients/upstream-client.ts",
+    "platform-services/services/bff-business/src/common/api-error.ts",
+    "platform-services/services/bff-business/src/common/api-exception.filter.ts"
+   ]
+  },
+  {
+   "date": "2022-06-20T00:00:00",
+   "author": "v.orlova",
+   "message": "GIS-0522 detokenise requires the pii.detokenise scope",
+   "empty": true
+  },
+  {
+   "date": "2022-06-23T00:00:00",
+   "author": "v.orlova",
+   "message": "GIS-1147 bff-business Sonar and Checkmarx onboarding",
+   "paths": [
+    "platform-services/services/bff-business/checkmarx.yml",
+    "platform-services/services/bff-business/sonar-project.properties"
+   ]
+  },
+  {
+   "date": "2022-07-05T00:00:00",
+   "author": "k.subramani",
+   "message": "PLAT-1921 bff-business ADR",
+   "paths": [
+    "platform-services/services/bff-business/docs/runbooks/bff-business.md"
+   ]
+  },
+  {
+   "date": "2022-07-08T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1928 iris-orchestrator handoff queue in Redis",
+   "paths": [
+    "platform-services/services/iris-orchestrator/src/auth/principal.ts",
+    "platform-services/services/iris-orchestrator/src/cache/cache.module.ts"
+   ]
+  },
+  {
+   "date": "2022-07-11T00:00:00",
+   "author": "k.subramani",
+   "message": "PLAT-1932 bff-business payments initiation through txn-posting",
+   "paths": [
+    "platform-services/services/bff-business/src/common/correlation.middleware.ts",
+    "platform-services/services/bff-business/src/common/correlation.ts"
+   ]
+  },
+  {
+   "date": "2022-07-11T00:00:00",
+   "author": "meridian-dependency-bot",
+   "message": "PLAT-1934 bump ioredis",
+   "empty": true,
+   "body": "Automated. Ranges pinned by the dependency policy; this moves the exact version only."
+  },
+  {
+   "date": "2022-07-14T00:00:00",
+   "author": "k.subramani",
+   "message": "PLAT-1938 bff-business entitlement check on every route",
+   "paths": [
+    "platform-services/services/bff-business/src/common/http.ts"
+   ]
+  },
+  {
+   "date": "2022-07-20T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2022.07 into main for train 2022.07.1",
+   "empty": true
+  },
+  {
+   "date": "2022-07-26T00:00:00",
+   "author": "a.balaraman",
+   "message": "Merge release/2022.07 into main for train 2022.07.2",
+   "empty": true
+  },
+  {
+   "date": "2022-08-04T00:00:00",
+   "author": "a.balaraman",
+   "message": "TOOL-755 iris-orchestrator Jenkinsfile on the shared library pipeline",
+   "paths": [
+    "platform-services/services/iris-orchestrator/Jenkinsfile"
+   ]
+  },
+  {
+   "date": "2022-08-05T00:00:00",
+   "author": "a.balaraman",
+   "message": "Merge release/2022.08 into main for train 2022.08.1",
+   "empty": true
+  },
+  {
+   "date": "2022-08-08T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1944 bff-business approvals queue",
+   "paths": [
+    "platform-services/services/bff-business/src/common/logger.ts",
+    "platform-services/services/bff-business/src/entitlements/entitlements.controller.ts"
+   ]
+  },
+  {
+   "date": "2022-08-08T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1947 iris-orchestrator tests for intent-loader",
+   "paths": [
+    "platform-services/services/iris-orchestrator/src/intents/intent-loader.spec.ts"
+   ]
+  },
+  {
+   "date": "2022-08-15T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1950 iris-orchestrator session state",
+   "paths": [
+    "platform-services/services/iris-orchestrator/src/cache/cache.service.ts",
+    "platform-services/services/iris-orchestrator/src/clients/bff-retail.client.ts",
+    "platform-services/services/iris-orchestrator/src/common/api-error.ts"
+   ]
+  },
+  {
+   "date": "2022-08-17T00:00:00",
+   "author": "a.balaraman",
+   "message": "Merge release/2022.08 into main for train 2022.08.2",
+   "empty": true
+  },
+  {
+   "date": "2022-08-22T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-1954 iris-orchestrator Dockerfile on the UBI runtime image",
+   "paths": [
+    "platform-services/services/iris-orchestrator/Dockerfile"
+   ]
+  },
+  {
+   "date": "2022-09-05T00:00:00",
+   "author": "t.nakamura",
+   "message": "PLAT-1961 exposure-calc position aggregation",
+   "paths": [
+    "platform-services/services/exposure-calc/app/engine.py",
+    "platform-services/services/exposure-calc/scipy_stub.py"
+   ]
+  },
+  {
+   "date": "2022-09-05T00:00:00",
+   "author": "a.balaraman",
+   "message": "Merge release/2022.09 into main for train 2022.09.1",
+   "empty": true
+  },
+  {
+   "date": "2022-09-12T00:00:00",
+   "author": "k.subramani",
+   "message": "PLAT-1967 bff-business dual approval submit and approve",
+   "paths": [
+    "platform-services/services/bff-business/src/health/health.controller.ts"
+   ]
+  },
+  {
+   "date": "2022-09-12T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1969 iris-orchestrator tests for intent-matcher",
+   "paths": [
+    "platform-services/services/iris-orchestrator/src/intents/intent-matcher.spec.ts"
+   ]
+  },
+  {
+   "date": "2022-09-12T00:00:00",
+   "author": "t.nakamura",
+   "message": "PLAT-1974 scaffold exposure-calc",
+   "paths": [
+    "platform-services/services/exposure-calc/.gitignore",
+    "platform-services/services/exposure-calc/app/__init__.py",
+    "platform-services/services/exposure-calc/app/main.py",
+    "platform-services/services/exposure-calc/requirements.txt",
+    "platform-services/services/exposure-calc/run.sh"
+   ]
+  },
+  {
+   "date": "2022-09-12T00:00:00",
+   "author": "a.balaraman",
+   "message": "Merge release/2022.09 into main for train 2022.09.2",
+   "empty": true
+  },
+  {
+   "date": "2022-09-12T00:00:00",
+   "author": "meridian-dependency-bot",
+   "message": "PLAT-1976 bump h2 2.1.214 test scope",
+   "empty": true,
+   "body": "Automated. Ranges pinned by the dependency policy; this moves the exact version only."
+  },
+  {
+   "date": "2022-09-13T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-1978 iris-orchestrator README in the wiki shape",
+   "paths": [
+    "platform-services/services/iris-orchestrator/README.md",
+    "platform-services/services/iris-orchestrator/docs/adr/0001-scripted-yaml-intents-rather-than.md"
+   ]
+  },
+  {
+   "date": "2022-09-14T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-1984 iris-orchestrator unknown intent fallback",
+   "paths": [
+    "platform-services/services/iris-orchestrator/src/common/api-exception.filter.ts",
+    "platform-services/services/iris-orchestrator/src/common/correlation.middleware.ts",
+    "platform-services/services/iris-orchestrator/src/common/correlation.ts"
+   ]
+  },
+  {
+   "date": "2022-09-15T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-1987 iris-orchestrator Keystone token passthrough",
+   "paths": [
+    "platform-services/services/iris-orchestrator/src/common/http.ts",
+    "platform-services/services/iris-orchestrator/src/common/logger.ts",
+    "platform-services/services/iris-orchestrator/src/conversation/conversation.controller.ts"
+   ]
+  },
+  {
+   "date": "2022-09-19T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1992 bff-business business accounts aggregation",
+   "paths": [
+    "platform-services/services/bff-business/src/entitlements/entitlements.module.ts",
+    "platform-services/services/bff-business/src/entitlements/entitlements.service.ts"
+   ]
+  },
+  {
+   "date": "2022-10-03T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-1997 iris-orchestrator Helm chart for the platform namespace",
+   "paths": [
+    "platform-services/services/iris-orchestrator/helm/Chart.yaml",
+    "platform-services/services/iris-orchestrator/helm/templates/_helpers.tpl",
+    "platform-services/services/iris-orchestrator/helm/templates/configmap.yaml",
+    "platform-services/services/iris-orchestrator/helm/templates/deployment.yaml",
+    "platform-services/services/iris-orchestrator/helm/templates/service.yaml",
+    "platform-services/services/iris-orchestrator/helm/values-local.yaml",
+    "platform-services/services/iris-orchestrator/helm/values.yaml"
+   ]
+  },
+  {
+   "date": "2022-10-03T00:00:00",
+   "author": "p.venkatesan",
+   "message": "Revert \"PLAT-1620 bff-retail transactions paging\"",
+   "empty": true,
+   "body": "Reverted after the canary. See the incident ticket linked from the runbook."
+  },
+  {
+   "date": "2022-10-04T00:00:00",
+   "author": "a.balaraman",
+   "message": "Merge release/2022.10 into main for train 2022.10.1",
+   "empty": true
+  },
+  {
+   "date": "2022-10-10T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-2000 iris-orchestrator intent scoring",
+   "paths": [
+    "platform-services/services/iris-orchestrator/src/conversation/conversation.service.ts"
+   ]
+  },
+  {
+   "date": "2022-10-10T00:00:00",
+   "author": "j.hollins",
+   "message": "Merge release/2022.10 into main for train 2022.10.2",
+   "empty": true
+  },
+  {
+   "date": "2022-10-13T00:00:00",
+   "author": "k.subramani",
+   "message": "PLAT-2007 bff-business treasury exposure proxy",
+   "paths": [
+    "platform-services/services/bff-business/src/health/health.module.ts",
+    "platform-services/services/bff-business/src/treasury/treasury.controller.ts",
+    "platform-services/services/bff-business/src/treasury/treasury.module.ts"
+   ]
+  },
+  {
+   "date": "2022-10-17T00:00:00",
+   "author": "meridian-dependency-bot",
+   "message": "PLAT-2009 bump ioredis",
+   "empty": true,
+   "body": "Automated. Ranges pinned by the dependency policy; this moves the exact version only."
+  },
+  {
+   "date": "2022-11-01T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2022.11 into main for train 2022.11.1",
+   "empty": true
+  },
+  {
+   "date": "2022-11-11T00:00:00",
+   "author": "n.rajaram",
+   "message": "PLAT-2012 formatting sweep with spotless and prettier, no functional change",
+   "empty": true
+  },
+  {
+   "date": "2022-11-14T00:00:00",
+   "author": "v.orlova",
+   "message": "GIS-1347 iris-orchestrator Sonar and Checkmarx onboarding",
+   "paths": [
+    "platform-services/services/iris-orchestrator/checkmarx.yml",
+    "platform-services/services/iris-orchestrator/sonar-project.properties"
+   ]
+  },
+  {
+   "date": "2022-11-15T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-2016 iris-orchestrator transfer intent guarded",
+   "paths": [
+    "platform-services/services/iris-orchestrator/src/conversation/conversation.types.ts",
+    "platform-services/services/iris-orchestrator/src/conversation/message.dto.ts"
+   ]
+  },
+  {
+   "date": "2022-11-16T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-2021 iris-orchestrator tests for bad-intents",
+   "paths": [
+    "platform-services/services/iris-orchestrator/test/bad-intents.yaml"
+   ]
+  },
+  {
+   "date": "2022-11-18T00:00:00",
+   "author": "d.okafor",
+   "message": "Merge release/2022.11 into main for train 2022.11.2",
+   "empty": true
+  },
+  {
+   "date": "2022-11-23T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-2027 iris-orchestrator handoff reasons",
+   "paths": [
+    "platform-services/services/iris-orchestrator/src/handoff/handoff.controller.ts",
+    "platform-services/services/iris-orchestrator/src/health/health.controller.ts",
+    "platform-services/services/iris-orchestrator/src/intents/intent-loader.ts"
+   ]
+  },
+  {
+   "date": "2022-12-02T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-2034 iris-orchestrator tests for setup-env",
+   "paths": [
+    "platform-services/services/iris-orchestrator/test/setup-env.ts"
+   ]
+  },
+  {
+   "date": "2022-12-19T00:00:00",
+   "author": "t.nakamura",
+   "message": "PLAT-2037 exposure-calc README in the wiki shape",
+   "paths": [
+    "platform-services/services/exposure-calc/README.md"
+   ]
+  },
+  {
+   "date": "2022-12-26T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-2044 iris-orchestrator conversation transcript",
+   "paths": [
+    "platform-services/services/iris-orchestrator/src/fixtures.service.ts",
+    "platform-services/services/iris-orchestrator/src/handoff/handoff-queue.service.ts"
+   ]
+  },
+  {
+   "date": "2022-12-26T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-2050 iris-orchestrator ADR",
+   "paths": [
+    "platform-services/services/iris-orchestrator/docs/runbooks/iris-orchestrator.md"
+   ]
+  },
+  {
+   "date": "2023-01-09T00:00:00",
+   "author": "meridian-dependency-bot",
+   "message": "PLAT-2051 bump jest 29.x",
+   "empty": true,
+   "body": "Automated. Ranges pinned by the dependency policy; this moves the exact version only."
+  },
+  {
+   "date": "2023-01-11T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-2053 iris-orchestrator intent catalogue from YAML",
+   "paths": [
+    "platform-services/services/iris-orchestrator/src/intents/intent-matcher.ts",
+    "platform-services/services/iris-orchestrator/src/intents/intent.types.ts"
+   ]
+  },
+  {
+   "date": "2023-01-16T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-2057 iris-orchestrator tests for token",
+   "paths": [
+    "platform-services/services/iris-orchestrator/test/token.ts"
+   ]
+  },
+  {
+   "date": "2023-01-16T00:00:00",
+   "author": "d.okafor",
+   "message": "Merge release/2023.01 into main for train 2023.01.1",
+   "empty": true
+  },
+  {
+   "date": "2023-01-20T00:00:00",
+   "author": "a.balaraman",
+   "message": "Merge release/2023.01 into main for train 2023.01.2",
+   "empty": true
+  },
+  {
+   "date": "2023-02-08T00:00:00",
+   "author": "meridian-dependency-bot",
+   "message": "PLAT-2059 bump reportlab 4.0.x",
+   "empty": true,
+   "body": "Automated. Ranges pinned by the dependency policy; this moves the exact version only."
+  },
+  {
+   "date": "2023-02-10T00:00:00",
+   "author": "b.arceneaux",
+   "message": "PLAT-2061 iris-orchestrator balance intent via bff-retail",
+   "paths": [
+    "platform-services/services/iris-orchestrator/src/intents/intents.controller.ts",
+    "platform-services/services/iris-orchestrator/src/intents/intents.yaml"
+   ]
+  },
+  {
+   "date": "2023-02-13T00:00:00",
+   "author": "w.tanaka",
+   "message": "PLAT-1900 architecture note on entitlements-service being the Boot 3 pilot",
+   "empty": true
+  },
+  {
+   "date": "2023-02-15T00:00:00",
+   "author": "a.balaraman",
+   "message": "Merge release/2023.02 into main for train 2023.02.1",
+   "empty": true
+  },
+  {
+   "date": "2023-02-27T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2023.02 into main for train 2023.02.2",
+   "empty": true
+  },
+  {
+   "date": "2023-03-01T00:00:00",
+   "author": "k.subramani",
+   "message": "PLAT-2063 scaffold entitlements-service",
+   "paths": [
+    "platform-services/services/entitlements-service/pom.xml",
+    "platform-services/services/entitlements-service/src/main/java/com/meridian/platform/entitlements/EntitlementsServiceApplication.java",
+    "platform-services/services/entitlements-service/src/main/resources/application.yml",
+    "platform-services/services/entitlements-service/src/test/resources/application.yml",
+    "platform-services/services/entitlements-service/src/test/resources/log4j2-test.xml"
+   ]
+  },
+  {
+   "date": "2023-03-06T00:00:00",
+   "author": "d.okafor",
+   "message": "Merge release/2023.03 into main for train 2023.03.1",
+   "empty": true
+  },
+  {
+   "date": "2023-03-09T00:00:00",
+   "author": "n.rajaram",
+   "message": "PLAT-2070 entitlements-service migration V2 approval request",
+   "paths": [
+    "platform-services/services/entitlements-service/src/main/resources/db/migration/oracle/V2__approval_request.sql"
+   ]
+  },
+  {
+   "date": "2023-03-10T00:00:00",
+   "author": "n.rajaram",
+   "message": "PLAT-2073 entitlements-service migration V1 roles and entitlements",
+   "paths": [
+    "platform-services/services/entitlements-service/src/main/resources/db/migration/oracle/V1__roles_and_entitlements.sql"
+   ]
+  },
+  {
+   "date": "2023-03-13T00:00:00",
+   "author": "a.balaraman",
+   "message": "Merge release/2023.03 into main for train 2023.03.2",
+   "empty": true
+  },
+  {
+   "date": "2023-03-21T00:00:00",
+   "author": "meridian-dependency-bot",
+   "message": "PLAT-2075 bump junit-jupiter",
+   "empty": true,
+   "body": "Automated. Ranges pinned by the dependency policy; this moves the exact version only."
+  },
+  {
+   "date": "2023-03-22T00:00:00",
+   "author": "n.rajaram",
+   "message": "PLAT-2076 entitlements-service dual approval rules",
+   "paths": [
+    "platform-services/services/entitlements-service/src/main/java/com/meridian/platform/entitlements/approval/ApprovalRequest.java",
+    "platform-services/services/entitlements-service/src/main/java/com/meridian/platform/entitlements/approval/ApprovalRequestRepository.java",
+    "platform-services/services/entitlements-service/src/main/java/com/meridian/platform/entitlements/approval/ChangeOutcome.java"
+   ]
+  },
+  {
+   "date": "2023-03-27T00:00:00",
+   "author": "n.rajaram",
+   "message": "PLAT-2079 entitlements-service roles and entitlements model on Boot 3",
+   "paths": [
+    "platform-services/services/entitlements-service/src/main/java/com/meridian/platform/entitlements/api/EntitlementView.java",
+    "platform-services/services/entitlements-service/src/main/java/com/meridian/platform/entitlements/api/EntitlementsController.java",
+    "platform-services/services/entitlements-service/src/main/java/com/meridian/platform/entitlements/approval/ApprovalProperties.java"
+   ]
+  },
+  {
+   "date": "2023-04-05T00:00:00",
+   "author": "j.hollins",
+   "message": "Merge release/2023.04 into main for train 2023.04.1",
+   "empty": true
+  },
+  {
+   "date": "2023-04-06T00:00:00",
+   "author": "d.okafor",
+   "message": "Merge release/2023.04 into main for train 2023.04.2",
+   "empty": true
+  },
+  {
+   "date": "2023-04-07T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-2081 beacon-notifications local-artemis profile so laptops do not need the MQ container",
+   "paths": [
+    "platform-services/services/beacon-notifications/src/main/resources/application-local-artemis.yml"
+   ],
+   "body": "Same JMS abstraction, broker chosen by SPRING_PROFILES_ACTIVE. No code path changes between IBM MQ and Artemis."
+  },
+  {
+   "date": "2023-04-10T00:00:00",
+   "author": "meridian-dependency-bot",
+   "message": "PLAT-2082 bump h2 2.1.214 test scope",
+   "empty": true,
+   "body": "Automated. Ranges pinned by the dependency policy; this moves the exact version only."
+  },
+  {
+   "date": "2023-04-12T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-2087 bedrock-adapter local-artemis profile so laptops do not need the MQ container",
+   "paths": [
+    "platform-services/services/bedrock-adapter/src/main/resources/application-local-artemis.yml"
+   ],
+   "body": "Same JMS abstraction, broker chosen by SPRING_PROFILES_ACTIVE. No code path changes between IBM MQ and Artemis."
+  },
+  {
+   "date": "2023-04-14T00:00:00",
+   "author": "n.rajaram",
+   "message": "PLAT-2091 entitlements-service tests for applicationcontext",
+   "paths": [
+    "platform-services/services/entitlements-service/src/test/java/com/meridian/platform/entitlements/ApplicationContextTest.java"
+   ]
+  },
+  {
+   "date": "2023-04-17T00:00:00",
+   "author": "k.subramani",
+   "message": "PLAT-2097 entitlements-service check endpoint",
+   "paths": [
+    "platform-services/services/entitlements-service/src/main/java/com/meridian/platform/entitlements/approval/ChangeRequest.java",
+    "platform-services/services/entitlements-service/src/main/java/com/meridian/platform/entitlements/approval/DecisionRequest.java",
+    "platform-services/services/entitlements-service/src/main/java/com/meridian/platform/entitlements/approval/DualApprovalService.java"
+   ]
+  },
+  {
+   "date": "2023-05-03T00:00:00",
+   "author": "d.okafor",
+   "message": "Merge release/2023.05 into main for train 2023.05.1",
+   "empty": true
+  },
+  {
+   "date": "2023-05-04T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2023.05 into main for train 2023.05.2",
+   "empty": true
+  },
+  {
+   "date": "2023-05-04T00:00:00",
+   "author": "meridian-dependency-bot",
+   "message": "PLAT-2100 bump ioredis",
+   "empty": true,
+   "body": "Automated. Ranges pinned by the dependency policy; this moves the exact version only."
+  },
+  {
+   "date": "2023-05-08T00:00:00",
+   "author": "k.subramani",
+   "message": "PLAT-2100 entitlements-service migration V3 auditor permission fix",
+   "paths": [
+    "platform-services/services/entitlements-service/src/main/resources/db/migration/oracle/V3__auditor_permission_fix.sql"
+   ]
+  },
+  {
+   "date": "2023-05-10T00:00:00",
+   "author": "n.rajaram",
+   "message": "PLAT-2102 entitlements-service grants and revokes",
+   "paths": [
+    "platform-services/services/entitlements-service/src/main/java/com/meridian/platform/entitlements/entitlement/CheckRequest.java",
+    "platform-services/services/entitlements-service/src/main/java/com/meridian/platform/entitlements/entitlement/Decision.java"
+   ]
+  },
+  {
+   "date": "2023-05-11T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-2108 entitlements-service Dockerfile on the UBI runtime image",
+   "paths": [
+    "platform-services/services/entitlements-service/Dockerfile"
+   ]
+  },
+  {
+   "date": "2023-05-12T00:00:00",
+   "author": "a.balaraman",
+   "message": "TOOL-676 entitlements-service Jenkinsfile on the shared library pipeline",
+   "paths": [
+    "platform-services/services/entitlements-service/Jenkinsfile"
+   ]
+  },
+  {
+   "date": "2023-05-16T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-2112 docker-compose.services.yml paired with the mock-external compose",
+   "paths": [
+    "platform-services/docker-compose.services.yml"
+   ]
+  },
+  {
+   "date": "2023-05-19T00:00:00",
+   "author": "n.rajaram",
+   "message": "PLAT-2117 entitlements-service tests for dualapprovalservice",
+   "paths": [
+    "platform-services/services/entitlements-service/src/test/java/com/meridian/platform/entitlements/approval/DualApprovalServiceTest.java"
+   ]
+  },
+  {
+   "date": "2023-05-22T00:00:00",
+   "author": "n.rajaram",
+   "message": "PLAT-2120 entitlements-service approvals queue",
+   "paths": [
+    "platform-services/services/entitlements-service/src/main/java/com/meridian/platform/entitlements/entitlement/Entitlement.java",
+    "platform-services/services/entitlements-service/src/main/java/com/meridian/platform/entitlements/entitlement/EntitlementRepository.java",
+    "platform-services/services/entitlements-service/src/main/java/com/meridian/platform/entitlements/entitlement/EntitlementService.java"
+   ]
+  },
+  {
+   "date": "2023-06-06T00:00:00",
+   "author": "k.subramani",
+   "message": "PLAT-2123 entitlements-service README in the wiki shape",
+   "paths": [
+    "platform-services/services/entitlements-service/README.md"
+   ]
+  },
+  {
+   "date": "2023-06-16T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2023.06 into main for train 2023.06.1",
+   "empty": true
+  },
+  {
+   "date": "2023-06-19T00:00:00",
+   "author": "n.rajaram",
+   "message": "PLAT-2128 entitlements-service Kafka producer for entitlement changes",
+   "paths": [
+    "platform-services/services/entitlements-service/src/main/java/com/meridian/platform/entitlements/entitlement/FixtureSeeder.java",
+    "platform-services/services/entitlements-service/src/main/java/com/meridian/platform/entitlements/events/EntitlementChangedEvent.java"
+   ]
+  },
+  {
+   "date": "2023-06-19T00:00:00",
+   "author": "k.subramani",
+   "message": "PLAT-2134 entitlements-service tests for entitlementservice",
+   "paths": [
+    "platform-services/services/entitlements-service/src/test/java/com/meridian/platform/entitlements/entitlement/EntitlementServiceTest.java"
+   ]
+  },
+  {
+   "date": "2023-06-19T00:00:00",
+   "author": "a.balaraman",
+   "message": "Merge release/2023.06 into main for train 2023.06.2",
+   "empty": true
+  },
+  {
+   "date": "2023-06-19T00:00:00",
+   "author": "meridian-dependency-bot",
+   "message": "PLAT-2135 bump uvicorn",
+   "empty": true,
+   "body": "Automated. Ranges pinned by the dependency policy; this moves the exact version only."
+  },
+  {
+   "date": "2023-07-10T00:00:00",
+   "author": "k.subramani",
+   "message": "PLAT-2137 entitlements-service organisation view",
+   "paths": [
+    "platform-services/services/entitlements-service/src/main/java/com/meridian/platform/entitlements/events/EntitlementEventPublisher.java"
+   ]
+  },
+  {
+   "date": "2023-07-12T00:00:00",
+   "author": "j.hollins",
+   "message": "Merge release/2023.07 into main for train 2023.07.1",
+   "empty": true
+  },
+  {
+   "date": "2023-07-13T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-2144 formatting sweep with spotless and prettier, no functional change",
+   "empty": true
+  },
+  {
+   "date": "2023-07-21T00:00:00",
+   "author": "a.balaraman",
+   "message": "Merge release/2023.07 into main for train 2023.07.2",
+   "empty": true
+  },
+  {
+   "date": "2023-07-25T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-2150 entitlements-service Helm chart for the platform namespace",
+   "paths": [
+    "platform-services/services/entitlements-service/helm/Chart.yaml",
+    "platform-services/services/entitlements-service/helm/templates/_helpers.tpl",
+    "platform-services/services/entitlements-service/helm/templates/configmap.yaml",
+    "platform-services/services/entitlements-service/helm/templates/deployment.yaml",
+    "platform-services/services/entitlements-service/helm/templates/service.yaml",
+    "platform-services/services/entitlements-service/helm/values-local.yaml",
+    "platform-services/services/entitlements-service/helm/values.yaml"
+   ]
+  },
+  {
+   "date": "2023-07-26T00:00:00",
+   "author": "meridian-dependency-bot",
+   "message": "PLAT-2151 bump reportlab 4.0.x",
+   "empty": true,
+   "body": "Automated. Ranges pinned by the dependency policy; this moves the exact version only."
+  },
+  {
+   "date": "2023-08-10T00:00:00",
+   "author": "meridian-dependency-bot",
+   "message": "PLAT-2152 bump jackson-databind",
+   "empty": true,
+   "body": "Automated. Ranges pinned by the dependency policy; this moves the exact version only."
+  },
+  {
+   "date": "2023-08-11T00:00:00",
+   "author": "d.okafor",
+   "message": "Merge release/2023.08 into main for train 2023.08.1",
+   "empty": true
+  },
+  {
+   "date": "2023-08-17T00:00:00",
+   "author": "k.subramani",
+   "message": "PLAT-2157 entitlements-service reject and approve endpoints",
+   "paths": [
+    "platform-services/services/entitlements-service/src/main/java/com/meridian/platform/entitlements/infra/ApiException.java",
+    "platform-services/services/entitlements-service/src/main/java/com/meridian/platform/entitlements/infra/CorrelationIdFilter.java",
+    "platform-services/services/entitlements-service/src/main/java/com/meridian/platform/entitlements/infra/GlobalExceptionHandler.java"
+   ]
+  },
+  {
+   "date": "2023-08-21T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2023.08 into main for train 2023.08.2",
+   "empty": true
+  },
+  {
+   "date": "2023-08-22T00:00:00",
+   "author": "k.subramani",
+   "message": "PLAT-2161 entitlements-service user view",
+   "paths": [
+    "platform-services/services/entitlements-service/src/main/java/com/meridian/platform/entitlements/infra/ApiError.java"
+   ]
+  },
+  {
+   "date": "2023-08-25T00:00:00",
+   "author": "v.orlova",
+   "message": "GIS-652 entitlements-service Sonar and Checkmarx onboarding",
+   "paths": [
+    "platform-services/services/entitlements-service/checkmarx.yml",
+    "platform-services/services/entitlements-service/sonar-project.properties"
+   ]
+  },
+  {
+   "date": "2023-09-04T00:00:00",
+   "author": "n.rajaram",
+   "message": "PLAT-2166 entitlements-service embedded equivalents for the Testcontainers suites",
+   "paths": [
+    "platform-services/services/entitlements-service/src/main/java/com/meridian/platform/entitlements/infra/Ids.java"
+   ]
+  },
+  {
+   "date": "2023-09-11T00:00:00",
+   "author": "v.orlova",
+   "message": "GIS-1044 stop echoing the bearer token in upstream error logs",
+   "empty": true
+  },
+  {
+   "date": "2023-09-12T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2023.09 into main for train 2023.09.1",
+   "empty": true
+  },
+  {
+   "date": "2023-09-15T00:00:00",
+   "author": "k.subramani",
+   "message": "PLAT-2173 entitlements-service tests for fixtures-slice",
+   "paths": [
+    "platform-services/services/entitlements-service/src/test/resources/fixtures-slice.json"
+   ]
+  },
+  {
+   "date": "2023-09-19T00:00:00",
+   "author": "n.rajaram",
+   "message": "PLAT-2178 entitlements-service ADR",
+   "paths": [
+    "platform-services/services/entitlements-service/docs/adr/0002-spring-boot-3-java-17.md",
+    "platform-services/services/entitlements-service/docs/runbooks/entitlements-service.md"
+   ]
+  },
+  {
+   "date": "2023-09-19T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2023.09 into main for train 2023.09.2",
+   "empty": true
+  },
+  {
+   "date": "2023-10-02T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2023.10 into main for train 2023.10.1",
+   "empty": true
+  },
+  {
+   "date": "2023-10-12T00:00:00",
+   "author": "j.hollins",
+   "message": "Merge release/2023.10 into main for train 2023.10.2",
+   "empty": true
+  },
+  {
+   "date": "2023-10-16T00:00:00",
+   "author": "k.subramani",
+   "message": "PLAT-2185 entitlements-service roles and entitlements model on Boot 3",
+   "paths": [
+    "platform-services/services/entitlements-service/src/main/java/com/meridian/platform/entitlements/infra/SecurityConfig.java",
+    "platform-services/services/entitlements-service/src/main/java/com/meridian/platform/entitlements/infra/SecurityProperties.java",
+    "platform-services/services/entitlements-service/src/main/java/com/meridian/platform/entitlements/role/RoleCatalogue.java"
+   ]
+  },
+  {
+   "date": "2023-10-23T00:00:00",
+   "author": "k.subramani",
+   "message": "PLAT-2189 entitlements-service dual approval rules",
+   "paths": [
+    "platform-services/services/entitlements-service/src/main/java/com/meridian/platform/entitlements/role/RoleDef.java",
+    "platform-services/services/entitlements-service/src/main/java/com/meridian/platform/entitlements/role/RoleDefRepository.java",
+    "platform-services/services/entitlements-service/src/main/resources/MeridianLayout.json"
+   ]
+  },
+  {
+   "date": "2023-11-06T00:00:00",
+   "author": "k.subramani",
+   "message": "PLAT-2191 entitlements-service check endpoint",
+   "paths": [
+    "platform-services/services/entitlements-service/src/main/resources/application-prod.yml"
+   ]
+  },
+  {
+   "date": "2023-11-08T00:00:00",
+   "author": "n.rajaram",
+   "message": "PLAT-2195 entitlements-service grants and revokes",
+   "paths": [
+    "platform-services/services/entitlements-service/src/main/resources/log4j2-spring.xml"
+   ]
+  },
+  {
+   "date": "2023-11-17T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2023.11 into main for train 2023.11.1",
+   "empty": true
+  },
+  {
+   "date": "2023-11-23T00:00:00",
+   "author": "j.hollins",
+   "message": "Merge release/2023.11 into main for train 2023.11.2",
+   "empty": true
+  },
+  {
+   "date": "2024-01-09T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2024.01 into main for train 2024.01.1",
+   "empty": true
+  },
+  {
+   "date": "2024-01-15T00:00:00",
+   "author": "j.hollins",
+   "message": "Merge release/2024.01 into main for train 2024.01.2",
+   "empty": true
+  },
+  {
+   "date": "2024-01-23T00:00:00",
+   "author": "meridian-dependency-bot",
+   "message": "PLAT-2197 bump numpy 1.26.x",
+   "empty": true,
+   "body": "Automated. Ranges pinned by the dependency policy; this moves the exact version only."
+  },
+  {
+   "date": "2024-02-05T00:00:00",
+   "author": "m.calderon",
+   "message": "Revert \"PLAT-2410 beacon-notifications gap timeout PT10S\"",
+   "empty": true,
+   "body": "Reverted after the canary. See the incident ticket linked from the runbook."
+  },
+  {
+   "date": "2024-02-12T00:00:00",
+   "author": "j.hollins",
+   "message": "Merge release/2024.02 into main for train 2024.02.1",
+   "empty": true
+  },
+  {
+   "date": "2024-02-26T00:00:00",
+   "author": "a.balaraman",
+   "message": "Merge release/2024.02 into main for train 2024.02.2",
+   "empty": true
+  },
+  {
+   "date": "2024-03-06T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2024.03 into main for train 2024.03.1",
+   "empty": true
+  },
+  {
+   "date": "2024-03-15T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2024.03 into main for train 2024.03.2",
+   "empty": true
+  },
+  {
+   "date": "2024-03-22T00:00:00",
+   "author": "n.rajaram",
+   "message": "PLAT-2199 formatting sweep with spotless and prettier, no functional change",
+   "empty": true
+  },
+  {
+   "date": "2024-04-02T00:00:00",
+   "author": "d.okafor",
+   "message": "Merge release/2024.04 into main for train 2024.04.1",
+   "empty": true
+  },
+  {
+   "date": "2024-04-12T00:00:00",
+   "author": "meridian-dependency-bot",
+   "message": "PLAT-2202 bump uvicorn",
+   "empty": true,
+   "body": "Automated. Ranges pinned by the dependency policy; this moves the exact version only."
+  },
+  {
+   "date": "2024-04-25T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2024.04 into main for train 2024.04.2",
+   "empty": true
+  },
+  {
+   "date": "2024-05-01T00:00:00",
+   "author": "j.hollins",
+   "message": "Merge release/2024.05 into main for train 2024.05.1",
+   "empty": true
+  },
+  {
+   "date": "2024-05-13T00:00:00",
+   "author": "c.mbeki",
+   "message": "GIS-1180 forbid path traversal in the archive key",
+   "empty": true
+  },
+  {
+   "date": "2024-05-27T00:00:00",
+   "author": "d.okafor",
+   "message": "Merge release/2024.05 into main for train 2024.05.2",
+   "empty": true
+  },
+  {
+   "date": "2024-06-12T00:00:00",
+   "author": "meridian-dependency-bot",
+   "message": "PLAT-2200 bump h2 2.1.214 test scope",
+   "empty": true,
+   "body": "Automated. Ranges pinned by the dependency policy; this moves the exact version only."
+  },
+  {
+   "date": "2024-06-12T00:00:00",
+   "author": "c.mbeki",
+   "message": "GIS-1201 CODEOWNERS for auth, Dockerfiles and Jenkinsfiles",
+   "empty": true
+  },
+  {
+   "date": "2024-06-13T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2024.06 into main for train 2024.06.1",
+   "empty": true
+  },
+  {
+   "date": "2024-06-17T00:00:00",
+   "author": "d.okafor",
+   "message": "Merge release/2024.06 into main for train 2024.06.2",
+   "empty": true
+  },
+  {
+   "date": "2024-07-03T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2024.07 into main for train 2024.07.1",
+   "empty": true
+  },
+  {
+   "date": "2024-07-09T00:00:00",
+   "author": "meridian-dependency-bot",
+   "message": "PLAT-2202 bump h2 2.1.214 test scope",
+   "empty": true,
+   "body": "Automated. Ranges pinned by the dependency policy; this moves the exact version only."
+  },
+  {
+   "date": "2024-07-19T00:00:00",
+   "author": "j.hollins",
+   "message": "Merge release/2024.07 into main for train 2024.07.2",
+   "empty": true
+  },
+  {
+   "date": "2024-08-02T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2024.08 into main for train 2024.08.1",
+   "empty": true
+  },
+  {
+   "date": "2024-08-22T00:00:00",
+   "author": "a.balaraman",
+   "message": "Merge release/2024.08 into main for train 2024.08.2",
+   "empty": true
+  },
+  {
+   "date": "2024-09-04T00:00:00",
+   "author": "meridian-dependency-bot",
+   "message": "PLAT-2200 bump flyway-core",
+   "empty": true,
+   "body": "Automated. Ranges pinned by the dependency policy; this moves the exact version only."
+  },
+  {
+   "date": "2024-09-17T00:00:00",
+   "author": "p.venkatesan",
+   "message": "PLAT-2201 bedrock-adapter HTTP bridge to the Bedrock queue facade for the local estate",
+   "paths": [
+    "platform-services/services/bedrock-adapter/src/main/java/com/meridian/platform/bedrockadapter/gateway/HttpBedrockGateway.java",
+    "platform-services/services/bedrock-adapter/src/test/java/com/meridian/platform/bedrockadapter/gateway/HttpBedrockGatewayTest.java"
+   ],
+   "body": "Bedrock core mock exposes BEDROCK.REQ/RESP over REST. Transport is a config switch; deployed environments stay on MQ."
+  },
+  {
+   "date": "2024-09-17T00:00:00",
+   "author": "d.okafor",
+   "message": "Merge release/2024.09 into main for train 2024.09.1",
+   "empty": true
+  },
+  {
+   "date": "2024-09-19T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-2204 formatting sweep with spotless and prettier, no functional change",
+   "empty": true
+  },
+  {
+   "date": "2024-09-23T00:00:00",
+   "author": "a.balaraman",
+   "message": "Merge release/2024.09 into main for train 2024.09.2",
+   "empty": true
+  },
+  {
+   "date": "2024-10-08T00:00:00",
+   "author": "m.calderon",
+   "message": "PLAT-2207 beacon-notifications debug ingest and dispatch trace for the estate smoke",
+   "paths": [
+    "platform-services/services/beacon-notifications/src/main/java/com/meridian/platform/beacon/api/DebugController.java",
+    "platform-services/services/beacon-notifications/src/main/java/com/meridian/platform/beacon/channel/ConsoleChannelAdapter.java"
+   ]
+  },
+  {
+   "date": "2024-10-09T00:00:00",
+   "author": "a.balaraman",
+   "message": "Merge release/2024.10 into main for train 2024.10.1",
+   "empty": true
+  },
+  {
+   "date": "2024-10-17T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2024.10 into main for train 2024.10.2",
+   "empty": true
+  },
+  {
+   "date": "2024-10-22T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-2210 run-local.sh and smoke.sh for the thirteen services",
+   "paths": [
+    "platform-services/scripts/run-local.sh",
+    "platform-services/scripts/smoke.sh",
+    "platform-services/alerts-preferences-service",
+    "platform-services/audit-trail-service",
+    "platform-services/beacon-notifications",
+    "platform-services/bedrock-adapter",
+    "platform-services/bff-business",
+    "platform-services/bff-retail",
+    "platform-services/documents-service",
+    "platform-services/entitlements-service",
+    "platform-services/exposure-calc",
+    "platform-services/iris-orchestrator",
+    "platform-services/pii-vault-service",
+    "platform-services/statements-api",
+    "platform-services/txn-posting-service"
+   ],
+   "body": "Top level symlinks keep mock-external/estate-up.sh happy; it expects platform-services/<name>. PLAT-2706 to remove."
+  },
+  {
+   "date": "2024-10-23T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-2216 ignore run-local pid and log directory",
+   "paths": [
+    "platform-services/.gitignore"
+   ]
+  },
+  {
+   "date": "2024-11-04T00:00:00",
+   "author": "d.okafor",
+   "message": "Merge release/2024.11 into main for train 2024.11.1",
+   "empty": true
+  },
+  {
+   "date": "2024-11-13T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2024.11 into main for train 2024.11.2",
+   "empty": true
+  },
+  {
+   "date": "2025-03-17T00:00:00",
+   "author": "a.balaraman",
+   "message": "PLAT-2604 keystone sub is the customer id, drop the cid fallback ordering",
+   "empty": true
+  },
+  {
+   "date": "2025-08-13T00:00:00",
+   "author": "e.castellanos",
+   "message": "PLAT-2702 estate smoke PKCE verifier via environment",
+   "empty": true
+  },
+  {
+   "date": "2026-02-11T00:00:00",
+   "author": "d.okafor",
+   "message": "PLAT-2706 plan: move services/<name> symlinks into estate-up",
+   "empty": true
+  },
+  {
+   "date": "2026-08-12T00:00:00",
+   "author": "e.castellanos",
+   "message": "Merge release/2026.08 into main for train 2026.08.2",
+   "empty": true
+  }
+ ]
+}

@@ -1,0 +1,23 @@
+replicaCount: 1
+image:
+  repository: registry.meridian.internal/cswt/beacon-notifications
+  tag: "5.2.0"
+  pullPolicy: IfNotPresent
+service:
+  port: 4510
+resources:
+  requests:
+    cpu: 250m
+    memory: 768Mi
+  limits:
+    memory: 1536Mi
+probes:
+  path: /actuator/health
+  initialDelaySeconds: 45
+env:
+  LOG_LEVEL: info
+  SPLUNK_HEC_URL: http://splunk-hec-mock:4606/services/collector
+  SPRING_PROFILES_ACTIVE: local,local-artemis
+vault:
+  role: beacon-notifications
+  secretsPath: secret/data/cswt/beacon-notifications

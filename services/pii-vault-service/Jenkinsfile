@@ -1,0 +1,12 @@
+#!/usr/bin/env groovy
+// pii-vault-service. Owner payments-platform. Coverage threshold matches sonar-project.properties; if you lower one, lower both, and raise a PLAT ticket saying why.
+@Library('meridian-pipeline@v3') _
+
+meridianJavaPipeline(
+    agentLabel:        'maven-jdk11-rhel8',
+    appName:           'pii-vault-service',
+    modulePath:        'platform-services/services/pii-vault-service',
+    helmChart:         'platform-tooling/helm/pii-vault-service',
+    coverageThreshold: 8,
+    checkmarxThresholds: [high: 0, medium: 0]   // compliance critical, GIS-STD-014
+)

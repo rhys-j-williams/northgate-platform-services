@@ -1,0 +1,23 @@
+replicaCount: 1
+image:
+  repository: registry.meridian.internal/cswt/bff-retail
+  tag: "3.9.1"
+  pullPolicy: IfNotPresent
+service:
+  port: 4500
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    memory: 512Mi
+probes:
+  path: /health
+  initialDelaySeconds: 10
+env:
+  LOG_LEVEL: info
+  SPLUNK_HEC_URL: http://splunk-hec-mock:4606/services/collector
+  MERIDIAN_AUTH_MODE: jwks
+vault:
+  role: bff-retail
+  secretsPath: secret/data/cswt/bff-retail

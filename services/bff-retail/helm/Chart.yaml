@@ -1,0 +1,12 @@
+apiVersion: v2
+name: bff-retail
+description: Local/legacy chart for bff-retail. The deployable chart is platform-tooling/helm/bff-retail; this one is kept for the kind cluster and the DeploymentConfig rollback path (TOOL-1102).
+type: application
+version: 0.3.0
+appVersion: "3.9.1"
+maintainers:
+  - name: retail-digital
+    email: retail-digital@example.com
+annotations:
+  meridian.bank/ticket-key: PLAT
+  meridian.bank/compliance-critical: "false"

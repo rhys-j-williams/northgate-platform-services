@@ -1,0 +1,6 @@
+{
+  "properties": [
+    {"name": "meridian.security.enabled", "type": "java.lang.Boolean", "description": "Enable the Keystone resource server chain."},
+    {"name": "meridian.security.jwks-uri", "type": "java.lang.String", "description": "Keystone JWKS endpoint."}
+  ]
+}

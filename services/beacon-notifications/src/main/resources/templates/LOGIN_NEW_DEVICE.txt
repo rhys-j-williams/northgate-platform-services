@@ -1,0 +1,2 @@
+New sign in to your account
+Your Meridian Trust account was accessed from a new device on {{occurredAt}}. If this was not you, lock your card in the app and call us.

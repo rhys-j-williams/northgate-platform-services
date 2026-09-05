@@ -1,0 +1,12 @@
+apiVersion: v2
+name: beacon-notifications
+description: Local/legacy chart for beacon-notifications. The deployable chart is platform-tooling/helm/beacon-notifications; this one is kept for the kind cluster and the DeploymentConfig rollback path (TOOL-1102).
+type: application
+version: 0.5.0
+appVersion: "5.2.0"
+maintainers:
+  - name: payments-platform
+    email: payments-platform@example.com
+annotations:
+  meridian.bank/ticket-key: PLAT
+  meridian.bank/compliance-critical: "true"

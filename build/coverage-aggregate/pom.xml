@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.meridian.platform</groupId>
+  <artifactId>coverage-aggregate</artifactId>
+  <version>2026.09</version>
+  <packaging>pom</packaging>
+  <name>platform-services JaCoCo aggregate</name>
+
+  <properties>
+    <jacoco.version>0.8.11</jacoco.version>
+  </properties>
+
+  <!-- Every Java service, as a dependency, so report-aggregate can find their exec files and classes
+       in the reactor. Versions track the service poms; the bump train script updates both. -->
+  <dependencies>
+    <dependency><groupId>com.meridian.platform</groupId><artifactId>bedrock-adapter</artifactId><version>3.14.2</version></dependency>
+    <dependency><groupId>com.meridian.platform</groupId><artifactId>beacon-notifications</artifactId><version>5.2.0</version></dependency>
+    <dependency><groupId>com.meridian.platform</groupId><artifactId>alerts-preferences-service</artifactId><version>2.9.1</version></dependency>
+    <dependency><groupId>com.meridian.platform</groupId><artifactId>txn-posting-service</artifactId><version>4.1.7</version></dependency>
+    <dependency><groupId>com.meridian.platform</groupId><artifactId>pii-vault-service</artifactId><version>1.12.0</version></dependency>
+    <dependency><groupId>com.meridian.platform</groupId><artifactId>audit-trail-service</artifactId><version>2.3.4</version></dependency>
+    <dependency><groupId>com.meridian.platform</groupId><artifactId>entitlements-service</artifactId><version>4.1.0</version></dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco.version}</version>
+        <executions>
+          <execution>
+            <id>report-aggregate</id>
+            <phase>verify</phase>
+            <goals><goal>report-aggregate</goal></goals>
+            <configuration>
+              <title>platform-services (Java) aggregate</title>
+              <outputDirectory>${project.reporting.outputDirectory}/jacoco-aggregate</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

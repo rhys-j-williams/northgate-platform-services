@@ -1,0 +1,281 @@
+# platform-services on a laptop, containerised. Pairs with mock-external/docker-compose.yml, which
+# owns the network (meridian-estate), the brokers (redpanda, redis, artemis) and every third party
+# mock. Bring that up first:
+#
+#   (cd ../mock-external && docker compose up -d)
+#   make build            # jars and dist/ are built on the host, the Dockerfiles only copy them in
+#   make up               # == docker compose -f docker-compose.services.yml up -d --build
+#
+# Build context is platform-services/ for every service so the Dockerfiles can reach
+# libs/ts/domain-fixtures and fixtures/meridian-fixtures.json. The Jenkins library builds the same
+# Dockerfiles with --build-arg BASE= pointing at the Artifactory mirrors; here we default BASE to
+# the public UBI images because nobody has Artifactory at home (PLAT-2331).
+#
+# exposure-calc has no container on purpose. The treasury desk runs it from run.sh and has declined
+# every offer to change that (PLAT-2090, closed won't-do). run-local.sh starts it.
+#
+# Ports match PORTS.md. Do not add new ones here; add them there first.
+
+name: meridian-platform
+
+x-java-env: &java-env
+  SPRING_PROFILES_ACTIVE: local,local-artemis
+  MERIDIAN_SECURITY_JWKS_URI: http://keystone-idp-mock:4400/.well-known/jwks.json
+  # Tokens are minted with iss=http://localhost:4400 by the browser facing IdP; the issuer check has
+  # to match what is in the token, not what the container can reach.
+  MERIDIAN_SECURITY_ISSUER: http://localhost:4400
+  SPRING_KAFKA_BOOTSTRAP_SERVERS: redpanda:29092
+  SPRING_REDIS_HOST: redis
+  SPRING_REDIS_PASSWORD: CHANGEME-redis-password
+  MERIDIAN_MQ_ARTEMIS_URL: tcp://artemis:61616
+  SPLUNK_HEC_URL: http://splunk-hec-mock:4606/services/collector/event
+  SPLUNK_HEC_TOKEN: CHANGEME-hec-token
+  MERIDIAN_FIXTURES: /deployments/fixtures/meridian-fixtures.json
+  JAVA_OPTS_APPEND: -Xmx512m -Djava.security.egd=file:/dev/./urandom
+
+x-node-env: &node-env
+  KEYSTONE_ISSUER: http://localhost:4400
+  KEYSTONE_JWKS_URL: http://keystone-idp-mock:4400/.well-known/jwks.json
+  REDIS_URL: redis://:CHANGEME-redis-password@redis:6379/0
+  BEDROCK_ADAPTER_URL: http://bedrock-adapter:4516/bedrock/v1
+  SPLUNK_HEC_URL: http://splunk-hec-mock:4606/services/collector/event
+  SPLUNK_HEC_TOKEN: CHANGEME-hec-token
+  MERIDIAN_FIXTURE_FALLBACK: "true"
+
+x-java-common: &java-common
+  restart: unless-stopped
+  networks: [estate]
+  volumes:
+    - ./fixtures:/deployments/fixtures:ro
+  healthcheck:
+    test: ["CMD-SHELL", "curl -fs http://localhost:${SERVER_PORT}/actuator/health/liveness || exit 1"]
+    interval: 15s
+    timeout: 3s
+    retries: 8
+    start_period: 60s
+
+services:
+  # ---------------------------------------------------------------- Bedrock and the ledger paths
+  bedrock-adapter:
+    <<: *java-common
+    build:
+      context: .
+      dockerfile: services/bedrock-adapter/Dockerfile
+      args: { BASE: "${JAVA11_BASE:-registry.access.redhat.com/ubi9/openjdk-11-runtime:1.20}" }
+    image: meridian/bedrock-adapter
+    container_name: platform-bedrock-adapter
+    ports: ["4516:4516"]
+    environment:
+      <<: *java-env
+      SERVER_PORT: "4516"
+      # The mock does not sit on MQ; bridge MTBREQ over its REST queue facade. Helm sets mq.
+      MERIDIAN_BEDROCK_MODE: auto
+      MERIDIAN_BEDROCK_TRANSPORT: http
+      BEDROCK_CORE_URL: http://bedrock-core-mock:4600
+
+  txn-posting-service:
+    <<: *java-common
+    build:
+      context: .
+      dockerfile: services/txn-posting-service/Dockerfile
+      args: { BASE: "${JAVA11_BASE:-registry.access.redhat.com/ubi9/openjdk-11-runtime:1.20}" }
+    image: meridian/txn-posting-service
+    container_name: platform-txn-posting-service
+    ports: ["4512:4512"]
+    depends_on: [bedrock-adapter]
+    environment:
+      <<: *java-env
+      SERVER_PORT: "4512"
+      MERIDIAN_POSTING_BEDROCK_ADAPTER_URL: http://bedrock-adapter:4516/bedrock/v1
+
+  # ---------------------------------------------------------------- alerts
+  beacon-notifications:
+    <<: *java-common
+    build:
+      context: .
+      dockerfile: services/beacon-notifications/Dockerfile
+      args: { BASE: "${JAVA11_BASE:-registry.access.redhat.com/ubi9/openjdk-11-runtime:1.20}" }
+    image: meridian/beacon-notifications
+    container_name: platform-beacon-notifications
+    ports: ["4510:4510"]
+    depends_on: [alerts-preferences-service]
+    environment:
+      <<: *java-env
+      SERVER_PORT: "4510"
+      MERIDIAN_BEACON_PREFERENCES_URL: http://alerts-preferences-service:4511/preferences/v1
+
+  alerts-preferences-service:
+    <<: *java-common
+    build:
+      context: .
+      dockerfile: services/alerts-preferences-service/Dockerfile
+      args: { BASE: "${JAVA11_BASE:-registry.access.redhat.com/ubi9/openjdk-11-runtime:1.20}" }
+    image: meridian/alerts-preferences-service
+    container_name: platform-alerts-preferences-service
+    ports: ["4511:4511"]
+    environment:
+      <<: *java-env
+      SERVER_PORT: "4511"
+
+  # ---------------------------------------------------------------- compliance critical
+  pii-vault-service:
+    <<: *java-common
+    build:
+      context: .
+      dockerfile: services/pii-vault-service/Dockerfile
+      args: { BASE: "${JAVA11_BASE:-registry.access.redhat.com/ubi9/openjdk-11-runtime:1.20}" }
+    image: meridian/pii-vault-service
+    container_name: platform-pii-vault-service
+    ports: ["4513:4513"]
+    environment:
+      <<: *java-env
+      SERVER_PORT: "4513"
+      MERIDIAN_VAULT_URL: http://vault-mock:4605
+      MERIDIAN_VAULT_TOKEN: CHANGEME-vault-root-token
+
+  audit-trail-service:
+    <<: *java-common
+    build:
+      context: .
+      dockerfile: services/audit-trail-service/Dockerfile
+      args: { BASE: "${JAVA11_BASE:-registry.access.redhat.com/ubi9/openjdk-11-runtime:1.20}" }
+    image: meridian/audit-trail-service
+    container_name: platform-audit-trail-service
+    ports: ["4514:4514"]
+    environment:
+      <<: *java-env
+      SERVER_PORT: "4514"
+
+  entitlements-service:
+    <<: *java-common
+    build:
+      context: .
+      dockerfile: services/entitlements-service/Dockerfile
+      args: { BASE: "${JAVA17_BASE:-registry.access.redhat.com/ubi9/openjdk-17-runtime:1.20}" }
+    image: meridian/entitlements-service
+    container_name: platform-entitlements-service
+    ports: ["4515:4515"]
+    environment:
+      <<: *java-env
+      SERVER_PORT: "4515"
+      # Boot 3: spring.redis moved to spring.data.redis. Both are set so the same anchor works.
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PASSWORD: CHANGEME-redis-password
+
+  # ---------------------------------------------------------------- BFFs and Node
+  bff-retail:
+    build:
+      context: .
+      dockerfile: services/bff-retail/Dockerfile
+    image: meridian/bff-retail
+    container_name: platform-bff-retail
+    restart: unless-stopped
+    networks: [estate]
+    ports: ["4500:4500"]
+    depends_on: [bedrock-adapter]
+    environment:
+      <<: *node-env
+      PORT: "4500"
+      TXN_POSTING_URL: http://txn-posting-service:4512/posting/v1
+      ALERTS_PREFERENCES_URL: http://alerts-preferences-service:4511/preferences/v1
+      AGGREGIO_URL: http://aggregio-mock:4601
+      TICKERHAUS_URL: http://tickerhaus-mock:4602
+      TRISCORE_URL: http://triscore-mock:4603
+      PAYLINK_URL: http://paylink-network-mock:4604
+      CORS_ORIGINS: http://localhost:4200,http://localhost:4205
+    healthcheck: &node-health
+      test: ["CMD-SHELL", "node -e \"require('http').get('http://localhost:'+process.env.PORT+'/health',r=>process.exit(r.statusCode===200?0:1)).on('error',()=>process.exit(1))\""]
+      interval: 15s
+      timeout: 3s
+      retries: 5
+      start_period: 20s
+
+  bff-business:
+    build:
+      context: .
+      dockerfile: services/bff-business/Dockerfile
+    image: meridian/bff-business
+    container_name: platform-bff-business
+    restart: unless-stopped
+    networks: [estate]
+    ports: ["4501:4501"]
+    depends_on: [bedrock-adapter, entitlements-service]
+    environment:
+      <<: *node-env
+      PORT: "4501"
+      REDIS_URL: redis://:CHANGEME-redis-password@redis:6379/1
+      ENTITLEMENTS_URL: http://entitlements-service:4515/entitlements/v1
+      TXN_POSTING_URL: http://txn-posting-service:4512/posting/v1
+      # exposure-calc is not containerised (see header); host.docker.internal reaches run.sh
+      EXPOSURE_CALC_URL: http://host.docker.internal:4520
+      CORS_ORIGINS: http://localhost:4201,http://localhost:4203
+    extra_hosts: ["host.docker.internal:host-gateway"]
+    healthcheck: *node-health
+
+  iris-orchestrator:
+    build:
+      context: .
+      dockerfile: services/iris-orchestrator/Dockerfile
+    image: meridian/iris-orchestrator
+    container_name: platform-iris-orchestrator
+    restart: unless-stopped
+    networks: [estate]
+    ports: ["4517:4517"]
+    depends_on: [bff-retail]
+    environment:
+      <<: *node-env
+      PORT: "4517"
+      REDIS_URL: redis://:CHANGEME-redis-password@redis:6379/2
+      BFF_RETAIL_URL: http://bff-retail:4500/api/v1
+    healthcheck: *node-health
+
+  documents-service:
+    build:
+      context: .
+      dockerfile: services/documents-service/Dockerfile
+    image: meridian/documents-service
+    container_name: platform-documents-service
+    restart: unless-stopped
+    networks: [estate]
+    ports: ["4518:4518"]
+    depends_on: [statements-api]
+    environment:
+      <<: *node-env
+      PORT: "4518"
+      STATEMENTS_API_URL: http://statements-api:4519
+      OBJECT_STORE_ROOT: /opt/app-root/var/object-store
+      CORS_ORIGINS: http://localhost:4200,http://localhost:4201,http://localhost:4203
+    volumes:
+      - documents-archive:/opt/app-root/var/object-store
+    healthcheck: *node-health
+
+  # ---------------------------------------------------------------- Python
+  statements-api:
+    build:
+      context: .
+      dockerfile: services/statements-api/Dockerfile
+    image: meridian/statements-api
+    container_name: platform-statements-api
+    restart: unless-stopped
+    networks: [estate]
+    ports: ["4519:4519"]
+    depends_on: [bedrock-adapter]
+    environment:
+      BEDROCK_ADAPTER_URL: http://bedrock-adapter:4516/bedrock/v1
+      SPLUNK_HEC_URL: http://splunk-hec-mock:4606/services/collector/event
+      SPLUNK_HEC_TOKEN: CHANGEME-hec-token
+      MERIDIAN_FIXTURE_FALLBACK: "true"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fs http://localhost:4519/health || exit 1"]
+      interval: 15s
+      timeout: 3s
+      retries: 5
+      start_period: 15s
+
+volumes:
+  documents-archive:
+
+networks:
+  estate:
+    name: meridian-estate
+    external: true

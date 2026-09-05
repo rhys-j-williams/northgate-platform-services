@@ -1,0 +1,24 @@
+# Oracle 19c on Exadata, CSWTPRD service. Credentials are rendered by the Vault agent.
+# The whole block is commented out because this repository cannot reach the production driver
+# artefacts outside the Artifactory virtual repository. Uncomment on a build agent with the
+# internal settings.xml. Do not commit it uncommented (GIS-1180).
+#spring:
+#  datasource:
+#    url: jdbc:oracle:thin:@//exa-cswt-prod-scan.meridian.internal:1521/CSWTPRD_SVC
+#    driver-class-name: oracle.jdbc.OracleDriver
+#    username: ${VAULT_DB_USER}
+#    password: ${VAULT_DB_PASSWORD}
+#    hikari:
+#      maximum-pool-size: 20
+#      connection-timeout: 5000
+#  jpa:
+#    properties:
+#      hibernate.dialect: org.hibernate.dialect.Oracle12cDialect
+#  flyway:
+#    locations: classpath:db/migration/oracle
+#    schemas: ${VAULT_DB_USER}
+
+meridian:
+  security:
+    jwks-uri: https://keystone.meridian.internal/.well-known/jwks.json
+    issuer: https://keystone.meridian.internal

@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "svc.name" . }}
+  labels:
+    {{- include "svc.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "svc.name" . }}
+  template:
+    metadata:
+      labels:
+        {{- include "svc.labels" . | nindent 8 }}
+      annotations:
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/role: {{ .Values.vault.role }}
+        vault.hashicorp.com/agent-inject-secret-app.env: {{ .Values.vault.secretsPath }}
+    spec:
+      containers:
+        - name: app
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.port }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "svc.name" . }}-env
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.probes.path }}
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: {{ .Values.probes.initialDelaySeconds }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.probes.path }}
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: {{ add .Values.probes.initialDelaySeconds 30 }}
+            periodSeconds: 20
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true

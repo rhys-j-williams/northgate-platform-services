@@ -1,0 +1,6 @@
+version: 1
+fallback: nope
+intents:
+  - id: only
+    keywords: [x]
+    responses: ["y"]

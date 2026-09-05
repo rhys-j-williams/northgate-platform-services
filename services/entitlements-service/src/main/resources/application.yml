@@ -1,0 +1,60 @@
+spring:
+  application:
+    name: entitlements-service
+  profiles:
+    active: local
+  main:
+    banner-mode: off
+  datasource:
+    # H2 in Oracle mode. Real block in application-prod.yml, commented out.
+    url: jdbc:h2:mem:entitlements;MODE=Oracle;DB_CLOSE_DELAY=-1;DEFAULT_NULL_ORDERING=HIGH
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      # Hibernate 6 picks H2Dialect from the connection here. OracleDialect is set in the prod
+      # profile; do not force it locally, 6.2's Oracle SQL does not all round trip through H2.
+      hibernate.jdbc.time_zone: UTC
+  flyway:
+    enabled: true
+    locations: classpath:db/migration/oracle
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      acks: all
+      properties:
+        max.block.ms: 2000
+
+server:
+  port: 4515
+  shutdown: graceful
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: when_authorized
+
+logging:
+  config: classpath:log4j2-spring.xml
+
+meridian:
+  security:
+    enabled: true
+    jwks-uri: http://localhost:4400/.well-known/jwks.json
+    issuer: http://localhost:4400
+  fixtures:
+    path: ""
+  approvals:
+    # Hours before a pending approval expires. Treasury asked for 24, business asked for 72,
+    # compromise nobody likes (PLAT-1388).
+    ttl-hours: 48
+  events:
+    topic: entitlements.changed.v1
