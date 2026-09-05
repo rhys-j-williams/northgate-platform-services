@@ -1,0 +1,10 @@
+spring:
+  main:
+    banner-mode: off
+
+logging:
+  config: classpath:log4j2-test.xml
+
+meridian:
+  security:
+    enabled: false
