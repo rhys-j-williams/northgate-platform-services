@@ -5,11 +5,15 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.Ordered;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 /** Reads or mints the correlation id, binds it to the MDC and echoes it on the response. */
 public class CorrelationIdFilter extends OncePerRequestFilter implements Ordered {
+
+    private static final Logger ACCESS = LoggerFactory.getLogger("http.access");
 
     @Override
     public int getOrder() {
@@ -27,9 +31,14 @@ public class CorrelationIdFilter extends OncePerRequestFilter implements Ordered
         }
         CorrelationId.bind(id);
         response.setHeader(CorrelationId.HEADER, id);
+        long started = System.nanoTime();
         try {
             chain.doFilter(request, response);
         } finally {
+            if (!request.getRequestURI().startsWith("/actuator")) {
+                ACCESS.info("http.request method={} path={} status={} durationMs={}", request.getMethod(),
+                        request.getRequestURI(), response.getStatus(), (System.nanoTime() - started) / 1_000_000);
+            }
             CorrelationId.clear();
         }
     }

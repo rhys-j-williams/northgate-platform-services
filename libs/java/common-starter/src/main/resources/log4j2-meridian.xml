@@ -24,7 +24,8 @@
       </JsonTemplateLayout>
     </Console>
     <Http name="SplunkHec" url="${hecUrl}" ignoreExceptions="true" connectTimeoutMillis="500" readTimeoutMillis="1000">
-      <Property name="Authorization" value="Splunk ${hecToken}"/>
+      <!-- element body, not value=: log4j-core 2.17.2 drops attribute values on Http appender headers (PLAT-2722) -->
+      <Property name="Authorization">Splunk ${env:SPLUNK_HEC_TOKEN:-CHANGEME-splunk-hec-token}</Property>
       <JsonTemplateLayout eventTemplateUri="classpath:SplunkHecLayout.json">
         <EventTemplateAdditionalField key="service" value="${service}"/>
         <EventTemplateAdditionalField key="environment" value="${environment}"/>

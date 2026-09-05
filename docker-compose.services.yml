@@ -67,6 +67,7 @@ services:
     ports: ["4516:4516"]
     environment:
       <<: *java-env
+      MERIDIAN_SERVICE_NAME: bedrock-adapter
       SERVER_PORT: "4516"
       # The mock does not sit on MQ; bridge MTBREQ over its REST queue facade. Helm sets mq.
       MERIDIAN_BEDROCK_MODE: auto
@@ -85,6 +86,7 @@ services:
     depends_on: [bedrock-adapter]
     environment:
       <<: *java-env
+      MERIDIAN_SERVICE_NAME: txn-posting-service
       SERVER_PORT: "4512"
       MERIDIAN_POSTING_BEDROCK_ADAPTER_URL: http://bedrock-adapter:4516/bedrock/v1
 
@@ -101,6 +103,7 @@ services:
     depends_on: [alerts-preferences-service]
     environment:
       <<: *java-env
+      MERIDIAN_SERVICE_NAME: beacon-notifications
       SERVER_PORT: "4510"
       MERIDIAN_BEACON_PREFERENCES_URL: http://alerts-preferences-service:4511/preferences/v1
 
@@ -115,6 +118,7 @@ services:
     ports: ["4511:4511"]
     environment:
       <<: *java-env
+      MERIDIAN_SERVICE_NAME: alerts-preferences-service
       SERVER_PORT: "4511"
 
   # ---------------------------------------------------------------- compliance critical
@@ -129,6 +133,7 @@ services:
     ports: ["4513:4513"]
     environment:
       <<: *java-env
+      MERIDIAN_SERVICE_NAME: pii-vault-service
       SERVER_PORT: "4513"
       MERIDIAN_VAULT_URL: http://vault-mock:4605
       MERIDIAN_VAULT_TOKEN: CHANGEME-vault-root-token
@@ -144,6 +149,7 @@ services:
     ports: ["4514:4514"]
     environment:
       <<: *java-env
+      MERIDIAN_SERVICE_NAME: audit-trail-service
       SERVER_PORT: "4514"
 
   entitlements-service:
@@ -157,6 +163,7 @@ services:
     ports: ["4515:4515"]
     environment:
       <<: *java-env
+      MERIDIAN_SERVICE_NAME: entitlements-service
       SERVER_PORT: "4515"
       # Boot 3: spring.redis moved to spring.data.redis. Both are set so the same anchor works.
       SPRING_DATA_REDIS_HOST: redis

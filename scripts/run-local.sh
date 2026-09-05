@@ -63,7 +63,7 @@ command_for() { # name port kind
       local jh="$JAVA11"; [ "$kind" = java17 ] && jh="$JAVA17"
       jar=$(ls "$dir"/target/*.jar 2>/dev/null | grep -v -E 'sources|javadoc|original' | head -1 || true)
       if [ -z "$jar" ]; then echo "$name: no jar in target/, run make build" >&2; return 1; fi
-      echo "cd '$dir' && exec '$jh/bin/java' \${JAVA_OPTS:-} -jar '$jar' --server.port=$port" ;;
+      echo "cd '$dir' && MERIDIAN_SERVICE_NAME=$name exec '$jh/bin/java' \${JAVA_OPTS:-} -jar '$jar' --server.port=$port" ;;
     node)
       # Nest services emit dist/main.js; documents-service is plain Express and emits dist/server.js
       local entry="dist/main.js"; [ -f "$dir/dist/server.js" ] && entry="dist/server.js"
