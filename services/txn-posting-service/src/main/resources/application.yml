@@ -44,3 +44,10 @@ meridian:
   security:
     jwks-uri: http://localhost:4400/.well-known/jwks.json
     issuer: http://localhost:4400
+  posting:
+    bedrock-adapter-url: http://localhost:4516/bedrock/v1
+    # PLAT-1188: hold postings as PENDING_BEDROCK during EOD rather than 503. Reversals never hold.
+    hold-when-bedrock-unavailable: true
+    daily-debit-limit-minor: 2500000
+    reversal-window-days: 60
+    pending-sweep-ms: 60000
