@@ -3,9 +3,6 @@ spring:
     banner-mode: off
   kafka:
     bootstrap-servers: localhost:1
-    producer:
-      properties:
-        max.block.ms: 200
 
 logging:
   config: classpath:log4j2-test.xml
@@ -13,3 +10,5 @@ logging:
 meridian:
   security:
     enabled: false
+  audit:
+    consume: false

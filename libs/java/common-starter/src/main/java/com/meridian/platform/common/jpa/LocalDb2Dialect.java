@@ -11,4 +11,15 @@ public class LocalDb2Dialect extends DB2Dialect {
     public SequenceInformationExtractor getSequenceInformationExtractor() {
         return SequenceInformationExtractorNoOpImpl.INSTANCE;
     }
+
+    /** DB2 says "values nextval for"; H2's DB2 mode only knows the SQL standard spelling. */
+    @Override
+    public String getSequenceNextValString(String sequenceName) {
+        return "select next value for " + sequenceName;
+    }
+
+    @Override
+    public String getSelectSequenceNextValString(String sequenceName) {
+        return "next value for " + sequenceName;
+    }
 }

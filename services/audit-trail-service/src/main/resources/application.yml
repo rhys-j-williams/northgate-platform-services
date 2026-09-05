@@ -33,6 +33,8 @@ spring:
     consumer:
       group-id: ${spring.application.name}
       auto-offset-reset: earliest
+    listener:
+      missing-topics-fatal: false
 
 server:
   port: 4514
@@ -54,3 +56,8 @@ meridian:
   security:
     jwks-uri: http://localhost:4400/.well-known/jwks.json
     issuer: http://localhost:4400
+  audit:
+    consume: true
+    topics:
+      envelope: audit.events.v1
+      preferences: alerts.preferences.changed.v1
