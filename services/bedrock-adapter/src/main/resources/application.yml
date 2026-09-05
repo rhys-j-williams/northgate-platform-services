@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: bedrock-adapter
+  profiles:
+    active: local
+  main:
+    banner-mode: off
+
+server:
+  port: 4516
+  shutdown: graceful
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: when_authorized
+
+logging:
+  config: classpath:log4j2-meridian.xml
+
+meridian:
+  security:
+    jwks-uri: http://localhost:4400/.well-known/jwks.json
+    issuer: http://localhost:4400
+  mq:
+    # IBM MQ developer container from mock-external. Switch to the embedded Artemis with
+    # --spring.profiles.active=local,local-artemis. No code change either way; see MqConfig.
+    host: localhost
+    port: 1414
+    queue-manager: QM1
+    channel: DEV.APP.SVRCONN
+    user: app
+    password: CHANGEME-mq-app-password
+    receive-timeout-ms: 5000
+  bedrock:
+    # mq | fixture | auto. See GatewayConfig. Helm values set mq.
+    mode: auto
+    request-queue: BEDROCK.REQ
+    reply-queue: BEDROCK.RESP
+  fixtures:
+    path: ${MERIDIAN_FIXTURES:../../fixtures/meridian-fixtures.json}

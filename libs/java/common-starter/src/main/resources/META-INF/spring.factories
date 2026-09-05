@@ -1,3 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 com.meridian.platform.common.MeridianCommonAutoConfiguration,\
-com.meridian.platform.common.security.ResourceServerAutoConfiguration
+com.meridian.platform.common.security.ResourceServerAutoConfiguration,\
+com.meridian.platform.common.fixtures.FixtureAutoConfiguration
