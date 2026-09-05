@@ -1,0 +1,32 @@
+{
+  "name": "@meridian/domain-fixtures",
+  "version": "1.6.0",
+  "description": "Seeded synthetic banking fixtures shared by the mocks, the backends for frontend and the front end test suites",
+  "license": "UNLICENSED",
+  "private": false,
+  "publishConfig": {
+    "registry": "http://localhost:4873"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=14"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "jest --runInBand",
+    "test:coverage": "jest --runInBand --coverage",
+    "lint": "eslint \"src/**/*.ts\"",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@types/jest": "29.5.12",
+    "@types/node": "18.19.31",
+    "jest": "29.7.0",
+    "ts-jest": "29.1.2",
+    "typescript": "4.9.5"
+  }
+}
