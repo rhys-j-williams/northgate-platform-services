@@ -4,7 +4,7 @@
 # internal settings.xml. Do not commit it uncommented (GIS-1180).
 #spring:
 #  datasource:
-#    url: jdbc:db2://db2-audit-prod.meridian.internal:50000/AUDITDB:sslConnection=true;
+#    url: jdbc:db2://db2-audit-prod.northgate.internal:50000/AUDITDB:sslConnection=true;
 #    driver-class-name: com.ibm.db2.jcc.DB2Driver
 #    username: ${VAULT_DB_USER}
 #    password: ${VAULT_DB_PASSWORD}
@@ -14,7 +14,7 @@
 #  flyway:
 #    locations: classpath:db/migration/db2
 
-meridian:
+northgate:
   security:
-    jwks-uri: https://keystone.meridian.internal/.well-known/jwks.json
-    issuer: https://keystone.meridian.internal
+    jwks-uri: https://keystone.northgate.internal/.well-known/jwks.json
+    issuer: https://keystone.northgate.internal

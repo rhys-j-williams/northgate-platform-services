@@ -1,6 +1,6 @@
 replicaCount: 1
 image:
-  repository: registry.meridian.internal/cswt/iris-orchestrator
+  repository: registry.northgate.internal/cswt/iris-orchestrator
   tag: "2.8.1"
   pullPolicy: IfNotPresent
 service:
@@ -17,7 +17,7 @@ probes:
 env:
   LOG_LEVEL: info
   SPLUNK_HEC_URL: http://splunk-hec-mock:4606/services/collector
-  MERIDIAN_AUTH_MODE: jwks
+  NORTHGATE_AUTH_MODE: jwks
 vault:
   role: iris-orchestrator
   secretsPath: secret/data/cswt/iris-orchestrator

@@ -1,7 +1,7 @@
 """Transaction and account source. bedrock-adapter first, fixture bundle second.
 
 The adapter returns the copybook shaped records (MTBACCT / MTBTRAN, see platform-services/copybooks)
-already unpacked to JSON. The fixture bundle is the raw @meridian/domain-fixtures export and has a
+already unpacked to JSON. The fixture bundle is the raw @northgate/domain-fixtures export and has a
 slightly different shape, hence the two mapping functions. They should be one function. PLAT-1722.
 """
 import json

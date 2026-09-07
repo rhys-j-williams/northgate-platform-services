@@ -64,7 +64,7 @@ export const MERCHANTS: MerchantSeed[] = [
   { name: 'Northgate Fuel', mcc: '5541', category: 'fuel', low: 24, high: 96 },
   { name: 'Wayfarer Service Station', mcc: '5541', category: 'fuel', low: 28, high: 104 },
   { name: 'Cirroline Airways', mcc: '3000', category: 'travel', low: 128, high: 1240 },
-  { name: 'Meridian Trust Bank Travel Centre', mcc: '4722', category: 'travel', low: 96, high: 2400 },
+  { name: 'Northgate Trust Bank Travel Centre', mcc: '4722', category: 'travel', low: 96, high: 2400 },
   { name: 'Lodgewood Inns', mcc: '7011', category: 'travel', low: 88, high: 640 },
   { name: 'Cascade Power & Light', mcc: '4900', category: 'utilities', low: 46, high: 288 },
   { name: 'Orbit Fibre Communications', mcc: '4814', category: 'utilities', low: 39, high: 149 },
@@ -84,7 +84,7 @@ export const MERCHANTS: MerchantSeed[] = [
 export const PAYEE_NAMES = [
   'Cascade Power & Light', 'Orbit Fibre Communications', 'Beaufort Mutual Insurance',
   'Municipal Water Authority', 'Verity College Bursar', 'Halcyon Fitness Club',
-  'Meridian Trust Bank Auto Loan', 'Larkspur Physiotherapy', 'County Revenue Office'
+  'Northgate Trust Bank Auto Loan', 'Larkspur Physiotherapy', 'County Revenue Office'
 ];
 
 export const ALERT_CATALOGUE: Array<{

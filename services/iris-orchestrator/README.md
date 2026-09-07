@@ -34,10 +34,10 @@ npm ci
 npm run lint
 npm test           # jest, coverage in coverage/
 npm run build
-MERIDIAN_AUTH_MODE=insecure-local npm start
+NORTHGATE_AUTH_MODE=insecure-local npm start
 ```
 
-Port **4517**. `MERIDIAN_AUTH_MODE=insecure-local` skips JWKS validation and trusts the token
+Port **4517**. `NORTHGATE_AUTH_MODE=insecure-local` skips JWKS validation and trusts the token
 payload; it refuses to start under `NODE_ENV=production`. With the Keystone mock on 4400 leave it
 unset. `.npmrc` carries `legacy-peer-deps` for the reasons in TOOL-0977; do not pass it on the
 command line.

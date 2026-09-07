@@ -1,8 +1,8 @@
 #!/usr/bin/env groovy
 // pii-vault-service. Owner payments-platform. Coverage threshold matches sonar-project.properties; if you lower one, lower both, and raise a PLAT ticket saying why.
-@Library('meridian-pipeline@v3') _
+@Library('northgate-pipeline@v3') _
 
-meridianJavaPipeline(
+northgateJavaPipeline(
     agentLabel:        'maven-jdk11-rhel8',
     appName:           'pii-vault-service',
     modulePath:        'platform-services/services/pii-vault-service',

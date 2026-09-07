@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { FixtureSet, generateFixtures } from '@meridian/domain-fixtures';
+import { FixtureSet, generateFixtures } from '@northgate/domain-fixtures';
 import { config } from './config';
 
 /**

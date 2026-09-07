@@ -7,7 +7,7 @@ import { config } from '../config';
 /**
  * Base for the outbound clients. `callOrFallback` is the pattern every aggregation uses: try the
  * upstream, and if it is unreachable (not if it answered 4xx) serve the fixture answer when
- * MERIDIAN_FIXTURE_FALLBACK allows it. 4xx from an upstream are mapped to our error model.
+ * NORTHGATE_FIXTURE_FALLBACK allows it. 4xx from an upstream are mapped to our error model.
  */
 export abstract class UpstreamClient {
   protected readonly http: AxiosInstance;

@@ -9,7 +9,7 @@ messages, puts them on `BEDROCK.REQ.ACCTINQ` / `BEDROCK.REQ.TXNPOST` / `BEDROCK.
 correlates the reply off `BEDROCK.RESP.*` and turns the copybook record back into JSON. Nothing in
 the estate reads Bedrock without going through here, which is both the point and the problem.
 The record layouts are the copybooks in `platform-services/copybooks/`; the signed zoned decimal
-overpunch is implemented once in `@meridian/domain-fixtures` (`bedrock.ts`) and the Java side has
+overpunch is implemented once in `@northgate/domain-fixtures` (`bedrock.ts`) and the Java side has
 to agree with it byte for byte. `FixedWidthCodecTest` pins that.
 
 ## On call

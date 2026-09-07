@@ -18,7 +18,7 @@ spring:
       # Flyway schema. Validation runs in the prod pipeline against a real Oracle (PLAT-0967).
       ddl-auto: none
     properties:
-      hibernate.dialect: com.meridian.platform.common.jpa.LocalOracleDialect
+      hibernate.dialect: com.northgate.platform.common.jpa.LocalOracleDialect
       hibernate.jdbc.time_zone: UTC
   flyway:
     enabled: true
@@ -43,9 +43,9 @@ management:
           include: ping,diskSpace
 
 logging:
-  config: classpath:log4j2-meridian.xml
+  config: classpath:log4j2-northgate.xml
 
-meridian:
+northgate:
   security:
     jwks-uri: http://localhost:4400/.well-known/jwks.json
     issuer: http://localhost:4400
@@ -71,7 +71,7 @@ meridian:
   ldap:
     embedded-port: 0
   fixtures:
-    path: ${MERIDIAN_FIXTURES:../../fixtures/meridian-fixtures.json}
+    path: ${NORTHGATE_FIXTURES:../../fixtures/northgate-fixtures.json}
 
 # The starter's LDAP health check dials spring.ldap.urls (default localhost:389) which does not exist
 # here; the embedded directory is on a random port. Admin auth is exercised by the smoke test instead.

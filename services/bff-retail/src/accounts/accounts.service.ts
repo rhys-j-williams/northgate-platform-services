@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { maskAccountNumber } from '@meridian/domain-fixtures';
+import { maskAccountNumber } from '@northgate/domain-fixtures';
 import { BedrockAccount, BedrockClient, BedrockTransaction } from '../clients/bedrock.client';
 import { CacheService } from '../cache/cache.service';
 import { FixturesService } from '../clients/fixtures.service';

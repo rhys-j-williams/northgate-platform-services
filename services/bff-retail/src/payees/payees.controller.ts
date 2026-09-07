@@ -1,6 +1,6 @@
 import { Body, Controller, Get, HttpCode, Post } from '@nestjs/common';
 import { IsIn, IsString, Length, Matches } from 'class-validator';
-import { Payee } from '@meridian/domain-fixtures';
+import { Payee } from '@northgate/domain-fixtures';
 import { FixturesService } from '../clients/fixtures.service';
 import { TriScoreClient } from '../clients/partner.clients';
 import { CacheService } from '../cache/cache.service';

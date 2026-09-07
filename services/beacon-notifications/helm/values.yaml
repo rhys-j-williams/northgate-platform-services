@@ -1,6 +1,6 @@
 replicaCount: 1
 image:
-  repository: registry.meridian.internal/cswt/beacon-notifications
+  repository: registry.northgate.internal/cswt/beacon-notifications
   tag: "5.2.0"
   pullPolicy: IfNotPresent
 service:

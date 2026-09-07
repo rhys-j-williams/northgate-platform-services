@@ -51,7 +51,7 @@ install: fixtures common-starter ## dependencies for every service (npm ci, venv
 	  $(VENVS)/$$s/bin/pip install -q -r services/$$s/requirements.txt
 	done
 
-fixtures: ## build @meridian/domain-fixtures and regenerate fixtures/meridian-fixtures.json
+fixtures: ## build @northgate/domain-fixtures and regenerate fixtures/northgate-fixtures.json
 	$(with_node)
 	cd libs/ts/domain-fixtures && npm ci --no-audit --no-fund --loglevel=error && npm run build
 	cd $(CURDIR) && node scripts/export-fixtures.js

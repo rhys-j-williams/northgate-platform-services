@@ -1,4 +1,4 @@
-import { generateFixtures } from '@meridian/domain-fixtures';
+import { generateFixtures } from '@northgate/domain-fixtures';
 import { AccountsService } from './accounts.service';
 import { BedrockClient } from '../clients/bedrock.client';
 import { CacheService } from '../cache/cache.service';
@@ -8,7 +8,7 @@ import { categoryForMcc, money } from './money';
 
 describe('AccountsService', () => {
   const fixtures = new FixturesService();
-  const set = generateFixtures({ seed: 'meridian' });
+  const set = generateFixtures({ seed: 'northgate' });
   const customer = set.customers[0];
   const principal: Principal = { subject: 'u', customerId: customer.customerId, segment: 'consumer', scopes: [] };
   // upstream is unreachable in tests (see test/setup-env.ts) so BedrockClient serves fixtures

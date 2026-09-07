@@ -5,7 +5,7 @@ import { config } from '../config';
 export function log(severity: 'INFO' | 'WARN' | 'ERROR', event: string, extra: Record<string, unknown> = {}): void {
   const line = JSON.stringify({
     time: Date.now() / 1000,
-    sourcetype: 'meridian:json',
+    sourcetype: 'northgate:json',
     service: config.serviceName,
     event: { event, severity, correlationId: correlation.current(), customerId: correlation.customerId(), ...extra },
   });

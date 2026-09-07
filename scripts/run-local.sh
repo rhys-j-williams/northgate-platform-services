@@ -8,9 +8,9 @@
 # Order matters a little: bedrock-adapter before anything that reads balances, statements-api before
 # documents-service, entitlements before bff-business. We start in that order and do not wait
 # between services; every caller has a fixture fallback so a slow neighbour just means a few
-# seconds of synthetic numbers (MERIDIAN_FIXTURE_FALLBACK=true is the local default).
+# seconds of synthetic numbers (NORTHGATE_FIXTURE_FALLBACK=true is the local default).
 #
-# mock-external must already be up (../meridian-mock-external/estate-up.sh or `make up` there). Without it
+# mock-external must already be up (../northgate-mock-external/estate-up.sh or `make up` there). Without it
 # the services still start; the BFFs will log JWKS fetch failures until Keystone appears.
 #
 # Jars are expected in target/ (make build). Node services run dist/ (npm run build). Python venvs
@@ -25,13 +25,13 @@ JAVA11="${JAVA11:-/usr/lib/jvm/java-11-openjdk-amd64}"
 JAVA17="${JAVA17:-/usr/lib/jvm/java-17-openjdk-amd64}"
 VENVS="${VENVS:-$HOME/.venvs}"
 export SPRING_PROFILES_ACTIVE="${SPRING_PROFILES_ACTIVE:-local,local-artemis}"
-export MERIDIAN_FIXTURES="${MERIDIAN_FIXTURES:-$ROOT/fixtures/meridian-fixtures.json}"
-export MERIDIAN_FIXTURE_FALLBACK="${MERIDIAN_FIXTURE_FALLBACK:-true}"
+export NORTHGATE_FIXTURES="${NORTHGATE_FIXTURES:-$ROOT/fixtures/northgate-fixtures.json}"
+export NORTHGATE_FIXTURE_FALLBACK="${NORTHGATE_FIXTURE_FALLBACK:-true}"
 # estate-up.sh exports KEYSTONE_JWKS_URI; the Node services read KEYSTONE_JWKS_URL. Both spellings
 # have shipped and nobody wants to be the one to break the other side (PLAT-2604).
 export KEYSTONE_JWKS_URL="${KEYSTONE_JWKS_URL:-${KEYSTONE_JWKS_URI:-http://localhost:4400/.well-known/jwks.json}}"
-export MERIDIAN_SECURITY_JWKS_URI="${MERIDIAN_SECURITY_JWKS_URI:-$KEYSTONE_JWKS_URL}"
-export MERIDIAN_SECURITY_ISSUER="${MERIDIAN_SECURITY_ISSUER:-${KEYSTONE_ISSUER:-http://localhost:4400}}"
+export NORTHGATE_SECURITY_JWKS_URI="${NORTHGATE_SECURITY_JWKS_URI:-$KEYSTONE_JWKS_URL}"
+export NORTHGATE_SECURITY_ISSUER="${NORTHGATE_SECURITY_ISSUER:-${KEYSTONE_ISSUER:-http://localhost:4400}}"
 export SPRING_KAFKA_BOOTSTRAP_SERVERS="${SPRING_KAFKA_BOOTSTRAP_SERVERS:-${KAFKA_BOOTSTRAP_SERVERS:-localhost:9092}}"
 
 # name:port:kind  (kind = java11 | java17 | node | python)
@@ -63,7 +63,7 @@ command_for() { # name port kind
       local jh="$JAVA11"; [ "$kind" = java17 ] && jh="$JAVA17"
       jar=$(ls "$dir"/target/*.jar 2>/dev/null | grep -v -E 'sources|javadoc|original' | head -1 || true)
       if [ -z "$jar" ]; then echo "$name: no jar in target/, run make build" >&2; return 1; fi
-      echo "cd '$dir' && MERIDIAN_SERVICE_NAME=$name exec '$jh/bin/java' \${JAVA_OPTS:-} -jar '$jar' --server.port=$port" ;;
+      echo "cd '$dir' && NORTHGATE_SERVICE_NAME=$name exec '$jh/bin/java' \${JAVA_OPTS:-} -jar '$jar' --server.port=$port" ;;
     node)
       # Nest services emit dist/main.js; documents-service is plain Express and emits dist/server.js
       local entry="dist/main.js"; [ -f "$dir/dist/server.js" ] && entry="dist/server.js"

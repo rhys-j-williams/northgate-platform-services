@@ -21,7 +21,7 @@ export class KeystoneJwtService {
   constructor() {
     this.verifier = config.authMode === 'insecure-local' ? this.insecureVerifier() : this.jwksVerifier();
     if (config.authMode === 'insecure-local') {
-      this.logger.warn('MERIDIAN_AUTH_MODE=insecure-local: tokens are decoded, not verified. Local use only.');
+      this.logger.warn('NORTHGATE_AUTH_MODE=insecure-local: tokens are decoded, not verified. Local use only.');
     }
   }
 
@@ -47,7 +47,7 @@ export class KeystoneJwtService {
     return {
       subject: payload.sub,
       customerId,
-      segment: ((payload['meridian_segment'] ?? payload['segment'] ?? 'consumer') as string) as Principal['segment'],
+      segment: ((payload['northgate_segment'] ?? payload['segment'] ?? 'consumer') as string) as Principal['segment'],
       scopes,
       mfaAt: typeof payload['mfa_at'] === 'number' ? (payload['mfa_at'] as number) : undefined,
       sessionId: payload['sid'] as string | undefined,

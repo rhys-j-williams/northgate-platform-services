@@ -1,10 +1,10 @@
 # Consumed by the mock cx CLI in platform-tooling/mock-scanners/bin. Inherits the platform-services
 # root checkmarx.yml; only the per-service overrides live here.
 project:
-  name: meridian-platform-services-audit-trail-service
-  team: /CxServer/Meridian/CSWT/platform-engineering
+  name: northgate-platform-services-audit-trail-service
+  team: /CxServer/Northgate/CSWT/platform-engineering
 scan:
-  preset: Meridian-PCI
+  preset: Northgate-PCI
   incremental: true
   language: java
   source: .

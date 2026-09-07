@@ -21,7 +21,7 @@ declare module 'express-serve-static-core' {
 const jwks = config.authMode === 'jwks' ? createRemoteJWKSet(new URL(config.keystoneJwksUrl), { cooldownDuration: 30_000 }) : undefined;
 
 if (config.authMode === 'insecure-local') {
-  log('WARN', 'MERIDIAN_AUTH_MODE=insecure-local: tokens decoded not verified');
+  log('WARN', 'NORTHGATE_AUTH_MODE=insecure-local: tokens decoded not verified');
 }
 
 async function verify(token: string): Promise<JWTPayload> {

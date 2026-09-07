@@ -1,6 +1,6 @@
 replicaCount: 1
 image:
-  repository: registry.meridian.internal/cswt/entitlements-service
+  repository: registry.northgate.internal/cswt/entitlements-service
   tag: "4.1.0"
   pullPolicy: IfNotPresent
 service:

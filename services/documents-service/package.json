@@ -1,5 +1,5 @@
 {
-  "name": "@meridian/documents-service",
+  "name": "@northgate/documents-service",
   "version": "1.14.3",
   "private": true,
   "description": "Statements, tax documents and disclosure HTML for retail-web and business-web. Streams statement PDFs from statements-api through an object store.",
@@ -16,7 +16,7 @@
     "test:coverage": "jest --runInBand --coverage"
   },
   "dependencies": {
-    "@meridian/domain-fixtures": "file:../../libs/ts/domain-fixtures",
+    "@northgate/domain-fixtures": "file:../../libs/ts/domain-fixtures",
     "axios": "1.6.8",
     "express": "4.18.2",
     "jose": "4.15.5"

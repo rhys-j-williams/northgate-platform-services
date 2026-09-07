@@ -4,7 +4,7 @@
 # internal settings.xml. Do not commit it uncommented (GIS-1180).
 #spring:
 #  datasource:
-#    url: jdbc:oracle:thin:@//exa-cswt-prod-scan.meridian.internal:1521/CSWTPRD_SVC
+#    url: jdbc:oracle:thin:@//exa-cswt-prod-scan.northgate.internal:1521/CSWTPRD_SVC
 #    driver-class-name: oracle.jdbc.OracleDriver
 #    username: ${VAULT_DB_USER}
 #    password: ${VAULT_DB_PASSWORD}
@@ -18,7 +18,7 @@
 #    locations: classpath:db/migration/oracle
 #    schemas: ${VAULT_DB_USER}
 
-meridian:
+northgate:
   security:
-    jwks-uri: https://keystone.meridian.internal/.well-known/jwks.json
-    issuer: https://keystone.meridian.internal
+    jwks-uri: https://keystone.northgate.internal/.well-known/jwks.json
+    issuer: https://keystone.northgate.internal
