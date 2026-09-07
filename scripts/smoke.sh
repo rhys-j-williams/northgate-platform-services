@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# platform-services smoke. Health on every port, then the paths the demo actually walks:
+# platform-services smoke. Health on every port, then the paths the estate smoke actually walks:
 #
 #   1  keystone        authorization code + PKCE as the fixture customer, MFA 123456
 #   2  bedrock-adapter account inquiry comes back with the fixture routing number

@@ -4,13 +4,14 @@
 # which are npm and which are the two Python ones. Jenkins does not use this file; each service has
 # its own Jenkinsfile. This is for laptops and for the estate smoke test.
 #
-# Assumptions (BUILD_LOG.md has the long version):
+# Assumptions (platform-tooling/governance/DEPENDENCY_POLICY.md has the long version):
 #   JAVA11 / JAVA17   JDK homes. Boot 2.7 services build on 11, entitlements-service needs 17.
-#   MVN               Maven 3.9.9. ~/.m2/settings.xml may carry the Central mirror from phase 0.
+#   MVN               Maven 3.9.9. ~/.m2/settings.xml may carry the Central mirror from registry/settings.xml.
 #   nvm with 18.19.0  Node services. `.nvmrc` in each.
 #   python3.11        Python services. Venvs live under ~/.venvs, NOT in the tree (PLAT-1933).
 #
-# Nothing here upgrades anything. If a target fails on a version complaint, read BUILD_LOG.md first.
+# Nothing here upgrades anything. If a target fails on a version complaint, check the pinned
+# toolchain in platform-tooling/governance/DEPENDENCY_POLICY.md first.
 
 SHELL := /bin/bash
 .ONESHELL:
@@ -18,7 +19,7 @@ SHELL := /bin/bash
 
 JAVA11 ?= /usr/lib/jvm/java-11-openjdk-amd64
 JAVA17 ?= /usr/lib/jvm/java-17-openjdk-amd64
-# Phase 0 unpacked Maven 3.9.9 under /opt rather than apt's 3.6 (BUILD_LOG.md). Prefer PATH if set.
+# The agent image unpacks Maven 3.9.9 under /opt rather than apt's 3.6 (TOOL-1102). Prefer PATH if set.
 MVN_BIN ?= $(shell command -v mvn 2>/dev/null || echo /opt/apache-maven-3.9.9/bin/mvn)
 MVN    ?= $(MVN_BIN) -q -B
 NODE_VERSION := 18.19.0
