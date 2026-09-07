@@ -10,7 +10,7 @@
 # between services; every caller has a fixture fallback so a slow neighbour just means a few
 # seconds of synthetic numbers (MERIDIAN_FIXTURE_FALLBACK=true is the local default).
 #
-# mock-external must already be up (../mock-external/estate-up.sh or `make up` there). Without it
+# mock-external must already be up (../meridian-mock-external/estate-up.sh or `make up` there). Without it
 # the services still start; the BFFs will log JWKS fetch failures until Keystone appears.
 #
 # Jars are expected in target/ (make build). Node services run dist/ (npm run build). Python venvs

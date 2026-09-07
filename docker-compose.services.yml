@@ -2,7 +2,7 @@
 # owns the network (meridian-estate), the brokers (redpanda, redis, artemis) and every third party
 # mock. Bring that up first:
 #
-#   (cd ../mock-external && docker compose up -d)
+#   (cd ../meridian-mock-external && docker compose up -d)
 #   make build            # jars and dist/ are built on the host, the Dockerfiles only copy them in
 #   make up               # == docker compose -f docker-compose.services.yml up -d --build
 #
