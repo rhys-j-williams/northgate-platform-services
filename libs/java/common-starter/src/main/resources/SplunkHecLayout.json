@@ -3,7 +3,7 @@
     "$resolver": "timestamp",
     "epoch": { "unit": "secs", "rounded": false }
   },
-  "sourcetype": "meridian:json",
+  "sourcetype": "northgate:json",
   "event": {
     "event": { "$resolver": "message", "stringified": true },
     "severity": { "$resolver": "level", "field": "name" },

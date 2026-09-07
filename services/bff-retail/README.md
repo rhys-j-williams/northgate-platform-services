@@ -2,7 +2,7 @@
 
 Node 18.19.0, NestJS 9 | port 4500 | version 3.9.1 | owner **retail-digital** (d.okafor, m.calderon)
 
-Backend-for-frontend for retail-web (Meridian Online). Validates Keystone JWTs against the mock
+Backend-for-frontend for retail-web (Northgate Online). Validates Keystone JWTs against the mock
 JWKS on 4400, fans out to bedrock-adapter (balances, transactions), Aggregio (external accounts),
 TickerHaus (market data on the dashboard), TriScore (credit score widget) and PayLink (P2P), and
 hands the front end one shape per screen under `/api/v1`. Redis on 6379 caches the aggregation
@@ -35,10 +35,10 @@ npm ci
 npm run lint
 npm test           # jest, coverage in coverage/
 npm run build
-MERIDIAN_AUTH_MODE=insecure-local npm start
+NORTHGATE_AUTH_MODE=insecure-local npm start
 ```
 
-Port **4500**. `MERIDIAN_AUTH_MODE=insecure-local` skips JWKS validation and trusts the token
+Port **4500**. `NORTHGATE_AUTH_MODE=insecure-local` skips JWKS validation and trusts the token
 payload; it refuses to start under `NODE_ENV=production`. With the Keystone mock on 4400 leave it
 unset. `.npmrc` carries `legacy-peer-deps` for the reasons in TOOL-0977; do not pass it on the
 command line.

@@ -4,6 +4,6 @@ image:
 env:
   LOG_LEVEL: debug
   SPLUNK_HEC_URL: http://host.docker.internal:4606/services/collector
-  MERIDIAN_BEDROCK_MODE: auto
-  MERIDIAN_BEDROCK_TRANSPORT: http
+  NORTHGATE_BEDROCK_MODE: auto
+  NORTHGATE_BEDROCK_TRANSPORT: http
   BEDROCK_CORE_URL: http://host.docker.internal:4600

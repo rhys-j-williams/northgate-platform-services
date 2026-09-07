@@ -6,7 +6,7 @@ import { ApiException } from '../common/api-error';
 import { correlation } from '../common/correlation';
 import { PRINCIPAL_KEY } from './principal';
 
-export const PUBLIC_KEY = 'meridian.public';
+export const PUBLIC_KEY = 'northgate.public';
 export const Public = () => SetMetadata(PUBLIC_KEY, true);
 
 @Injectable()

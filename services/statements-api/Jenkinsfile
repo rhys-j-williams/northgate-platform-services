@@ -1,19 +1,19 @@
 #!/usr/bin/env groovy
-// statements-api. There is no meridianPythonPipeline (TOOL-1290, declined twice). This is a hand written
+// statements-api. There is no northgatePythonPipeline (TOOL-1290, declined twice). This is a hand written
 // scripted pipeline that does install, build, scan and deploy. There is no test stage because there
 // are no tests. CAB-2021-1188.
-@Library('meridian-pipeline@v3') _
+@Library('northgate-pipeline@v3') _
 
-import com.meridian.pipeline.MeridianDefaults
+import com.northgate.pipeline.NorthgateDefaults
 
-Map cfg = MeridianDefaults.common() + [appName: 'statements-api', helmChart: 'platform-tooling/helm/statements-api']
+Map cfg = NorthgateDefaults.common() + [appName: 'statements-api', helmChart: 'platform-tooling/helm/statements-api']
 
 pipeline {
     agent { label 'maven-jdk11-rhel8' }   // it has python3.11 on it. Do not ask.
     options { timestamps(); timeout(time: 30, unit: 'MINUTES'); disableConcurrentBuilds() }
     environment {
         APP_NAME = 'statements-api'
-        PIP_INDEX_URL = 'https://artifactory.meridian.internal/artifactory/api/pypi/pypi-virtual/simple'
+        PIP_INDEX_URL = 'https://artifactory.northgate.internal/artifactory/api/pypi/pypi-virtual/simple'
     }
     stages {
         stage('Checkout') { steps { checkout scm } }

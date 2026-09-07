@@ -1,4 +1,4 @@
-# @meridian/domain-fixtures
+# @northgate/domain-fixtures
 
 Seeded synthetic banking data. Every mock, backend for frontend and front end test suite in the
 estate gets its customers, accounts, cards, transactions, payees, alert preferences and
@@ -8,11 +8,11 @@ mock and in a Cypress run.
 Published to the internal registry (Verdaccio at `http://localhost:4873` when the estate is up).
 
 ```bash
-npm install @meridian/domain-fixtures
+npm install @northgate/domain-fixtures
 ```
 
 ```ts
-import { generateFixtures, maskAccountNumber } from '@meridian/domain-fixtures';
+import { generateFixtures, maskAccountNumber } from '@northgate/domain-fixtures';
 
 const estate = generateFixtures({ seed: 'retail-web-e2e', customers: 40 });
 const [customer] = estate.customers;
@@ -41,7 +41,7 @@ by convention:
 - names, merchants and organisations are invented; `src/vocabulary.ts` is the whole list
 - addresses are real cities with invented streets
 
-`src/fixtures.spec.ts` asserts all of the above. `meridian-cswt-workspace/scripts/verify-estate.sh` runs that suite as part
+`src/fixtures.spec.ts` asserts all of the above. `northgate-cswt-workspace/scripts/verify-estate.sh` runs that suite as part
 of the estate check. If you add a generator, add the matching guarantee test.
 
 ## Bedrock records

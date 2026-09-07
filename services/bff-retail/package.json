@@ -1,5 +1,5 @@
 {
-  "name": "@meridian/bff-retail",
+  "name": "@northgate/bff-retail",
   "version": "4.12.0",
   "private": true,
   "description": "Backend for frontend for retail-web. Aggregates Bedrock (via bedrock-adapter), Aggregio, TickerHaus, TriScore and PayLink behind /api/v1.",
@@ -16,7 +16,7 @@
     "test:coverage": "jest --runInBand --coverage"
   },
   "dependencies": {
-    "@meridian/domain-fixtures": "file:../../libs/ts/domain-fixtures",
+    "@northgate/domain-fixtures": "file:../../libs/ts/domain-fixtures",
     "@nestjs/common": "9.4.3",
     "@nestjs/core": "9.4.3",
     "@nestjs/platform-express": "9.4.3",

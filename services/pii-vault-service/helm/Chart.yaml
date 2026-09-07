@@ -8,5 +8,5 @@ maintainers:
   - name: payments-platform
     email: payments-platform@example.com
 annotations:
-  meridian.bank/ticket-key: PLAT
-  meridian.bank/compliance-critical: "true"
+  northgate.bank/ticket-key: PLAT
+  northgate.bank/compliance-critical: "true"

@@ -14,7 +14,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.meridian.platform</groupId>
+  <groupId>com.northgate.platform</groupId>
   <artifactId>platform-services-reactor</artifactId>
   <version>2026.09</version>
   <packaging>pom</packaging>

@@ -1,6 +1,6 @@
 # Fallback broker for laptops and build agents without the IBM MQ image. Same JMS abstraction,
 # same queue names, different ConnectionFactory. Activated with SPRING_PROFILES_ACTIVE=local,local-artemis.
-meridian:
+northgate:
   mq:
     artemis-url: tcp://localhost:61616
     user: artemis

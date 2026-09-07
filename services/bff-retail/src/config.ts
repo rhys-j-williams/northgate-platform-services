@@ -13,10 +13,10 @@ function env(name: string, fallback: string): string {
 export const config = {
   port: Number(env('PORT', '4500')),
   serviceName: 'bff-retail',
-  authMode: env('MERIDIAN_AUTH_MODE', 'jwks') as AuthMode,
+  authMode: env('NORTHGATE_AUTH_MODE', 'jwks') as AuthMode,
   keystoneIssuer: env('KEYSTONE_ISSUER', 'http://localhost:4400'),
   keystoneJwksUrl: env('KEYSTONE_JWKS_URL', 'http://localhost:4400/.well-known/jwks.json'),
-  keystoneAudience: env('KEYSTONE_AUDIENCE', 'api://meridian-digital-channels'),
+  keystoneAudience: env('KEYSTONE_AUDIENCE', 'api://northgate-digital-channels'),
   redisUrl: env('REDIS_URL', 'redis://localhost:6379/0'),
   cacheTtlSeconds: Number(env('CACHE_TTL_SECONDS', '30')),
   bedrockAdapterUrl: env('BEDROCK_ADAPTER_URL', 'http://localhost:4516/bedrock/v1'),
@@ -27,9 +27,9 @@ export const config = {
   triscoreUrl: env('TRISCORE_URL', 'http://localhost:4603'),
   paylinkUrl: env('PAYLINK_URL', 'http://localhost:4604'),
   upstreamTimeoutMs: Number(env('UPSTREAM_TIMEOUT_MS', '2500')),
-  /** When an upstream is down, answer from @meridian/domain-fixtures instead of 502. Never on in prod. */
-  fixtureFallback: env('MERIDIAN_FIXTURE_FALLBACK', 'true') === 'true',
-  fixtureSeed: env('MERIDIAN_FIXTURE_SEED', 'meridian'),
+  /** When an upstream is down, answer from @northgate/domain-fixtures instead of 502. Never on in prod. */
+  fixtureFallback: env('NORTHGATE_FIXTURE_FALLBACK', 'true') === 'true',
+  fixtureSeed: env('NORTHGATE_FIXTURE_SEED', 'northgate'),
   corsOrigins: env('CORS_ORIGINS', 'http://localhost:4200,http://localhost:4205').split(','),
   splunkHecUrl: env('SPLUNK_HEC_URL', 'http://localhost:4606/services/collector/event'),
   splunkHecToken: env('SPLUNK_HEC_TOKEN', 'CHANGEME-splunk-hec-token'),

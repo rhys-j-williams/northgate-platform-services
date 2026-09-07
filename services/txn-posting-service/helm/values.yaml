@@ -1,6 +1,6 @@
 replicaCount: 1
 image:
-  repository: registry.meridian.internal/cswt/txn-posting-service
+  repository: registry.northgate.internal/cswt/txn-posting-service
   tag: "4.1.7"
   pullPolicy: IfNotPresent
 service:

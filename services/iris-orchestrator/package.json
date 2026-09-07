@@ -1,5 +1,5 @@
 {
-  "name": "@meridian/iris-orchestrator",
+  "name": "@northgate/iris-orchestrator",
   "version": "2.8.1",
   "private": true,
   "description": "Scripted intent engine behind the Iris widget. Intents from YAML, balances from bff-retail, handoff to the agent queue.",
@@ -16,7 +16,7 @@
     "test:coverage": "jest --runInBand --coverage"
   },
   "dependencies": {
-    "@meridian/domain-fixtures": "file:../../libs/ts/domain-fixtures",
+    "@northgate/domain-fixtures": "file:../../libs/ts/domain-fixtures",
     "@nestjs/common": "9.4.3",
     "@nestjs/core": "9.4.3",
     "@nestjs/platform-express": "9.4.3",

@@ -4,7 +4,7 @@ Java 17, Spring Boot 3.1.12 | port 4515 | version 4.1.0 | owner **identity-platf
 
 Roles, entitlements and dual-approval policy for the business channel. Which operator may do
 what on which organisation, and which actions need a second pair of eyes at what threshold.
-bff-business asks; this service answers. Fixture organisations come from `@meridian/domain-fixtures`
+bff-business asks; this service answers. Fixture organisations come from `@northgate/domain-fixtures`
 via the shared JSON export.
 
 This is the one backend already on Java 17 and Spring Boot 3.1.12, done in 2024 as the pilot for
@@ -54,7 +54,7 @@ layer the pipeline actually builds.
 
 ## Known issues
 
-- **PLAT-1352** Boot 3 pilot. `common-starter` is not consumed here; the correlation filter, error advice and JSON logging are copied under `com.meridian.entitlements.platform`. Drift is inevitable and has already happened once (the error envelope gained `violations` in the starter and not here for two months).
+- **PLAT-1352** Boot 3 pilot. `common-starter` is not consumed here; the correlation filter, error advice and JSON logging are copied under `com.northgate.entitlements.platform`. Drift is inevitable and has already happened once (the error envelope gained `violations` in the starter and not here for two months).
 - **KEY-1620** Role catalogue is Flyway-seeded, not synced from Keystone groups. Keystone are meant to publish a `roles.changed` topic. They have not.
 - **PLAT-1701** Approval thresholds are in `application.yml`. Business want them per organisation. Data model supports it, API does not.
 

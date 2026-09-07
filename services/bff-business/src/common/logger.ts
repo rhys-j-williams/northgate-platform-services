@@ -32,9 +32,9 @@ export class StructuredLogger implements LoggerService {
   private emit(severity: Severity, message: unknown, context?: string, trace?: string): void {
     const record = {
       time: Date.now() / 1000,
-      sourcetype: 'meridian:json',
+      sourcetype: 'northgate:json',
       service: config.serviceName,
-      environment: process.env.MERIDIAN_ENV ?? 'local',
+      environment: process.env.NORTHGATE_ENV ?? 'local',
       event: {
         event: typeof message === 'string' ? message : JSON.stringify(message),
         severity,
@@ -50,7 +50,7 @@ export class StructuredLogger implements LoggerService {
     } else {
       process.stdout.write(line + '\n');
     }
-    if (process.env.MERIDIAN_HEC_DIRECT === 'true') {
+    if (process.env.NORTHGATE_HEC_DIRECT === 'true') {
       // fire and forget; a logging outage must never take the BFF down (INC0048817)
       fetch(config.splunkHecUrl, {
         method: 'POST',

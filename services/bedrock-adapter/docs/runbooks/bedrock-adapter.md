@@ -26,7 +26,7 @@ A reply did not parse. Pull the raw message from `BEDROCK.RESP.*.DLQ`, compare a
 
 ### Fixture fallback active in uat/prod
 
-This should be impossible; `bedrock.fixture-fallback` is false in the prod values. If you see the `X-Meridian-Source: fixture` header from a non-local environment, stop the pods and raise a P2.
+This should be impossible; `bedrock.fixture-fallback` is false in the prod values. If you see the `X-Northgate-Source: fixture` header from a non-local environment, stop the pods and raise a P2.
 
 ## Restart
 

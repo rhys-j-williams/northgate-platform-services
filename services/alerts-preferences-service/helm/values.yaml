@@ -1,6 +1,6 @@
 replicaCount: 1
 image:
-  repository: registry.meridian.internal/cswt/alerts-preferences-service
+  repository: registry.northgate.internal/cswt/alerts-preferences-service
   tag: "2.9.1"
   pullPolicy: IfNotPresent
 service:

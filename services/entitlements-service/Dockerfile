@@ -2,14 +2,14 @@
 # JAVA_OPTS) is in platform-tooling/docker/java/Dockerfile and the Jenkins library builds that with
 # --build-arg SERVICE=entitlements-service JDK_VERSION=17. This file exists so `docker compose` can build the
 # service standalone for the estate smoke test and so CODEOWNERS has something to point GIS at.
-ARG BASE=artifactory.meridian.internal/docker-redhat-remote/ubi9/openjdk-17-runtime:1.20
+ARG BASE=artifactory.northgate.internal/docker-redhat-remote/ubi9/openjdk-17-runtime:1.20
 FROM ${BASE}
 
 ARG GIT_SHA=unknown
 LABEL org.opencontainers.image.title="entitlements-service" \
       org.opencontainers.image.revision="${GIT_SHA}" \
-      meridian.bank/team="identity-platform" \
-      meridian.bank/compliance-critical="false"
+      northgate.bank/team="identity-platform" \
+      northgate.bank/compliance-critical="false"
 
 ENV JAVA_OPTS_APPEND="-Djava.security.egd=file:/dev/./urandom -Dlog4j2.formatMsgNoLookups=true" \
     SERVER_PORT=4515 \

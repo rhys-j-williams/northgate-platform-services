@@ -1,4 +1,4 @@
-import { generateFixtures } from '@meridian/domain-fixtures';
+import { generateFixtures } from '@northgate/domain-fixtures';
 import { EntitlementsService } from './entitlements.service';
 import { EntitlementsClient } from '../clients/entitlements.client';
 import { FixturesService } from '../clients/fixtures.service';
@@ -6,7 +6,7 @@ import { CacheService } from '../cache/cache.service';
 import { Principal } from '../auth/principal';
 
 describe('EntitlementsService', () => {
-  const set = generateFixtures({ seed: 'meridian' });
+  const set = generateFixtures({ seed: 'northgate' });
   const fixtures = new FixturesService();
   const svc = new EntitlementsService(new EntitlementsClient(fixtures), new CacheService());
   const org = set.entitlements[0];

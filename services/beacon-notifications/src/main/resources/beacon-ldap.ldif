@@ -1,19 +1,19 @@
 # Local stand-in for corporate AD. Same DIT shape as CN=APP-BEACON-OPS under OU=AppGroups.
 # Passwords are local only. Do not add real handles here; use the roster in the estate notes.
-dn: dc=meridian,dc=local
+dn: dc=northgate,dc=local
 objectClass: top
 objectClass: domain
-dc: meridian
+dc: northgate
 
-dn: ou=people,dc=meridian,dc=local
+dn: ou=people,dc=northgate,dc=local
 objectClass: organizationalUnit
 ou: people
 
-dn: ou=groups,dc=meridian,dc=local
+dn: ou=groups,dc=northgate,dc=local
 objectClass: organizationalUnit
 ou: groups
 
-dn: uid=beacon-ops,ou=people,dc=meridian,dc=local
+dn: uid=beacon-ops,ou=people,dc=northgate,dc=local
 objectClass: inetOrgPerson
 uid: beacon-ops
 cn: Beacon Ops
@@ -21,7 +21,7 @@ sn: Ops
 mail: beacon-ops@example.com
 userPassword: CHANGEME-beacon-ops
 
-dn: uid=readonly,ou=people,dc=meridian,dc=local
+dn: uid=readonly,ou=people,dc=northgate,dc=local
 objectClass: inetOrgPerson
 uid: readonly
 cn: Read Only
@@ -29,12 +29,12 @@ sn: User
 mail: readonly@example.com
 userPassword: CHANGEME-readonly
 
-dn: cn=beacon-ops,ou=groups,dc=meridian,dc=local
+dn: cn=beacon-ops,ou=groups,dc=northgate,dc=local
 objectClass: groupOfNames
 cn: beacon-ops
-member: uid=beacon-ops,ou=people,dc=meridian,dc=local
+member: uid=beacon-ops,ou=people,dc=northgate,dc=local
 
-dn: cn=beacon-viewers,ou=groups,dc=meridian,dc=local
+dn: cn=beacon-viewers,ou=groups,dc=northgate,dc=local
 objectClass: groupOfNames
 cn: beacon-viewers
-member: uid=readonly,ou=people,dc=meridian,dc=local
+member: uid=readonly,ou=people,dc=northgate,dc=local

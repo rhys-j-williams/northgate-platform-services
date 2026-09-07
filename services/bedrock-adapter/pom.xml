@@ -10,7 +10,7 @@
     <relativePath/>
   </parent>
 
-  <groupId>com.meridian.platform</groupId>
+  <groupId>com.northgate.platform</groupId>
   <artifactId>bedrock-adapter</artifactId>
   <version>3.14.2</version>
   <packaging>jar</packaging>
@@ -27,7 +27,7 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.meridian.platform</groupId>
+      <groupId>com.northgate.platform</groupId>
       <artifactId>common-starter</artifactId>
       <version>${common-starter.version}</version>
     </dependency>

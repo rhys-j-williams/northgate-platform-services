@@ -1,5 +1,5 @@
 {
-  "name": "@meridian/bff-business",
+  "name": "@northgate/bff-business",
   "version": "3.9.1",
   "private": true,
   "description": "Backend for frontend for business-web and ledgerline-web. Entitlement checks via entitlements-service, approvals queue, treasury positions from exposure-calc.",
@@ -16,7 +16,7 @@
     "test:coverage": "jest --runInBand --coverage"
   },
   "dependencies": {
-    "@meridian/domain-fixtures": "file:../../libs/ts/domain-fixtures",
+    "@northgate/domain-fixtures": "file:../../libs/ts/domain-fixtures",
     "@nestjs/common": "9.4.3",
     "@nestjs/core": "9.4.3",
     "@nestjs/platform-express": "9.4.3",

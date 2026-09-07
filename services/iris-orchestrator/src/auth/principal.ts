@@ -8,4 +8,4 @@ export interface Principal {
   sessionId?: string;
 }
 
-export const PRINCIPAL_KEY = 'meridian.principal';
+export const PRINCIPAL_KEY = 'northgate.principal';

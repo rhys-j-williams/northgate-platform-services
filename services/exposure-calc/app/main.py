@@ -132,7 +132,7 @@ def _book(book: str) -> List[Position]:
 @app.on_event("startup")
 def seed():
     """Seed a demo book so the desk sees numbers straight away. Not fixture data in the
-    @meridian/domain-fixtures sense; treasury positions are not in that package (TRS-0592)."""
+    @northgate/domain-fixtures sense; treasury positions are not in that package (TRS-0592)."""
     if os.environ.get("EXPOSURE_SEED", "true") != "true":
         return
     rng = np.random.default_rng(20220314)

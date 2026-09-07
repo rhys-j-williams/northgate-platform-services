@@ -1,13 +1,13 @@
 # platform-services on a laptop, containerised. Pairs with mock-external/docker-compose.yml, which
-# owns the network (meridian-estate), the brokers (redpanda, redis, artemis) and every third party
+# owns the network (northgate-estate), the brokers (redpanda, redis, artemis) and every third party
 # mock. Bring that up first:
 #
-#   (cd ../meridian-mock-external && docker compose up -d)
+#   (cd ../northgate-mock-external && docker compose up -d)
 #   make build            # jars and dist/ are built on the host, the Dockerfiles only copy them in
 #   make up               # == docker compose -f docker-compose.services.yml up -d --build
 #
 # Build context is platform-services/ for every service so the Dockerfiles can reach
-# libs/ts/domain-fixtures and fixtures/meridian-fixtures.json. The Jenkins library builds the same
+# libs/ts/domain-fixtures and fixtures/northgate-fixtures.json. The Jenkins library builds the same
 # Dockerfiles with --build-arg BASE= pointing at the Artifactory mirrors; here we default BASE to
 # the public UBI images because nobody has Artifactory at home (PLAT-2331).
 #
@@ -16,21 +16,21 @@
 #
 # Ports match PORTS.md. Do not add new ones here; add them there first.
 
-name: meridian-platform
+name: northgate-platform
 
 x-java-env: &java-env
   SPRING_PROFILES_ACTIVE: local,local-artemis
-  MERIDIAN_SECURITY_JWKS_URI: http://keystone-idp-mock:4400/.well-known/jwks.json
+  NORTHGATE_SECURITY_JWKS_URI: http://keystone-idp-mock:4400/.well-known/jwks.json
   # Tokens are minted with iss=http://localhost:4400 by the browser facing IdP; the issuer check has
   # to match what is in the token, not what the container can reach.
-  MERIDIAN_SECURITY_ISSUER: http://localhost:4400
+  NORTHGATE_SECURITY_ISSUER: http://localhost:4400
   SPRING_KAFKA_BOOTSTRAP_SERVERS: redpanda:29092
   SPRING_REDIS_HOST: redis
   SPRING_REDIS_PASSWORD: CHANGEME-redis-password
-  MERIDIAN_MQ_ARTEMIS_URL: tcp://artemis:61616
+  NORTHGATE_MQ_ARTEMIS_URL: tcp://artemis:61616
   SPLUNK_HEC_URL: http://splunk-hec-mock:4606/services/collector/event
   SPLUNK_HEC_TOKEN: CHANGEME-hec-token
-  MERIDIAN_FIXTURES: /deployments/fixtures/meridian-fixtures.json
+  NORTHGATE_FIXTURES: /deployments/fixtures/northgate-fixtures.json
   JAVA_OPTS_APPEND: -Xmx512m -Djava.security.egd=file:/dev/./urandom
 
 x-node-env: &node-env
@@ -40,7 +40,7 @@ x-node-env: &node-env
   BEDROCK_ADAPTER_URL: http://bedrock-adapter:4516/bedrock/v1
   SPLUNK_HEC_URL: http://splunk-hec-mock:4606/services/collector/event
   SPLUNK_HEC_TOKEN: CHANGEME-hec-token
-  MERIDIAN_FIXTURE_FALLBACK: "true"
+  NORTHGATE_FIXTURE_FALLBACK: "true"
 
 x-java-common: &java-common
   restart: unless-stopped
@@ -62,16 +62,16 @@ services:
       context: .
       dockerfile: services/bedrock-adapter/Dockerfile
       args: { BASE: "${JAVA11_BASE:-registry.access.redhat.com/ubi9/openjdk-11-runtime:1.20}" }
-    image: meridian/bedrock-adapter
+    image: northgate/bedrock-adapter
     container_name: platform-bedrock-adapter
     ports: ["4516:4516"]
     environment:
       <<: *java-env
-      MERIDIAN_SERVICE_NAME: bedrock-adapter
+      NORTHGATE_SERVICE_NAME: bedrock-adapter
       SERVER_PORT: "4516"
       # The mock does not sit on MQ; bridge MTBREQ over its REST queue facade. Helm sets mq.
-      MERIDIAN_BEDROCK_MODE: auto
-      MERIDIAN_BEDROCK_TRANSPORT: http
+      NORTHGATE_BEDROCK_MODE: auto
+      NORTHGATE_BEDROCK_TRANSPORT: http
       BEDROCK_CORE_URL: http://bedrock-core-mock:4600
 
   txn-posting-service:
@@ -80,15 +80,15 @@ services:
       context: .
       dockerfile: services/txn-posting-service/Dockerfile
       args: { BASE: "${JAVA11_BASE:-registry.access.redhat.com/ubi9/openjdk-11-runtime:1.20}" }
-    image: meridian/txn-posting-service
+    image: northgate/txn-posting-service
     container_name: platform-txn-posting-service
     ports: ["4512:4512"]
     depends_on: [bedrock-adapter]
     environment:
       <<: *java-env
-      MERIDIAN_SERVICE_NAME: txn-posting-service
+      NORTHGATE_SERVICE_NAME: txn-posting-service
       SERVER_PORT: "4512"
-      MERIDIAN_POSTING_BEDROCK_ADAPTER_URL: http://bedrock-adapter:4516/bedrock/v1
+      NORTHGATE_POSTING_BEDROCK_ADAPTER_URL: http://bedrock-adapter:4516/bedrock/v1
 
   # ---------------------------------------------------------------- alerts
   beacon-notifications:
@@ -97,15 +97,15 @@ services:
       context: .
       dockerfile: services/beacon-notifications/Dockerfile
       args: { BASE: "${JAVA11_BASE:-registry.access.redhat.com/ubi9/openjdk-11-runtime:1.20}" }
-    image: meridian/beacon-notifications
+    image: northgate/beacon-notifications
     container_name: platform-beacon-notifications
     ports: ["4510:4510"]
     depends_on: [alerts-preferences-service]
     environment:
       <<: *java-env
-      MERIDIAN_SERVICE_NAME: beacon-notifications
+      NORTHGATE_SERVICE_NAME: beacon-notifications
       SERVER_PORT: "4510"
-      MERIDIAN_BEACON_PREFERENCES_URL: http://alerts-preferences-service:4511/preferences/v1
+      NORTHGATE_BEACON_PREFERENCES_URL: http://alerts-preferences-service:4511/preferences/v1
 
   alerts-preferences-service:
     <<: *java-common
@@ -113,12 +113,12 @@ services:
       context: .
       dockerfile: services/alerts-preferences-service/Dockerfile
       args: { BASE: "${JAVA11_BASE:-registry.access.redhat.com/ubi9/openjdk-11-runtime:1.20}" }
-    image: meridian/alerts-preferences-service
+    image: northgate/alerts-preferences-service
     container_name: platform-alerts-preferences-service
     ports: ["4511:4511"]
     environment:
       <<: *java-env
-      MERIDIAN_SERVICE_NAME: alerts-preferences-service
+      NORTHGATE_SERVICE_NAME: alerts-preferences-service
       SERVER_PORT: "4511"
 
   # ---------------------------------------------------------------- compliance critical
@@ -128,15 +128,15 @@ services:
       context: .
       dockerfile: services/pii-vault-service/Dockerfile
       args: { BASE: "${JAVA11_BASE:-registry.access.redhat.com/ubi9/openjdk-11-runtime:1.20}" }
-    image: meridian/pii-vault-service
+    image: northgate/pii-vault-service
     container_name: platform-pii-vault-service
     ports: ["4513:4513"]
     environment:
       <<: *java-env
-      MERIDIAN_SERVICE_NAME: pii-vault-service
+      NORTHGATE_SERVICE_NAME: pii-vault-service
       SERVER_PORT: "4513"
-      MERIDIAN_VAULT_URL: http://vault-mock:4605
-      MERIDIAN_VAULT_TOKEN: CHANGEME-vault-root-token
+      NORTHGATE_VAULT_URL: http://vault-mock:4605
+      NORTHGATE_VAULT_TOKEN: CHANGEME-vault-root-token
 
   audit-trail-service:
     <<: *java-common
@@ -144,12 +144,12 @@ services:
       context: .
       dockerfile: services/audit-trail-service/Dockerfile
       args: { BASE: "${JAVA11_BASE:-registry.access.redhat.com/ubi9/openjdk-11-runtime:1.20}" }
-    image: meridian/audit-trail-service
+    image: northgate/audit-trail-service
     container_name: platform-audit-trail-service
     ports: ["4514:4514"]
     environment:
       <<: *java-env
-      MERIDIAN_SERVICE_NAME: audit-trail-service
+      NORTHGATE_SERVICE_NAME: audit-trail-service
       SERVER_PORT: "4514"
 
   entitlements-service:
@@ -158,12 +158,12 @@ services:
       context: .
       dockerfile: services/entitlements-service/Dockerfile
       args: { BASE: "${JAVA17_BASE:-registry.access.redhat.com/ubi9/openjdk-17-runtime:1.20}" }
-    image: meridian/entitlements-service
+    image: northgate/entitlements-service
     container_name: platform-entitlements-service
     ports: ["4515:4515"]
     environment:
       <<: *java-env
-      MERIDIAN_SERVICE_NAME: entitlements-service
+      NORTHGATE_SERVICE_NAME: entitlements-service
       SERVER_PORT: "4515"
       # Boot 3: spring.redis moved to spring.data.redis. Both are set so the same anchor works.
       SPRING_DATA_REDIS_HOST: redis
@@ -174,7 +174,7 @@ services:
     build:
       context: .
       dockerfile: services/bff-retail/Dockerfile
-    image: meridian/bff-retail
+    image: northgate/bff-retail
     container_name: platform-bff-retail
     restart: unless-stopped
     networks: [estate]
@@ -201,7 +201,7 @@ services:
     build:
       context: .
       dockerfile: services/bff-business/Dockerfile
-    image: meridian/bff-business
+    image: northgate/bff-business
     container_name: platform-bff-business
     restart: unless-stopped
     networks: [estate]
@@ -223,7 +223,7 @@ services:
     build:
       context: .
       dockerfile: services/iris-orchestrator/Dockerfile
-    image: meridian/iris-orchestrator
+    image: northgate/iris-orchestrator
     container_name: platform-iris-orchestrator
     restart: unless-stopped
     networks: [estate]
@@ -240,7 +240,7 @@ services:
     build:
       context: .
       dockerfile: services/documents-service/Dockerfile
-    image: meridian/documents-service
+    image: northgate/documents-service
     container_name: platform-documents-service
     restart: unless-stopped
     networks: [estate]
@@ -261,7 +261,7 @@ services:
     build:
       context: .
       dockerfile: services/statements-api/Dockerfile
-    image: meridian/statements-api
+    image: northgate/statements-api
     container_name: platform-statements-api
     restart: unless-stopped
     networks: [estate]
@@ -271,7 +271,7 @@ services:
       BEDROCK_ADAPTER_URL: http://bedrock-adapter:4516/bedrock/v1
       SPLUNK_HEC_URL: http://splunk-hec-mock:4606/services/collector/event
       SPLUNK_HEC_TOKEN: CHANGEME-hec-token
-      MERIDIAN_FIXTURE_FALLBACK: "true"
+      NORTHGATE_FIXTURE_FALLBACK: "true"
     healthcheck:
       test: ["CMD-SHELL", "curl -fs http://localhost:4519/health || exit 1"]
       interval: 15s
@@ -284,5 +284,5 @@ volumes:
 
 networks:
   estate:
-    name: meridian-estate
+    name: northgate-estate
     external: true

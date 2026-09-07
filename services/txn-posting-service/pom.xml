@@ -10,7 +10,7 @@
     <relativePath/>
   </parent>
 
-  <groupId>com.meridian.platform</groupId>
+  <groupId>com.northgate.platform</groupId>
   <artifactId>txn-posting-service</artifactId>
   <version>4.1.7</version>
   <packaging>jar</packaging>
@@ -27,7 +27,7 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.meridian.platform</groupId>
+      <groupId>com.northgate.platform</groupId>
       <artifactId>common-starter</artifactId>
       <version>${common-starter.version}</version>
     </dependency>

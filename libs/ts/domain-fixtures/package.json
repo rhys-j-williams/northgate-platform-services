@@ -1,5 +1,5 @@
 {
-  "name": "@meridian/domain-fixtures",
+  "name": "@northgate/domain-fixtures",
   "version": "1.6.0",
   "description": "Seeded synthetic banking fixtures shared by the mocks, the backends for frontend and the front end test suites",
   "license": "UNLICENSED",

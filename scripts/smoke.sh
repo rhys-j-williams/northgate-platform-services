@@ -18,9 +18,9 @@
 set -uo pipefail
 
 KEYSTONE_URL="${KEYSTONE_URL:-http://localhost:4400}"
-CLIENT_ID="${OIDC_CLIENT_ID:-meridian-online-web}"
+CLIENT_ID="${OIDC_CLIENT_ID:-northgate-online-web}"
 REDIRECT_URI="${OIDC_REDIRECT_URI:-http://localhost:4200/index.html}"
-FIXTURES="${MERIDIAN_FIXTURES:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/fixtures/meridian-fixtures.json}"
+FIXTURES="${NORTHGATE_FIXTURES:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/fixtures/northgate-fixtures.json}"
 TMP="$(mktemp -d "${TMPDIR:-/tmp}/ps-smoke.XXXXXX")"
 trap 'rm -rf "$TMP"' EXIT
 
@@ -147,8 +147,8 @@ if [ -z "$TOKEN" ]; then skip documents "no token"; else
   URL="http://localhost:4518/api/v1/statements/$ACCOUNT/latest.pdf"
   S1=$(curl -s -D "$TMP/h1" -o "$TMP/p1" --max-time 20 "${AUTH[@]}" "$URL" -w '%{http_code}')
   S2=$(curl -s -D "$TMP/h2" -o "$TMP/p2" --max-time 20 "${AUTH[@]}" "$URL" -w '%{http_code}')
-  SRC1=$(grep -i '^x-meridian-source' "$TMP/h1" | tr -d '\r' | awk '{print $2}')
-  SRC2=$(grep -i '^x-meridian-source' "$TMP/h2" | tr -d '\r' | awk '{print $2}')
+  SRC1=$(grep -i '^x-northgate-source' "$TMP/h1" | tr -d '\r' | awk '{print $2}')
+  SRC2=$(grep -i '^x-northgate-source' "$TMP/h2" | tr -d '\r' | awk '{print $2}')
   if [ "$S1" = 200 ] && [ "$S2" = 200 ] && head -c 4 "$TMP/p2" | grep -q '%PDF' && [ "$SRC2" = "archive" ]; then
     ok documents "latest.pdf $(wc -c <"$TMP/p1") bytes, source $SRC1 then $SRC2"
   else
