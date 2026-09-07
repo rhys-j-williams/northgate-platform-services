@@ -52,7 +52,7 @@ export interface Card {
   accountId: string;
   /** Deliberately fails the Luhn check. See safety.ts. */
   cardNumber: string;
-  network: 'meridian-debit' | 'meridian-credit';
+  network: 'northgate-debit' | 'northgate-credit';
   expiryMonth: number;
   expiryYear: number;
   status: 'active' | 'locked' | 'replaced' | 'expired';

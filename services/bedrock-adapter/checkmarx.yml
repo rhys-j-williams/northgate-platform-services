@@ -1,10 +1,10 @@
 # Consumed by the mock cx CLI in platform-tooling/mock-scanners/bin. Inherits the platform-services
 # root checkmarx.yml; only the per-service overrides live here.
 project:
-  name: meridian-platform-services-bedrock-adapter
-  team: /CxServer/Meridian/CSWT/payments-platform
+  name: northgate-platform-services-bedrock-adapter
+  team: /CxServer/Northgate/CSWT/payments-platform
 scan:
-  preset: Meridian-PCI
+  preset: Northgate-PCI
   incremental: true
   language: java
   source: .

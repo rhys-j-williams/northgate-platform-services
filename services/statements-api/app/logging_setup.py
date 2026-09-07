@@ -10,13 +10,13 @@ correlation_id: ContextVar[str] = ContextVar("correlation_id", default="no-reque
 
 
 class SplunkJsonFormatter(logging.Formatter):
-    """Same field names as the Java common-starter MeridianLayout so Splunk joins the hops."""
+    """Same field names as the Java common-starter NorthgateLayout so Splunk joins the hops."""
 
     def format(self, record: logging.LogRecord) -> str:
         return json.dumps(
             {
                 "time": time.time(),
-                "sourcetype": "meridian:json",
+                "sourcetype": "northgate:json",
                 "service": settings.service_name,
                 "event": {
                     "event": record.getMessage(),

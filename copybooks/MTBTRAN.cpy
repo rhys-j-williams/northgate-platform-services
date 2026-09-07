@@ -3,7 +3,7 @@
       * LENGTH 160. FIXED BLOCK, LRECL=160, BLKSIZE=27200.            *
       *                                                               *
       * WRITTEN BY BEDROCK JOB MTBD210P FOR EVERY POSTING CYCLE AND   *
-      * REPLAYED ONTO REDPANDA TOPIC MERIDIAN.TRANSACTIONS.POSTED BY  *
+      * REPLAYED ONTO REDPANDA TOPIC NORTHGATE.TRANSACTIONS.POSTED BY  *
       * BEDROCK-ADAPTER-SERVICE.                                      *
       *                                                               *
       * TRAN-SETTLED-DATE IS SPACES WHILE THE AUTHORISATION HAS NOT   *

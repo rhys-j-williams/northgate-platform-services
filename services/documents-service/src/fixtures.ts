@@ -1,4 +1,4 @@
-import { FixtureSet, generateFixtures } from '@meridian/domain-fixtures';
+import { FixtureSet, generateFixtures } from '@northgate/domain-fixtures';
 import { config } from './config';
 
 let set: FixtureSet | undefined;

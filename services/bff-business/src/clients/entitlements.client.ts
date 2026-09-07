@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Entitlement } from '@meridian/domain-fixtures';
+import { Entitlement } from '@northgate/domain-fixtures';
 import { UpstreamClient } from './upstream-client';
 import { FixturesService } from './fixtures.service';
 import { config } from '../config';

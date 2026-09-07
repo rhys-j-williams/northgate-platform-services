@@ -8,5 +8,5 @@ maintainers:
   - name: platform-engineering
     email: platform-engineering@example.com
 annotations:
-  meridian.bank/ticket-key: PLAT
-  meridian.bank/compliance-critical: "true"
+  northgate.bank/ticket-key: PLAT
+  northgate.bank/compliance-critical: "true"

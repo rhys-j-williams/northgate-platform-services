@@ -21,7 +21,7 @@ export interface GenerateOptions {
 }
 
 const DEFAULTS: Required<GenerateOptions> = {
-  seed: 'meridian',
+  seed: 'northgate',
   customers: 25,
   segmentMix: { consumer: 0.7, smallBusiness: 0.22, treasury: 0.08 },
   monthsOfHistory: 18,
@@ -37,7 +37,7 @@ const TREASURY_ACCOUNTS: AccountType[] = ['treasury-operating', 'business-saving
 const NICKNAMES: Record<AccountType, string[]> = {
   checking: ['Everyday checking', 'Household account', 'Bills account'],
   savings: ['Rainy day', 'Holiday fund', 'Emergency savings'],
-  'credit-card': ['Meridian Rewards card', 'Everyday card', 'Travel card'],
+  'credit-card': ['Northgate Rewards card', 'Everyday card', 'Travel card'],
   mortgage: ['Home loan'],
   'auto-loan': ['Car loan'],
   certificate: ['18 month certificate', '24 month certificate'],
@@ -125,8 +125,8 @@ export function generateCards(random: SeededRandom, customer: Customer,
     || account.type === 'credit-card');
 
   return eligible.map((account) => {
-    const network = account.type === 'credit-card' ? 'meridian-credit' as const
-      : 'meridian-debit' as const;
+    const network = account.type === 'credit-card' ? 'northgate-credit' as const
+      : 'northgate-debit' as const;
     const raw = `4${random.digits(15)}`;
     return {
       cardId: id('CRD', random),
@@ -202,7 +202,7 @@ function generateScheduledTransactions(random: SeededRandom, account: Account, a
       settledAt: isoDate(asOf, -month * 30 + 1),
       description: account.type === 'mortgage' ? 'Scheduled mortgage payment'
         : 'Certificate interest credit',
-      merchantName: 'Meridian Trust Bank',
+      merchantName: 'Northgate Trust Bank',
       merchantCategoryCode: '6012',
       category: account.type === 'mortgage' ? 'transfers' : 'income',
       amountMinor: account.type === 'mortgage' ? payment : Math.round(payment / 12),

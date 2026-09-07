@@ -5,7 +5,7 @@ Node 18.19.0, Express 4, TypeScript | port 4518 | version 1.14.3 | owner **retai
 Statements, tax documents and disclosure HTML for retail-web. Statement PDFs are rendered by
 statements-api (Python, 4519) and streamed through here; the first request for a period tees
 the stream into the object store and later requests are served from there
-(`X-Meridian-Source: statements-api` vs `archive`). The object store is a local disk directory in
+(`X-Northgate-Source: statements-api` vs `archive`). The object store is a local disk directory in
 every environment below prod; prod is the enterprise object store behind the same interface.
 Tax documents are 1099-INT placeholders generated on first request. Disclosures are static HTML
 in `disclosures/`, served with a version header that retail-web caches on.
@@ -40,10 +40,10 @@ npm ci
 npm run lint
 npm test           # jest, coverage in coverage/
 npm run build
-MERIDIAN_AUTH_MODE=insecure-local npm start
+NORTHGATE_AUTH_MODE=insecure-local npm start
 ```
 
-Port **4518**. `MERIDIAN_AUTH_MODE=insecure-local` skips JWKS validation and trusts the token
+Port **4518**. `NORTHGATE_AUTH_MODE=insecure-local` skips JWKS validation and trusts the token
 payload; it refuses to start under `NODE_ENV=production`. With the Keystone mock on 4400 leave it
 unset. `.npmrc` carries `legacy-peer-deps` for the reasons in TOOL-0977; do not pass it on the
 command line.

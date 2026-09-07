@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Card, maskCardNumber } from '@meridian/domain-fixtures';
+import { Card, maskCardNumber } from '@northgate/domain-fixtures';
 import { FixturesService } from '../clients/fixtures.service';
 import { CacheService } from '../cache/cache.service';
 import { ApiException } from '../common/api-error';

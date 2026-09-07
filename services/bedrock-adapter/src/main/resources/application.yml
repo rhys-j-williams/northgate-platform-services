@@ -25,9 +25,9 @@ management:
           include: ping,diskSpace
 
 logging:
-  config: classpath:log4j2-meridian.xml
+  config: classpath:log4j2-northgate.xml
 
-meridian:
+northgate:
   security:
     jwks-uri: http://localhost:4400/.well-known/jwks.json
     issuer: http://localhost:4400
@@ -51,4 +51,4 @@ meridian:
     request-queue: BEDROCK.REQ
     reply-queue: BEDROCK.RESP
   fixtures:
-    path: ${MERIDIAN_FIXTURES:../../fixtures/meridian-fixtures.json}
+    path: ${NORTHGATE_FIXTURES:../../fixtures/northgate-fixtures.json}

@@ -9,8 +9,8 @@ describe('KeystoneJwtService', () => {
     expect(p).toEqual({ subject: 'u-1', customerId: 'CUS-100000', segment: 'consumer', scopes: ['accounts:read', 'transfers:write'], mfaAt: 1700000000, sessionId: undefined });
   });
 
-  it('falls back to sub as the customer id and reads meridian_segment (KEY-1702 token shape)', async () => {
-    const p = await svc.verify(testToken({ sub: 'CUS-100003', meridian_segment: 'small-business' }));
+  it('falls back to sub as the customer id and reads northgate_segment (KEY-1702 token shape)', async () => {
+    const p = await svc.verify(testToken({ sub: 'CUS-100003', northgate_segment: 'small-business' }));
     expect(p.customerId).toBe('CUS-100003');
     expect(p.segment).toBe('small-business');
   });

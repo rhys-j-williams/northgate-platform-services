@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import { maskAccountNumber } from '@meridian/domain-fixtures';
+import { maskAccountNumber } from '@northgate/domain-fixtures';
 import { BedrockClient } from '../clients/bedrock.client';
 import { CacheService } from '../cache/cache.service';
 import { EntitlementsService } from '../entitlements/entitlements.service';

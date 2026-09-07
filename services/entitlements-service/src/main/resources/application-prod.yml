@@ -3,7 +3,7 @@
 # internal Artifactory virtual repo. See README, Datasources. GIS-1180 applies.
 #spring:
 #  datasource:
-#    url: jdbc:oracle:thin:@//exa-cswt-prod-scan.meridian.internal:1521/CSWTPRD_SVC
+#    url: jdbc:oracle:thin:@//exa-cswt-prod-scan.northgate.internal:1521/CSWTPRD_SVC
 #    driver-class-name: oracle.jdbc.OracleDriver
 #    username: ${VAULT_DB_USER}
 #    password: ${VAULT_DB_PASSWORD}
@@ -15,13 +15,13 @@
 #  flyway:
 #    schemas: ENTL
 #  kafka:
-#    bootstrap-servers: redpanda-a.meridian.internal:9092,redpanda-b.meridian.internal:9092
+#    bootstrap-servers: redpanda-a.northgate.internal:9092,redpanda-b.northgate.internal:9092
 #    security:
 #      protocol: SASL_SSL
 
-meridian:
+northgate:
   security:
-    jwks-uri: https://keystone.meridian.internal/.well-known/jwks.json
-    issuer: https://keystone.meridian.internal
+    jwks-uri: https://keystone.northgate.internal/.well-known/jwks.json
+    issuer: https://keystone.northgate.internal
   approvals:
     ttl-hours: 48

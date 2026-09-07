@@ -1,6 +1,6 @@
 replicaCount: 1
 image:
-  repository: registry.meridian.internal/cswt/statements-api
+  repository: registry.northgate.internal/cswt/statements-api
   tag: "0.9.4"
   pullPolicy: IfNotPresent
 service:
@@ -17,7 +17,7 @@ probes:
 env:
   LOG_LEVEL: info
   SPLUNK_HEC_URL: http://splunk-hec-mock:4606/services/collector
-  MERIDIAN_AUTH_MODE: jwks
+  NORTHGATE_AUTH_MODE: jwks
 vault:
   role: statements-api
   secretsPath: secret/data/cswt/statements-api

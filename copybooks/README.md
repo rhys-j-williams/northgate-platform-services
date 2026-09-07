@@ -1,6 +1,6 @@
 # Bedrock copybooks
 
-Bedrock is the system of record. It has no JSON interface. Everything Meridian's digital estate
+Bedrock is the system of record. It has no JSON interface. Everything Northgate's digital estate
 knows about a balance arrives as a fixed width record described by one of the copybooks here,
 delivered over IBM MQ and translated by `bedrock-adapter-service`.
 
@@ -49,7 +49,7 @@ rather than in a separate position, so `-1234` in a ten position field is `00000
 | 8 | `H` | `Q` |
 | 9 | `I` | `R` |
 
-`@meridian/domain-fixtures` implements this in `src/bedrock.ts` and the encoder is unit tested
+`@northgate/domain-fixtures` implements this in `src/bedrock.ts` and the encoder is unit tested
 against the examples above. Do not write another implementation. Two independent decoders is how
 INC0044182 happened: the statements batch treated a spaces `TRAN-SETTLED-DATE` as `00000000` and
 posted 4,118 statements dated in the year zero.

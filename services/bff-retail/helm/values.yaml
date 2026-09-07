@@ -1,6 +1,6 @@
 replicaCount: 1
 image:
-  repository: registry.meridian.internal/cswt/bff-retail
+  repository: registry.northgate.internal/cswt/bff-retail
   tag: "3.9.1"
   pullPolicy: IfNotPresent
 service:
@@ -17,7 +17,7 @@ probes:
 env:
   LOG_LEVEL: info
   SPLUNK_HEC_URL: http://splunk-hec-mock:4606/services/collector
-  MERIDIAN_AUTH_MODE: jwks
+  NORTHGATE_AUTH_MODE: jwks
 vault:
   role: bff-retail
   secretsPath: secret/data/cswt/bff-retail

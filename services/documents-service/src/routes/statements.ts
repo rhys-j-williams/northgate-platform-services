@@ -66,7 +66,7 @@ export function statementsRouter(store: ObjectStore, statements: StatementsApiCl
       const hit = store.head(k);
       if (hit) {
         res.setHeader('Content-Length', String(hit.size));
-        res.setHeader('X-Meridian-Source', 'archive');
+        res.setHeader('X-Northgate-Source', 'archive');
         store.get(k).pipe(res);
         return;
       }
@@ -74,7 +74,7 @@ export function statementsRouter(store: ObjectStore, statements: StatementsApiCl
       if (length) {
         res.setHeader('Content-Length', String(length));
       }
-      res.setHeader('X-Meridian-Source', 'statements-api');
+      res.setHeader('X-Northgate-Source', 'statements-api');
       const toStore = new PassThrough();
       const toClient = new PassThrough();
       stream.pipe(toStore);

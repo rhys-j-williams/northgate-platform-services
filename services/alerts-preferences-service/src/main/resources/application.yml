@@ -18,7 +18,7 @@ spring:
       # Flyway schema. Validation runs in the prod pipeline against a real Oracle (PLAT-0967).
       ddl-auto: none
     properties:
-      hibernate.dialect: com.meridian.platform.common.jpa.LocalOracleDialect
+      hibernate.dialect: com.northgate.platform.common.jpa.LocalOracleDialect
       hibernate.jdbc.time_zone: UTC
   flyway:
     enabled: true
@@ -48,9 +48,9 @@ management:
       show-details: when_authorized
 
 logging:
-  config: classpath:log4j2-meridian.xml
+  config: classpath:log4j2-northgate.xml
 
-meridian:
+northgate:
   security:
     jwks-uri: http://localhost:4400/.well-known/jwks.json
     issuer: http://localhost:4400

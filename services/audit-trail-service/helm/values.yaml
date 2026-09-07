@@ -1,6 +1,6 @@
 replicaCount: 1
 image:
-  repository: registry.meridian.internal/cswt/audit-trail-service
+  repository: registry.northgate.internal/cswt/audit-trail-service
   tag: "2.3.4"
   pullPolicy: IfNotPresent
 service:

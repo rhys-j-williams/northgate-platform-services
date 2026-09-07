@@ -10,7 +10,7 @@
     <relativePath/>
   </parent>
 
-  <groupId>com.meridian.platform</groupId>
+  <groupId>com.northgate.platform</groupId>
   <artifactId>entitlements-service</artifactId>
   <version>4.1.0</version>
   <packaging>jar</packaging>

@@ -8,5 +8,5 @@ maintainers:
   - name: identity-platform
     email: identity-platform@example.com
 annotations:
-  meridian.bank/ticket-key: PLAT
-  meridian.bank/compliance-critical: "false"
+  northgate.bank/ticket-key: PLAT
+  northgate.bank/compliance-critical: "false"
