@@ -12,7 +12,7 @@ spreadsheet and raises a TRS ticket in the morning.
 - `GET /exposure/v1/books/{book}/var?confidence=0.99&horizonDays=1` parametric VaR, no correlation.
 - `POST /exposure/v1/books/{book}/scenario` rates / FX / spread shock P&L.
 
-Everything is in memory. Restart and it is gone, except the seeded demo books.
+Everything is in memory. Restart and it is gone, except the seeded fixture books.
 
 ## Run
 
