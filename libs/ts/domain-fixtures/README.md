@@ -41,7 +41,7 @@ by convention:
 - names, merchants and organisations are invented; `src/vocabulary.ts` is the whole list
 - addresses are real cities with invented streets
 
-`src/fixtures.spec.ts` asserts all of the above. `meridian-cswt-estate/scripts/verify-estate.sh` runs that suite as part
+`src/fixtures.spec.ts` asserts all of the above. `meridian-cswt-workspace/scripts/verify-estate.sh` runs that suite as part
 of the estate check. If you add a generator, add the matching guarantee test.
 
 ## Bedrock records
